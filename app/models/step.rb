@@ -9,11 +9,13 @@ class Step < ApplicationRecord
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
   def delayed?
-    Time.zone.today > end_date
+    Time.zone.today > end_date && !completed
   end
 
   def on_time_status
-    unless completed
+    if completed
+      "Complete"
+    else
       Time.zone.today < end_date ? "On-Time" : "Delayed"
     end
   end

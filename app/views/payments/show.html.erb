@@ -15,7 +15,7 @@
         Amount
       </td>
       <td>
-        <%= @payment.amount %>
+        <%= money_to_currency @payment.amount, params %>
       </td>
     </tr>
     <tr>

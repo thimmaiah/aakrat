@@ -3,7 +3,7 @@
     <%= payment.company.name %>
   </td>
   <td>
-    <%= number_to_currency payment.amount %>
+    <%= money_to_currency payment.amount, params %>
   </td>
   <td>
     <%= payment.project.client.full_name %>

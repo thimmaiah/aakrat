@@ -25,5 +25,6 @@ class Payment < ApplicationRecord
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
-  validates :amount, presence: true
+  validates :amount_cents, presence: true
+  monetize :amount_cents, with_currency: ->(i) { i.project.currency }
 end

@@ -103,7 +103,9 @@
 
   <div>
     <%= link_to "Edit" , edit_phase_path(@phase), {class: "btn btn-primary" } %> |
-    <%= link_to "Back" , :back, {class: "btn btn-primary" } %> |
+    <%= link_to "Add Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), {class: "btn btn-success" } %> |
 
     <%= button_to "Delete" , @phase, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>
+
+  <%= render "/phases/phase_details", phase: @phase %>

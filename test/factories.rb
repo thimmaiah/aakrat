@@ -1,4 +1,16 @@
 FactoryBot.define do
+  factory :step do
+    name { "MyString" }
+    start_date { "2022-04-18" }
+    end_date { "2022-04-18" }
+    status { "MyString" }
+    project { nil }
+    phase { nil }
+    assigned_to { nil }
+    visible_to_client { false }
+    completed { false }
+  end
+
   factory :note do
     user { nil }
     company { nil }

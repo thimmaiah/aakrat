@@ -1,0 +1,69 @@
+<%= form_with(model: step) do |form| %>
+  <% if step.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(step.errors.count, "error") %> prohibited this step from being saved:</h2>
+
+      <ul>
+        <% step.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.text_field :status, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assigned_to_id %>
+    <%= form.select :assigned_to_id, current_user.company.users.team_members.map{|u| [u.full_name, u.id]}, {}, class: "form-control"  %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.rich_text_area :details, class: "form-control trix-content"  %>
+  </div>
+
+  <div class="field" class="form-group" data-controller="directuploads" >
+    <%= form.label :attachments, "Attachments" %>
+    <%= form.file_field :attachments, class: "form-control", direct_upload: true, multiple:true %>
+    <small class="text-muted"> Upload multiple attachements. </small>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :visible_to_client %>
+    <%= form.check_box :visible_to_client, class: "form-control form-checkbox"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :completed %>
+    <%= form.check_box :completed, class: "form-control form-checkbox"  %>
+  </div>
+
+  <%= form.text_field :phase_id, class: "form-control", hidden: true    %>
+  <%= form.text_field :project_id, class: "form-control", hidden: true  %>
+
+
+  <div class="form-group">
+    <%= form.submit "Save", {class: "btn btn-primary"}%>
+  </div>
+<% end %>

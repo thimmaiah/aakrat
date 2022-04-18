@@ -1,0 +1,45 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Steps</h1>
+    <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), 
+                    {class: "btn btn-success" } if @phase %> 
+</div>
+
+<div class="table-responsive" data-controller="datatable">
+
+    <table id="steps" class="table table-bordered dataTable jqDataTable">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Start Date
+                </th>
+                <th>
+                    End Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Assigned To
+                </th>
+                <th>
+                    Visible To Client
+                </th>
+                <th>
+                    Completed
+                </th>
+
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% steps.each do |step| %>
+                <%= render step %>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_053813) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_061101) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -193,6 +193,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_053813) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "steps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "status", limit: 20
+    t.bigint "project_id", null: false
+    t.bigint "phase_id", null: false
+    t.bigint "assigned_to_id", null: false
+    t.boolean "visible_to_client", default: false
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "company_id", null: false
+    t.index ["assigned_to_id"], name: "index_steps_on_assigned_to_id"
+    t.index ["company_id"], name: "index_steps_on_company_id"
+    t.index ["phase_id"], name: "index_steps_on_phase_id"
+    t.index ["project_id"], name: "index_steps_on_project_id"
+  end
+
   create_table "taggings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "tag_id"
     t.string "taggable_type"
@@ -285,5 +304,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_053813) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "client_id"
   add_foreign_key "projects", "users", column: "team_lead_id"
+  add_foreign_key "steps", "companies"
+  add_foreign_key "steps", "phases"
+  add_foreign_key "steps", "projects"
+  add_foreign_key "steps", "users", column: "assigned_to_id"
   add_foreign_key "taggings", "tags"
 end

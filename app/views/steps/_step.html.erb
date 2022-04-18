@@ -1,0 +1,29 @@
+<tr id="<%= dom_id step %>">
+  <td>
+    <%= step.name %>
+  </td>
+  <td>
+    <%= l step.start_date %>
+  </td>
+  <td>
+    <%= l step.end_date %>
+  </td>
+  <td>
+    <%= step.status %>
+  </td>
+  <td>
+    <%= step.assigned_to.full_name %>
+  </td>
+  <td>
+    <span class="badge <%= step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+      <%= step.visible_to_client ? "Yes" : "No" %>
+    </span>  </td>
+  <td>
+    <span class="badge <%= step.completed ? 'bg-success' : 'bg-warning' %>">
+      <%= step.completed ? "Yes" : "No" %>
+    </span>  
+  </td>
+  <td>
+    <%= link_to "Show" , step , {class: "btn btn-primary" }%>
+  </td>
+</tr>

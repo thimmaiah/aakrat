@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-  before_action :set_step, only: %i[show edit update destroy]
+  before_action :set_step, only: %i[show edit update destroy toggle_completed]
 
   # GET /steps or /steps.json
   def index
@@ -47,6 +47,20 @@ class StepsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @step.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def toggle_completed
+    @step.completed = !@step.completed
+    @step.save
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.replace(@step)
+        ]
+      end
+      format.html { redirect_to step_url(@step), notice: "Step was successfully updated." }
+      format.json { render :show, status: :ok, location: @step }
     end
   end
 

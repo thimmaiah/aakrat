@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :steps
+  resources :steps do
+    patch 'toggle_completed', on: :member
+  end
   resources :notes
-  resources :phases
+  resources :phases do
+    patch 'toggle_completed', on: :member
+  end
   resources :projects
   namespace :admin do
     resources :users

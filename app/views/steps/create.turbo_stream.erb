@@ -1,5 +1,5 @@
 
-    <%= turbo_stream.append('steps_tbody',
+    <%= turbo_stream.prepend('steps_tbody',
         partial: "steps/step", locals: { step: @step }) %>
 
     <%= turbo_stream.replace('toasts', partial: "layouts/success_toast",

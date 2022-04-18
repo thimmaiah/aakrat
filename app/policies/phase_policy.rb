@@ -48,4 +48,8 @@ class PhasePolicy < ApplicationPolicy
   def destroy?
     update?
   end
+
+  def toggle_completed?
+    update?
+  end
 end

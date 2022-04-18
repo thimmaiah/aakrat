@@ -45,11 +45,11 @@ namespace :vk do
       (1..5).each do 
         p = FactoryBot.create(:project, company: c)        
         puts p.to_json
-        (1..10).each do 
-          s = FactoryBot.create(:phase, company: c, project: p)        
+        (1..10).each do |i|
+          s = FactoryBot.create(:phase, name: "Phase #{i}", company: c, project: p)        
 
-          (1..10).each do 
-            t = FactoryBot.create(:step, company: c, project: p, phase: s)        
+          (1..10).each do |j|
+            t = FactoryBot.create(:step, name: "Step #{j}", company: c, project: p, phase: s)        
           end
         end
       end
@@ -61,7 +61,7 @@ namespace :vk do
 
 
   
-  task :generateAll => [:generateFakeCompanies, :generateFakeUsers] do
+  task :generateAll => [:generateFakeCompanies, :generateFakeUsers, :generateFakeProjects] do
     puts "Generating all Fake Data"
     Sidekiq.redis(&:flushdb)
   end

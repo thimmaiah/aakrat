@@ -3,10 +3,13 @@
     <%= phase.name %>
   </td>
   <td>
-    <%= phase.start_date %>
+    <%= l phase.start_date %>
   </td>
   <td>
-    <%= phase.end_date %>
+    <%= l phase.end_date %>
+  </td>
+  <td>
+    <%= (phase.end_date - phase.start_date).to_i %>
   </td>
   <td>
     <%= phase.status %>

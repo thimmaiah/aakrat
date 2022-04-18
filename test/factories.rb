@@ -7,7 +7,7 @@ FactoryBot.define do
     project { Project.all.sample }
     phase { project.phases.sample }
     assigned_to { project.company.users.sample }
-    visible_to_client { rand(1) }
+    visible_to_client { rand(2) }
     completed { rand(1) }
     details { Faker::Quotes::Rajnikanth.joke }
   end
@@ -23,7 +23,7 @@ FactoryBot.define do
     status { }
     project { Project.all.sample }
     assigned_to { project.company.users.sample }
-    visible_to_client { rand(1) }
+    visible_to_client { rand(2) }
     payment_status {  }
     percentage_complete { rand(100) }
     completed { rand(1) }

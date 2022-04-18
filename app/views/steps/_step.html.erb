@@ -9,6 +9,10 @@
     <%= l step.end_date %>
   </td>
   <td>
+    <%= (step.end_date - step.start_date).to_i %>
+  </td>
+  
+  <td>
     <%= step.status %>
     <span class="badge <%= step.delayed? ? 'bg-danger' : 'bg-success' %>">
       <%= step.on_time_status %>

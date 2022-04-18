@@ -10,7 +10,7 @@
     <div class="tab-content">
         <div id="phases-tab" class="tab-pane fade show active">
             <div id="phases" class="associated_entity">
-                <%= render "/phases/index" , phases: project.phases %>
+                <%= render "/phases/index" , phases: project.phases.order(start_date: :desc) %>
             </div>
         </div>
         <div id="payments-tab" class="tab-pane fade">

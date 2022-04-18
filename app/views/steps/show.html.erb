@@ -1,93 +1,113 @@
 <%= render "/layouts/alerts" %>
 
-<table class="table table-bordered dataTable">
+  <table class="table table-bordered dataTable">
 
-          <tr>
-        <td>
-          Name
-        </td>
-        <td>
-          <%= @step.name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Start Date
-        </td>
-        <td>
-          <%= l @step.start_date %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          End Date
-        </td>
-        <td>
-          <%= l @step.end_date %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Status
-        </td>
-        <td>
-          <%= @step.status %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Project
-        </td>
-        <td>
-          <%= link_to @step.project.name, @step.project %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Phase
-        </td>
-        <td>
-          <%= link_to @step.phase.name, @step.phase %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Assigned To
-        </td>
-        <td>
-          <%= @step.assigned_to.full_name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Visible To Client
-        </td>
-        <td>
-          <span class="badge <%= @step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-            <%= @step.visible_to_client ? "Yes" : "No" %>
-          </span>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Completed
-        </td>
-        <td>
-          <span class="badge <%= @step.completed ? 'bg-success' : 'bg-warning' %>">
-            <%= @step.completed ? "Yes" : "No" %>
-          </span>
-        </td>    
-      </tr>
-    
-  
-</table>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        <%= @step.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Start Date
+      </td>
+      <td>
+        <%= l @step.start_date %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        End Date
+      </td>
+      <td>
+        <%= l @step.end_date %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Status
+      </td>
+      <td>
+        <%= @step.status %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Project
+      </td>
+      <td>
+        <%= link_to @step.project.name, @step.project %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Phase
+      </td>
+      <td>
+        <%= link_to @step.phase.name, @step.phase %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Assigned To
+      </td>
+      <td>
+        <%= @step.assigned_to.full_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Visible To Client
+      </td>
+      <td>
+        <span class="badge <%= @step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+          <%= @step.visible_to_client ? "Yes" : "No" %>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Completed
+      </td>
+      <td>
+        <span class="badge <%= @step.completed ? 'bg-success' : 'bg-warning' %>">
+          <%= @step.completed ? "Yes" : "No" %>
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Attachments
+      </td>
+      <td>
+        <ul>
+          <% @step.attachments.each do |file| %>
+            <li>
+              <%= link_to rails_blob_path(file, disposition: :attachment), class: "btn btn-sm btn-primary" do%>
+                <i class="fas fa-download"></i>
+                <%= file.filename.to_s.capitalize %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+      </td>
+    </tr>
 
 
-<div>
-  <%= link_to "Edit", edit_step_path(@step), {class: "btn btn-primary"} %> |
-  <%= link_to "Back", :back, {class: "btn btn-primary"} %> |
-  <%= link_to "Add Note" , new_note_path("note[owner_id]": @step.id, "note[owner_type]": @step.class.name) , {class: "btn btn-success" }%> |
-  <%= button_to "Delete", @step, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
-</div>
 
-<%= render "/steps/step_details", step: @step %>
+  </table>
+
+
+  <div>
+    <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
+    <%= link_to "Add Note" , new_note_path("note[owner_id]": @step.id, "note[owner_type]": @step.class.name) ,
+          {class: "btn btn-success" }%> |
+    <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+  </div>
+
+  <%= render "/steps/step_details" , step: @step %>

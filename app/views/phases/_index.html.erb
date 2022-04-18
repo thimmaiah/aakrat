@@ -1,0 +1,55 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Phases</h1>
+    <%= link_to "New Phase" , new_phase_path, {class: "btn btn-primary" } %>
+  </div>
+
+  <div class="table-responsive" data-controller="datatable">
+
+    <table id="phases" class="table table-bordered dataTable">
+
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Start Date
+          </th>
+          <th>
+            End Date
+          </th>
+          <th>
+            Status
+          </th>
+          <th>
+            Project
+          </th>
+          <th>
+            Assigned To
+          </th>
+          <th>
+            Visible To Client
+          </th>
+          <th>
+            Payment Status
+          </th>
+          <th>
+            Percentage Complete
+          </th>
+          <th>
+            Completed
+          </th>
+
+          <th>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% phases.each do |phase| %>
+          <%= render phase %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>

@@ -1,4 +1,17 @@
 FactoryBot.define do
+  factory :phase do
+    name { "MyString" }
+    start_date { "2022-04-18" }
+    end_date { "2022-04-18" }
+    status { "MyString" }
+    project { nil }
+    assigned_to { nil }
+    visible_to_client { false }
+    payment_status { "MyString" }
+    percentage_complete { 1 }
+    completed { false }
+  end
+
   factory :project do
     name { ["Villa Project", "Industrial Shed", "Interior Design", "Farm House", "Vacation Home", "Low cost housing"][rand(6)] }
     start_date { Time.zone.today - rand(10).days }

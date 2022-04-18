@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_035018) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -132,12 +132,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_035018) do
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
+  create_table "phases", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "status", limit: 20
+    t.bigint "project_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "assigned_to_id", null: false
+    t.boolean "visible_to_client", default: false
+    t.string "payment_status", limit: 20
+    t.integer "percentage_complete", default: 0
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_phases_on_assigned_to_id"
+    t.index ["company_id"], name: "index_phases_on_company_id"
+    t.index ["project_id"], name: "index_phases_on_project_id"
+  end
+
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
     t.date "end_date"
     t.decimal "cost_estimate_cents", precision: 20
-    t.integer "percentage_completed"
+    t.integer "percentage_completed", default: 0
     t.string "status", limit: 20
     t.bigint "company_id", null: false
     t.bigint "client_id"
@@ -247,6 +266,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_035018) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "payments", "companies"
   add_foreign_key "payments", "users"
+  add_foreign_key "phases", "companies"
+  add_foreign_key "phases", "projects"
+  add_foreign_key "phases", "users", column: "assigned_to_id"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "client_id"
   add_foreign_key "projects", "users", column: "team_lead_id"

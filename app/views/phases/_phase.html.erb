@@ -1,0 +1,39 @@
+<tr id="<%= dom_id phase %>">
+  <td>
+    <%= phase.name %>
+  </td>
+  <td>
+    <%= phase.start_date %>
+  </td>
+  <td>
+    <%= phase.end_date %>
+  </td>
+  <td>
+    <%= phase.status %>
+  </td>
+  <td>
+    <%= phase.project.name %>
+  </td>
+  <td>
+    <%= phase.assigned_to.full_name %>
+  </td>
+  <td>
+    <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+      <%= phase.visible_to_client ? "Yes" : "No" %>
+    </span>
+  </td>
+  <td>
+    <%= phase.payment_status %>
+  </td>
+  <td>
+    <%= phase.percentage_complete %>
+  </td>
+  <td>
+    <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">
+      <%= phase.completed ? "Yes" : "No" %>
+    </span>
+  </td>
+  <td>
+    <%= link_to "Show" , phase , {class: "btn btn-primary" }%>
+  </td>
+</tr>

@@ -1,6 +1,9 @@
 <tr id="<%= dom_id project %>">
   <td>
-    <%= project.name %>
+    <%= project.client.full_name %>
+  </td>
+  <td>
+    <%= link_to project.name, project %>
   </td>
   <td>
     <%= l project.start_date %>

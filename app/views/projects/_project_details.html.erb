@@ -1,0 +1,26 @@
+<div class="associated_entity" data-controller="tabs">
+    <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
+        <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#phases-tab">Phases</a>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#payments-tab">Payments</a>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+    </nav>
+
+
+
+    <div class="tab-content">
+        <div id="phases-tab" class="tab-pane fade show active">
+            <div id="phases" class="associated_entity">
+                <%= render "/phases/index" , phases: project.phases %>
+            </div>
+        </div>
+        <div id="payments-tab" class="tab-pane fade in show active">
+            <div id="payments" class="associated_entity">
+            </div>
+        </div>
+        <div id="notes-tab" class="tab-pane fade in show active">
+            <div id="notes" class="associated_entity">
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -53,7 +53,7 @@ input[type="file" i] {
 }
 
 
-.associated_company {
+.associated_entity {
   margin-top: 30px;
   h1 {
     font-size: 1.3rem !important;
@@ -111,11 +111,6 @@ h1 {
     font-weight: bold;
     background-color: #2ca87b !important;
   }
-}
-
-#deal_grid_div {
-  overflow-x:scroll;
-  min-height:400px;
 }
 
 .badge {
@@ -218,34 +213,6 @@ div.divider {
   min-height: 200px;
 }
 
-#deal_grid_view {
-  th, td, .btn {
-    font-size: 1em;
-  }
-
-  .sticky-col {
-    position: -webkit-sticky;
-    position: sticky;
-    background-color: white;
-  }
-
-  .sticky-col:hover {
-    z-index: 1;
-  }
-  
-  .first-col {
-    width: 200px;
-    min-width: 200px;
-    max-width: 800px;
-    left: 0px;
-  }
-
-  .deal_activity_cell {
-    .dropdown {
-      position: unset;
-    }
-  }
-}
 
 #currency_units_form, #scenarios_form {
   display: inline !important;
@@ -275,28 +242,6 @@ div.divider {
     }
 }
 
-
-.investment_row_container {
-  .card {
-    margin-bottom: 30px;
-    .card-body {
-      margin-left: 30px;
-    }
-  }
-  .delete-form-row {
-    display: block;
-    margin-bottom: 10px;
-    height: auto;
-  }display: inline;
-}
-
-#offers {
-  td {
-    .badge {
-      display: table;
-    }
-  }
-}
 
 .info {
   .button_to {

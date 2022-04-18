@@ -137,7 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
     t.date "start_date"
     t.date "end_date"
     t.string "status", limit: 20
-    t.bigint "project_id", null: false
+    t.bigint "project_id"
     t.bigint "company_id", null: false
     t.bigint "assigned_to_id", null: false
     t.boolean "visible_to_client", default: false

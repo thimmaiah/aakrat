@@ -263,6 +263,18 @@ div.divider {
   }
 }
 
+@media all and (max-width: 479px) {
+
+  .quick_entry {
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+  }    
+
+}
+
 .quick_entry {
 
   display: block;

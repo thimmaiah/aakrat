@@ -39,7 +39,7 @@
   </td>
   <td>
     <%= link_to "Show" , phase , {class: "btn btn-primary" }%>
-    <%= link_to "Edit" , edit_phase_path(phase) , {class: "btn btn-success" }%>
+    <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <%= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
   </td>
 </tr>

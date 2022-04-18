@@ -1,6 +1,11 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Phases</h1>
-    <%= link_to "New Phase" , new_phase_path(), {class: "btn btn-primary" } %>
+    <%= link_to "New Phase" , new_phase_path("phase[project_id]": @project.id), 
+            {class: "btn btn-primary" } if @project %>
+  </div>
+  
+  <div class="quick_entry">
+    <%= render "/phases/quick_entry", phase: Phase.new(project_id: @project.id, start_date: Time.zone.today) if @project %>
   </div>
 
   <div class="table-responsive">
@@ -45,7 +50,7 @@
         </tr>
       </thead>
 
-      <tbody>
+      <tbody id="phases_tbody">
         <% phases.each do |phase| %>
           <%= render phase %>
         <% end %>

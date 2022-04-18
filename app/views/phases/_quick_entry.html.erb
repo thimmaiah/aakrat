@@ -1,0 +1,37 @@
+<%= form_with(model: phase, class: "form-inline") do |form| %>
+ 
+  <div class="form-row">
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control"  %>
+    <%= form.text_field :project_id, hidden: true  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assigned_to_id %>
+    <%= form.select :assigned_to_id, current_user.company.users.team_leads.map{|u| [u.full_name, u.id]}, {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :visible_to_client %>
+    <%= form.check_box :visible_to_client, class: "form-control"  %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.submit "Save", {class: "btn btn-primary"}%>
+  </div>
+
+  </div>
+<% end %>

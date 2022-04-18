@@ -1,8 +1,15 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Steps</h1>
     <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), 
-                    {class: "btn btn-success" } if @phase %> 
+                    {class: "btn btn-primary" } if @phase %> 
 </div>
+
+
+<div class="quick_entry">
+    <%= render "/steps/quick_entry", step: Step.new(phase_id: @phase.id, 
+                    project_id: @phase.project_id, start_date: Time.zone.today) if @phase %>
+</div>
+
 
 <div class="table-responsive">
 
@@ -35,7 +42,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="steps_tbody">
             <% steps.each do |step| %>
                 <%= render step %>
             <% end %>

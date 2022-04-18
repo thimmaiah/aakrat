@@ -27,6 +27,7 @@ class StepsController < ApplicationController
 
     respond_to do |format|
       if @step.save
+        format.turbo_stream { render :create }
         format.html { redirect_to step_url(@step), notice: "Step was successfully created." }
         format.json { render :show, status: :created, location: @step }
       else
@@ -54,6 +55,11 @@ class StepsController < ApplicationController
     @step.destroy
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove(@step)
+        ]
+      end
       format.html { redirect_to steps_url, notice: "Step was successfully destroyed." }
       format.json { head :no_content }
     end

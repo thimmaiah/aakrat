@@ -11,9 +11,9 @@ class PhasesController < ApplicationController
 
   # GET /phases/new
   def new
-    @phase = Phase.new
+    @phase = Phase.new(phase_params)
     @phase.company_id = current_user.company_id
-    @phase.project_id = params[:project_id]
+    @phase.project_id ||= params[:project_id]
     @phase.start_date = Time.zone.today
     @phase.end_date = Time.zone.today + 10.days
     authorize @phase
@@ -30,6 +30,7 @@ class PhasesController < ApplicationController
 
     respond_to do |format|
       if @phase.save
+        format.turbo_stream { render :create }
         format.html { redirect_to phase_url(@phase), notice: "Phase was successfully created." }
         format.json { render :show, status: :created, location: @phase }
       else
@@ -57,6 +58,11 @@ class PhasesController < ApplicationController
     @phase.destroy
 
     respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.remove(@phase)
+        ]
+      end
       format.html { redirect_to phases_url, notice: "Phase was successfully destroyed." }
       format.json { head :no_content }
     end

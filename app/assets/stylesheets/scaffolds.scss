@@ -262,3 +262,31 @@ div.divider {
     max-height: 75vh;
   }
 }
+
+.quick_entry {
+
+  display: block;
+  text-align: center;
+
+  .form-inline {
+    border: 1px solid lightgray;
+    width: auto !important;
+    margin-bottom: 15px;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+
+    .form-group {
+      padding: 20px;
+      display: block !important;
+      label {
+        margin-right: 5px;
+      }
+    }
+
+    .btn {
+      margin-top: 15px;
+    }
+  }
+}

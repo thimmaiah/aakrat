@@ -1,0 +1,7 @@
+
+    <%= turbo_stream.append('phases_tbody',
+        partial: "phases/phase", locals: { phase: @phase }) %>
+
+    <%= turbo_stream.replace('toasts', partial: "layouts/success_toast",
+        locals: { message: "Phase create successfully" }) %>
+

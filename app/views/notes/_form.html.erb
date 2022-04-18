@@ -1,0 +1,35 @@
+<%= form_with(model: note) do |form| %>
+  <% if note.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(note.errors.count, "error") %> prohibited this note from being saved:</h2>
+
+      <ul>
+        <% note.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= form.text_field :company_id, class: "form-control", hidden: true  %>
+    <%= form.text_field :user_id, class: "form-control", hidden: true  %>
+    <%= form.number_field :owner_id, class: "form-control", hidden: true  %>
+    <%= form.text_field :owner_type, class: "form-control", hidden: true  %>
+
+
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.rich_text_area :details, class: "form-control trix-content"  %>
+  </div>
+
+  <div class="field" class="form-group" data-controller="directuploads" >
+    <%= form.label :attachments, "Attachments" %>
+    <%= form.file_field :attachments, class: "form-control", direct_upload: true, multiple:true %>
+    <small class="text-muted"> Upload multiple attachements. </small>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.submit "Save", {class: "btn btn-primary"}%>
+  </div>
+<% end %>

@@ -1,4 +1,11 @@
 FactoryBot.define do
+  factory :note do
+    user { nil }
+    company { nil }
+    owner_id { 1 }
+    owner_type { "MyString" }
+  end
+
   factory :phase do
     name { "MyString" }
     start_date { "2022-04-18" }

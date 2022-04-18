@@ -1,0 +1,14 @@
+<tr id="<%= dom_id note %>">
+  <td>
+    <%= note.user.full_name %>
+  </td>
+  <td>
+    <%= note.company.name %>
+  </td>
+  <td>
+    <%= note.details %>
+  </td>
+  <td>
+    <%= link_to "Show" , note , {class: "btn btn-primary" }%>
+  </td>
+</tr>

@@ -13,12 +13,13 @@
                 <%= render "/phases/index" , phases: project.phases %>
             </div>
         </div>
-        <div id="payments-tab" class="tab-pane fade in show active">
+        <div id="payments-tab" class="tab-pane fade">
             <div id="payments" class="associated_entity">
             </div>
         </div>
-        <div id="notes-tab" class="tab-pane fade in show active">
+        <div id="notes-tab" class="tab-pane fade">
             <div id="notes" class="associated_entity">
+                <%= render "/notes/index", notes: project.notes, owner: project %>
             </div>
         </div>
     </div>

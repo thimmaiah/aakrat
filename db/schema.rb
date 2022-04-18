@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_053813) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -117,6 +117,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "notes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.integer "owner_id"
+    t.string "owner_type", limit: 30
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_notes_on_company_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "payments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
@@ -137,7 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
     t.date "start_date"
     t.date "end_date"
     t.string "status", limit: 20
-    t.bigint "project_id"
+    t.bigint "project_id", null: false
     t.bigint "company_id", null: false
     t.bigint "assigned_to_id", null: false
     t.boolean "visible_to_client", default: false
@@ -264,6 +275,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_042939) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "notes", "companies"
+  add_foreign_key "notes", "users"
   add_foreign_key "payments", "companies"
   add_foreign_key "payments", "users"
   add_foreign_key "phases", "companies"

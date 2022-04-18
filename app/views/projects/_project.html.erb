@@ -15,7 +15,7 @@
     <%= money_to_currency project.cost_estimate, params %>
   </td>
   <td>
-    <%= number_with_precision project.percentage_completed_days, precision: 2 %>  
+    <%= number_with_precision project.percentage_completed_days, precision: 2 %> %
   </td>
   <td>
     <span class="badge <%= status_badge(project) %>">

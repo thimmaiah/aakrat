@@ -16,10 +16,14 @@
 
 class Payment < ApplicationRecord
   include Trackable
-  include ActivityTrackable
 
   belongs_to :company
   belongs_to :user
+  belongs_to :phase
+  belongs_to :project
 
-  validates :amount, :plan, presence: true
+  has_rich_text :details
+  has_many_attached :attachments, service: :amazon, dependent: :destroy
+
+  validates :amount, presence: true
 end

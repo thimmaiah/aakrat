@@ -1,62 +1,90 @@
 <%= render "/layouts/alerts" %>
 
-<table class="table table-bordered dataTable">
+  <table class="table table-bordered dataTable">
 
-          <tr>
-        <td>
-          Company
-        </td>
-        <td>
-          <%= @payment.company.name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Amount
-        </td>
-        <td>
-          <%= @payment.amount %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Plan
-        </td>
-        <td>
-          <%= @payment.plan %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Discount
-        </td>
-        <td>
-          <%= @payment.discount %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Reference Number
-        </td>
-        <td>
-          <%= @payment.reference_number %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          User
-        </td>
-        <td>
-          <%= @payment.user.full_name %>
-        </td>    
-      </tr>
-    
-  
-</table>
+    <tr>
+      <td>
+        Company
+      </td>
+      <td>
+        <%= @payment.company.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Amount
+      </td>
+      <td>
+        <%= @payment.amount %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Phase
+      </td>
+      <td>
+        <%= @payment.project.client.full_name %> : <%= @payment.project.name %> : <%= @payment.phase.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Discount
+      </td>
+      <td>
+        <%= @payment.discount %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Reference Number
+      </td>
+      <td>
+        <%= @payment.reference_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        User
+      </td>
+      <td>
+        <%= @payment.user.full_name %>
+      </td>
+    </tr>
 
-<% if current_user.has_cached_role?(:super) %>
-<div>
-  <%= link_to "Edit", edit_payment_path(@payment), {class: "btn btn-primary"} %> |
-  <%= button_to "Delete", @payment, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
-</div>
-<% end %>
+    <tr>
+      <td>
+        Details
+      </td>
+      <td>
+        <%= @payment.details %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Attachments
+      </td>
+      <td>
+        <ul>
+          <% @payment.attachments.each do |file| %>
+            <li>
+              <%= link_to rails_blob_path(file, disposition: :attachment), class: "btn btn-sm btn-primary" do%>
+                <i class="fas fa-download"></i>
+                <%= file.filename.to_s.capitalize %>
+              <% end %>
+            </li>
+            <% end %>
+        </ul>
+
+      </td>
+    </tr>
+
+
+  </table>
+
+  <% if current_user.has_cached_role?(:super) %>
+    <div>
+      <%= link_to "Edit" , edit_payment_path(@payment), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @payment, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    </div>
+  <% end %>

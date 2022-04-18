@@ -4,10 +4,12 @@ class Project < ApplicationRecord
   belongs_to :team_lead, class_name: "User"
 
   has_many :phases, dependent: :destroy
+  has_many :payments, dependent: :destroy
+
   has_many :notes, as: :owner, dependent: :destroy
   has_rich_text :details
 
-  STATUS = ["Started", "In Progress", "Completed", "Halted", "Abandoned"].freeze
+  STATUS = ["Not Started", "In Progress", "Completed", "Halted", "Abandoned"].freeze
   PAYMENT_STATUS = ["Not Paid", "Partial Payment", "Paid"].freeze
 
   monetize :cost_estimate_cents, with_model_currency: :currency

@@ -3,7 +3,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments or /payments.json
   def index
-    @payments = policy_scope(Payment)
+    @payments = policy_scope(Payment).includes(:phase, :user, project: [:client])
   end
 
   # GET /payments/1 or /payments/1.json
@@ -32,7 +32,7 @@ class PaymentsController < ApplicationController
         format.html { redirect_to payment_url(@payment), notice: "Payment was successfully created." }
         format.json { render :show, status: :created, location: @payment }
       else
-        format.html { render :new, status: :unprocessable_company }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @payment.errors, status: :unprocessable_company }
       end
     end
@@ -73,6 +73,7 @@ class PaymentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def payment_params
-    params.require(:payment).permit(:amount, :plan, :discount, :reference_number)
+    params.require(:payment).permit(:amount, :plan, :discount, :reference_number, :project_id,
+                                    :phase_id, :details, attachments: [])
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_140555) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_153108) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -138,8 +138,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_140555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.bigint "phase_id", null: false
+    t.bigint "project_id", null: false
     t.index ["company_id"], name: "index_payments_on_company_id"
     t.index ["deleted_at"], name: "index_payments_on_deleted_at"
+    t.index ["phase_id"], name: "index_payments_on_phase_id"
+    t.index ["project_id"], name: "index_payments_on_project_id"
     t.index ["user_id"], name: "index_payments_on_user_id"
   end
 
@@ -302,6 +306,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_140555) do
   add_foreign_key "notes", "companies"
   add_foreign_key "notes", "users"
   add_foreign_key "payments", "companies"
+  add_foreign_key "payments", "phases"
+  add_foreign_key "payments", "projects"
   add_foreign_key "payments", "users"
   add_foreign_key "phases", "companies"
   add_foreign_key "phases", "projects"

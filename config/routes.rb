@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     patch 'toggle_completed', on: :member
   end
   resources :projects
+  resources :payments
+
   namespace :admin do
     resources :users
     resources :companies

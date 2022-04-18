@@ -18,7 +18,7 @@ class PaymentPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_cached_role?(:super)
+    user.has_cached_role?(:super) || (user.has_cached_role?(:team_lead) && user.company_id == record.company_id)
   end
 
   def new?

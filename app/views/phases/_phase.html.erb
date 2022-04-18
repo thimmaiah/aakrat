@@ -18,9 +18,7 @@
     </span>
 
   </td>
-  <td>
-    <%= phase.project.name %>
-  </td>
+  
   <td>
     <%= phase.assigned_to.full_name %>
   </td>
@@ -46,6 +44,6 @@
     <%= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
 
     <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
-    <%= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
+    <% #= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
   </td>
 </tr>

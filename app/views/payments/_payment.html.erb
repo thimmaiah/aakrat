@@ -6,7 +6,13 @@
     <%= number_to_currency payment.amount %>
   </td>
   <td>
-    <%= payment.plan %>
+    <%= payment.project.client.full_name %>
+  </td>
+  <td>
+    <%= payment.project.name %>
+  </td>
+  <td>
+    <%= payment.phase.name %>
   </td>
   <td>
     <%= payment.discount %>

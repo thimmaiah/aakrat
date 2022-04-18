@@ -3,7 +3,7 @@ en:
   number:
     currency:
       format:
-        format: "%u%n"
+        format: "%u %n"
         unit: "INR"
 
   date:

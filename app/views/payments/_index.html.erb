@@ -1,0 +1,49 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Payments</h1>
+    <%= link_to "New Payment", new_payment_path("payment[project_id]": @project.id), class: "btn btn-primary" if @project %>
+</div>
+
+<div class="table-responsive">
+
+    <table id="payments" class="table table-bordered dataTable jqDataTable">
+
+        <thead>
+            <tr>
+                <th>
+                    Company
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Client
+                </th>
+                <th>
+                    Project
+                </th>
+                <th>
+                    Phase
+                </th>
+                <th>
+                    Discount
+                </th>
+                <th>
+                    Reference Number
+                </th>
+                <th>
+                    User
+                </th>
+
+                <th>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% payments.each do |payment| %>
+                <%= render payment %>
+            <% end %>
+        </tbody>
+    </table>
+
+</div>

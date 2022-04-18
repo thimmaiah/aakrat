@@ -15,11 +15,12 @@
   <div class="form-group">
     <%= form.label :amount %>
     <%= form.text_field :amount, class: "form-control"  %>
+    <%= form.text_field :project_id, hidden: true  %>
   </div>
 
   <div class="form-group">
-    <%= form.label :plan %>
-    <%= form.text_field :plan, class: "form-control"  %>
+    <%= form.label :phase %>
+    <%= form.select :phase_id, payment.project.phases.map{|u| [u.name, u.id] }, {}, class: "form-control"  %>
   </div>
 
   <div class="form-group">
@@ -32,6 +33,18 @@
     <%= form.text_field :reference_number, class: "form-control"  %>
   </div>
 
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.rich_text_area :details, class: "form-control trix-content"  %>
+  </div>
+
+  <div class="field" class="form-group" data-controller="directuploads" >
+    <%= form.label :attachments, "Attachments" %>
+    <%= form.file_field :attachments, class: "form-control", direct_upload: true, multiple:true %>
+    <small class="text-muted"> Upload multiple attachements. </small>
+  </div>
+
+  
   <div class="form-group">
     <%= form.submit "Save", {class: "btn btn-primary"}%>
   </div>

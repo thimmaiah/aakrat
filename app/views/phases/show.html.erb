@@ -83,9 +83,21 @@
         Percentage Complete
       </td>
       <td>
-        <%= @phase.percentage_complete %> %
+        <%= number_with_precision @phase.percentage_completed_days, precision: 2 %> %
       </td>
     </tr>
+
+    <tr>
+      <td>
+        Days
+      </td>
+      <td>
+        Total: <%= @phase.total_days %>, 
+        Completed: <%= @phase.completed_days %>
+      </td>    
+    </tr>
+
+
     <tr>
       <td>
         Completed

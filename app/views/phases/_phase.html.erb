@@ -33,7 +33,7 @@
     <%= phase.payment_status %>
   </td>
   <td>
-    <%= phase.percentage_complete %>
+    <%= number_with_precision phase.percentage_completed_days, precision: 2 %>  
   </td>
   <td>
     <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">

@@ -48,7 +48,7 @@
         Percentage Completed
       </td>
       <td>
-        <%= @project.percentage_completed %>
+        <%= number_with_precision @project.percentage_completed_days, precision: 2 %>
       </td>
     </tr>
     <tr>
@@ -58,6 +58,16 @@
       <td>
         <%= @project.status %>
       </td>
+    </tr>
+    
+    <tr>
+      <td>
+        Days
+      </td>
+      <td>
+        Total: <%= @project.total_days %>, 
+        Completed: <%= @project.completed_days %>
+      </td>    
     </tr>
 
     <tr>

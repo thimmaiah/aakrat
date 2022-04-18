@@ -19,4 +19,8 @@ class Phase < ApplicationRecord
       Time.zone.today < end_date ? "On-Time" : "Delayed"
     end
   end
+
+  def percentage_completed_days
+    completed_days * 100.0 / total_days
+  end
 end

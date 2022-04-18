@@ -11,4 +11,8 @@ class Project < ApplicationRecord
   PAYMENT_STATUS = ["Not Paid", "Partial Payment", "Paid"].freeze
 
   monetize :cost_estimate_cents, with_model_currency: :currency
+
+  def percentage_completed_days
+    completed_days * 100.0 / total_days
+  end
 end

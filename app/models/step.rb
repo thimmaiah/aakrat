@@ -8,6 +8,28 @@ class Step < ApplicationRecord
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
+  before_save :set_days
+
+  counter_culture :phase,
+                  column_name: proc { |s| s.completed ? 'completed_days' : nil },
+                  delta_column: 'days'
+
+  counter_culture :phase,
+                  column_name: 'total_days',
+                  delta_column: 'days'
+
+  counter_culture :project,
+                  column_name: proc { |s| s.completed ? 'completed_days' : nil },
+                  delta_column: 'days'
+
+  counter_culture :project,
+                  column_name: 'total_days',
+                  delta_column: 'days'
+
+  def set_days
+    self.days = (end_date - start_date).to_i
+  end
+
   def delayed?
     Time.zone.today > end_date && !completed
   end

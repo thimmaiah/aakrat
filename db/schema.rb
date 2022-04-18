@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_061101) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_140555) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -157,6 +157,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_061101) do
     t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_days", default: 0
+    t.integer "completed_days", default: 0
     t.index ["assigned_to_id"], name: "index_phases_on_assigned_to_id"
     t.index ["company_id"], name: "index_phases_on_company_id"
     t.index ["project_id"], name: "index_phases_on_project_id"
@@ -175,6 +177,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_061101) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "currency", limit: 5
+    t.integer "total_days", default: 0
+    t.integer "completed_days", default: 0
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"
@@ -206,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_061101) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "company_id", null: false
+    t.integer "days", default: 0
     t.index ["assigned_to_id"], name: "index_steps_on_assigned_to_id"
     t.index ["company_id"], name: "index_steps_on_company_id"
     t.index ["phase_id"], name: "index_steps_on_phase_id"

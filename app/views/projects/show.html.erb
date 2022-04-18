@@ -88,4 +88,6 @@
     <%= button_to "Delete" , @project, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>
 
-  <%= render "/projects/project_details", project: @project %>
+  <div data-controller="datatable">
+    <%= render "/projects/project_details", project: @project %>
+  </div>

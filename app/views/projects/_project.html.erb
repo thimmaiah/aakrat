@@ -15,10 +15,12 @@
     <%= money_to_currency project.cost_estimate, params %>
   </td>
   <td>
-    <%= project.percentage_completed %>
+    <%= project.percentage_completed %> %
   </td>
   <td>
-    <%= project.status %>
+    <span class="badge <%= status_badge(project) %>">
+      <%= project.status %>
+    </span>
   </td>
   <td>
     <%= project.company.name %>

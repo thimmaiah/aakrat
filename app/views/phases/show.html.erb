@@ -109,4 +109,6 @@
     <%= button_to "Delete" , @phase, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>
 
-  <%= render "/phases/phase_details", phase: @phase %>
+  <div data-controller="datatable">
+    <%= render "/phases/phase_details", phase: @phase %>
+  </div>

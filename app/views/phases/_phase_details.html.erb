@@ -1,6 +1,7 @@
 <div class="associated_entity" data-controller="tabs">
     <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
         <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#steps-tab">Steps</a>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
     </nav>
 
 
@@ -9,6 +10,11 @@
         <div id="steps-tab" class="tab-pane fade show active">
             <div id="steps" class="associated_entity">
                 <%= render "/steps/index" , steps: phase.steps %>
+            </div>
+        </div>
+        <div id="notes-tab" class="tab-pane fade">
+            <div id="notes" class="associated_entity">
+                <%= render "/notes/index", notes: phase.notes, owner: phase %>
             </div>
         </div>
     </div>

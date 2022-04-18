@@ -10,6 +10,10 @@
   </td>
   <td>
     <%= phase.status %>
+    <span class="badge <%= phase.delayed? ? 'bg-danger' : 'bg-success' %>">
+      <%= phase.on_time_status %>
+    </span>
+
   </td>
   <td>
     <%= phase.project.name %>
@@ -36,5 +40,6 @@
   <td>
     <%= link_to "Show" , phase , {class: "btn btn-primary" }%>
     <%= link_to "Edit" , edit_phase_path(phase) , {class: "btn btn-success" }%>
+    <%= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
   </td>
 </tr>

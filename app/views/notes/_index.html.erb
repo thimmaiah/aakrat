@@ -1,10 +1,11 @@
+  <% owner ||= nil %>
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Notes</h1>
-    <%= link_to "New Note" , new_note_path("note[owner_id]": owner.id, "note[owner_type]": owner.class.name), {class: "btn btn-primary" } %>
+    <%= link_to "New Note" , new_note_path("note[owner_id]": owner.id, "note[owner_type]": owner.class.name), {class: "btn btn-primary" } if owner %>
   </div>
 
-  <div class="table-responsive" data-controller="datatable">
+  <div class="table-responsive">
 
     <table id="notes" class="table table-bordered dataTable">
 
@@ -14,7 +15,7 @@
             User
           </th>
           <th>
-            Company
+            Linked To
           </th>
           <th>
             Details

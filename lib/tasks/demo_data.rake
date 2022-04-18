@@ -39,6 +39,26 @@ namespace :vk do
   end
 
 
+  desc "generates fake Projects for testing"
+  task generateFakeProjects: :environment do
+    Company.all.each do |c| 
+      p = FactoryBot.create(:project, company: c)        
+      puts p.to_json
+      (1..10).each do 
+        s = FactoryBot.create(:phase, company: c, project: p)        
+
+        (1..10).each do 
+          t = FactoryBot.create(:step, company: c, project: p, phase: s)        
+        end
+      end
+
+    end
+  rescue Exception => e
+    puts e.backtrace.join("\n")
+    raise e
+  end
+
+
   
   task :generateAll => [:generateFakeCompanies, :generateFakeUsers] do
     puts "Generating all Fake Data"

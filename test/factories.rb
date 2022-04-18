@@ -1,34 +1,33 @@
 FactoryBot.define do
   factory :step do
-    name { "MyString" }
-    start_date { "2022-04-18" }
-    end_date { "2022-04-18" }
-    status { "MyString" }
-    project { nil }
-    phase { nil }
-    assigned_to { nil }
-    visible_to_client { false }
-    completed { false }
+    name { Faker::Company.catch_phrase }
+    start_date { Time.zone.today - rand(10).days }
+    end_date { Time.zone.today + rand(10).days }
+    status {  }
+    project { Project.all.sample }
+    phase { project.phases.sample }
+    assigned_to { project.company.users.sample }
+    visible_to_client { rand(1) }
+    completed { rand(1) }
+    details { Faker::Quotes::Rajnikanth.joke }
   end
 
   factory :note do
-    user { nil }
-    company { nil }
-    owner_id { 1 }
-    owner_type { "MyString" }
+    details { Faker::Quotes::Rajnikanth.joke }
   end
 
   factory :phase do
-    name { "MyString" }
-    start_date { "2022-04-18" }
-    end_date { "2022-04-18" }
-    status { "MyString" }
-    project { nil }
-    assigned_to { nil }
-    visible_to_client { false }
-    payment_status { "MyString" }
-    percentage_complete { 1 }
-    completed { false }
+    name { Faker::Company.catch_phrase }
+    start_date { Time.zone.today - rand(10).days }
+    end_date { Time.zone.today + rand(10).days }
+    status { }
+    project { Project.all.sample }
+    assigned_to { project.company.users.sample }
+    visible_to_client { rand(1) }
+    payment_status {  }
+    percentage_complete { rand(100) }
+    completed { rand(1) }
+    details { Faker::Quotes::Rajnikanth.joke }
   end
 
   factory :project do
@@ -42,6 +41,7 @@ FactoryBot.define do
     client { User.clients.sample }
     team_lead { User.team_leads.sample }
     currency { company.currency }
+    details { Faker::Quotes::Rajnikanth.joke }
   end
 
   factory :payment do

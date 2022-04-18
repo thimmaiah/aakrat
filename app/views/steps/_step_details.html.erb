@@ -1,0 +1,16 @@
+<div class="associated_entity" data-controller="tabs">
+    <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
+        <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+    </nav>
+
+
+
+    <div class="tab-content">
+        <div id="notes-tab" class="tab-pane fade show active">
+            <div id="notes" class="associated_entity">
+                <%= render "/notes/index" , notes: step.notes %>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -6,4 +6,14 @@ class Phase < ApplicationRecord
   has_many :steps, dependent: :destroy
 
   has_rich_text :details
+
+  def delayed?
+    Time.zone.today > end_date
+  end
+
+  def on_time_status
+    unless completed
+      Time.zone.today < end_date ? "On-Time" : "Delayed"
+    end
+  end
 end

@@ -3,7 +3,7 @@
     <%= note.user.full_name %>
   </td>
   <td>
-    <%= note.company.name %>
+    <%= link_to note.owner_type, note.owner %>
   </td>
   <td>
     <%= note.details %>

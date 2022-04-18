@@ -10,6 +10,9 @@
   </td>
   <td>
     <%= step.status %>
+    <span class="badge <%= step.delayed? ? 'bg-danger' : 'bg-success' %>">
+      <%= step.on_time_status %>
+    </span>  
   </td>
   <td>
     <%= step.assigned_to.full_name %>
@@ -17,7 +20,8 @@
   <td>
     <span class="badge <%= step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
       <%= step.visible_to_client ? "Yes" : "No" %>
-    </span>  </td>
+    </span>  
+  </td>
   <td>
     <span class="badge <%= step.completed ? 'bg-success' : 'bg-warning' %>">
       <%= step.completed ? "Yes" : "No" %>
@@ -25,5 +29,6 @@
   </td>
   <td>
     <%= link_to "Show" , step , {class: "btn btn-primary" }%>
+    <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "btn btn-success" }%>
   </td>
 </tr>

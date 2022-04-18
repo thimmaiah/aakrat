@@ -1,10 +1,10 @@
-class CompanyPolicy < ApplicationPolicy
+class ProjectPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.has_cached_role?(:super)
         scope.all
       else
-        scope.where(id: user.company_id)
+        scope.where(company_id: user.company_id)
       end
     end
   end
@@ -22,7 +22,7 @@ class CompanyPolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.id
+    if user.has_cached_role?(:super) || user.company_id == record.company_id
       true
     else
       user.company_id != record.id
@@ -30,15 +30,15 @@ class CompanyPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_cached_role?(:super)
+    user.has_cached_role?(:team_lead) && user.company_id == record.company_id
   end
 
   def new?
-    update?
+    create?
   end
 
   def update?
-    user.has_cached_role?(:super) || user.company_id == record.id
+    create?
   end
 
   def edit?

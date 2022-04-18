@@ -1,0 +1,26 @@
+<tr id="<%= dom_id project %>">
+  <td>
+    <%= project.name %>
+  </td>
+  <td>
+    <%= l project.start_date %>
+  </td>
+  <td>
+    <%= l project.end_date %>
+  </td>
+  <td>
+    <%= money_to_currency project.cost_estimate, params %>
+  </td>
+  <td>
+    <%= project.percentage_completed %>
+  </td>
+  <td>
+    <%= project.status %>
+  </td>
+  <td>
+    <%= project.company.name %>
+  </td>
+  <td>
+    <%= link_to "Show" , project , {class: "btn btn-primary" }%>
+  </td>
+</tr>

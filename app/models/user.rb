@@ -16,13 +16,13 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A[^@\s]+@[^@\s]+\z/ }, presence: true
 
   # "CxO", "Founder", "Angel", "VC", "Admin",
-  ROLES = ["Customer", "Team Lead", "Team Member", "Contractor", "Company Admin"].freeze
+  ROLES = %i[client team_lead team_member contractor company_admin].freeze
 
-  scope :admins, -> { where(role: "Company Admin") }
-  scope :customers, -> { where(role: "Customer") }
-  scope :contractors, -> { where(role: "Contractor") }
-  scope :team_leads, -> { where(role: "Team Lead") }
-  scope :team_members, -> { where(role: "Team Member") }
+  scope :admins, -> { where('roles.name': :company_admin).joins(:roles) }
+  scope :clients, -> { where('roles.name': :client).joins(:roles) }
+  scope :contractors, -> { where('roles.name': :contractor).joins(:roles) }
+  scope :team_leads, -> { where('roles.name': :team_lead).joins(:roles) }
+  scope :team_members, -> { where('roles.name': :team_member).joins(:roles) }
 
   before_create :setup_defaults
 
@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def setup_defaults
-    add_role :team_member
+    add_role :team_member if company
     # add_role :investor if (company && company.company_type == "VC") || InvestorAccess.where(user_id: id).first.present?
     # add_role :secondary_buyer if company && ["Advisor", "Family Office", "VC"].include?(company.company_type)
     # add_role :startup if company && (company.company_type == "Startup")

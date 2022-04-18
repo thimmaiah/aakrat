@@ -1,16 +1,17 @@
-namespace :sa do
+namespace :vk do
   require "faker"
   require 'digest/sha1'
   require 'factory_bot'
 
   
   desc "generates fake Company for testing"
-  task generateFakeEntities: :environment do
-    (1..10).each do 
+  task generateFakeCompanies: :environment do
+    (1..3).each do 
       e = FactoryBot.create(:company, company_type: "Architect")
       puts "Company #{e.name}"
       (1..2).each do |j|
         user = FactoryBot.create(:user, company: e, first_name: "Emp#{j}")
+        user.add_role(:team_lead)
         puts user.to_json
       end
     end
@@ -24,8 +25,22 @@ namespace :sa do
 
 
 
+  desc "generates fake Users for testing"
+  task generateFakeUsers: :environment do
+    (1..10).each do 
+      u = FactoryBot.create(:user)
+      u.add_role([:client, :contractor][rand(2)])  
+      
+      puts u.to_json
+    end
+  rescue Exception => e
+    puts e.backtrace.join("\n")
+    raise e
+  end
+
+
   
-  task :generateAll => [:generateFakeEntities] do
+  task :generateAll => [:generateFakeCompanies, :generateFakeUsers] do
     puts "Generating all Fake Data"
     Sidekiq.redis(&:flushdb)
   end

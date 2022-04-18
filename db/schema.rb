@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_10_064854) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_035018) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -127,9 +127,27 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_064854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_payments_on_deleted_at"
     t.index ["company_id"], name: "index_payments_on_company_id"
+    t.index ["deleted_at"], name: "index_payments_on_deleted_at"
     t.index ["user_id"], name: "index_payments_on_user_id"
+  end
+
+  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "cost_estimate_cents", precision: 20
+    t.integer "percentage_completed"
+    t.string "status", limit: 20
+    t.bigint "company_id", null: false
+    t.bigint "client_id"
+    t.bigint "team_lead_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "currency", limit: 5
+    t.index ["client_id"], name: "index_projects_on_client_id"
+    t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"
   end
 
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -200,10 +218,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_064854) do
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.boolean "accept_terms", default: false
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -226,9 +244,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_10_064854) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "payments", "companies"
   add_foreign_key "payments", "users"
+  add_foreign_key "projects", "companies"
+  add_foreign_key "projects", "users", column: "client_id"
+  add_foreign_key "projects", "users", column: "team_lead_id"
   add_foreign_key "taggings", "tags"
 end

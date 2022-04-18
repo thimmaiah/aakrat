@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :projects
   namespace :admin do
     resources :users
     resources :companies

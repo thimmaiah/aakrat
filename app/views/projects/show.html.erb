@@ -1,0 +1,71 @@
+<%= render "/layouts/alerts" %>
+
+<table class="table table-bordered dataTable">
+
+          <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          <%= @project.name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Start Date
+        </td>
+        <td>
+          <%= l @project.start_date %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          End Date
+        </td>
+        <td>
+          <%= l @project.end_date %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Cost Estimate Cents
+        </td>
+        <td>
+          <%= money_to_currency @project.cost_estimate, params %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Percentage Completed
+        </td>
+        <td>
+          <%= @project.percentage_completed %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Status
+        </td>
+        <td>
+          <%= @project.status %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Company
+        </td>
+        <td>
+          <%= @project.company.name %>
+        </td>    
+      </tr>
+    
+  
+</table>
+
+
+<div>
+  <%= link_to "Edit", edit_project_path(@project), {class: "btn btn-primary"} %> |
+  <%= link_to "Back", :back, {class: "btn btn-primary"} %> |
+
+  <%= button_to "Delete", @project, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+</div>

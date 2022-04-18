@@ -1,0 +1,63 @@
+<%= render "/layouts/alerts" %>
+
+<div class="card shadow mb-4">
+
+   <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary"><%= link_to @user.name, @user %></h6>
+   </div>
+
+   <div class="card-body">
+
+      <table id="users" class="table table-bordered dataTable ">
+
+        <tr>
+          <td>
+            First name
+          </td>
+          <td>
+            <%=@user.first_name%>
+          </td>
+        </tr>
+        <tr>  
+          <td>
+            Last name
+          </td>
+        <td>
+            <%=@user.last_name%>
+          </td>
+        </tr>
+        <tr>  
+          <td>
+            Email
+          </td>
+        <td>
+            <%=@user.email%>
+          </td>
+        </tr>
+        <tr>  
+          <td>
+            Phone
+          </td>
+        <td>
+            <%=@user.phone%>
+          </td>
+        </tr>
+        
+      
+        <tr>  
+          <td>
+            Company
+          </td>
+          <td>
+            <%=@user.company.name if @user.company_id %>
+          </td>
+        </tr>
+
+    </table>
+    
+    <div>
+      <%= link_to "Edit", edit_user_path(@user), {class: "btn btn-primary"} %> 
+    </div>
+  </div>
+</div>
+

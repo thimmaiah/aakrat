@@ -1,0 +1,31 @@
+
+en:
+  number:
+    currency:
+      format:
+        format: "%u%n"
+        unit: "INR"
+
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  note:
+    create: 'Note was created'
+    update: 'Note was updated'
+    destroy: 'Note was deleted'
+  
+  user:
+    create: 'User was created'
+    update: 'User was updated'
+    destroy: 'User was deleted'
+  access_right:
+    create: 'Access was given'
+    update: 'Access was updated'
+    destroy: 'Access was removed'

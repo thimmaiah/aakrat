@@ -1,0 +1,30 @@
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Companies</h1>
+</div>
+
+<div class="table-responsive">
+
+  <table id="companies" class="table table-bordered dataTable ">
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Category
+      </th>
+      <th>
+        Type
+      </th>
+      <th>
+      </th>  
+    </tr>
+
+
+    <% companies.each do |company| %>
+      <%= render "companies/company", company: company, vc_view: vc_view %>
+    <% end %>
+  </table>
+
+</div>
+

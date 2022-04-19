@@ -9,10 +9,10 @@
     <%= payment.project.client.full_name %>
   </td>
   <td>
-    <%= payment.project.name %>
+    <%= link_to payment.project.name, payment.project %>
   </td>
   <td>
-    <%= payment.phase.name %>
+    <%= link_to payment.phase.name, payment.phase %>
   </td>
   <td>
     <%= payment.discount %>

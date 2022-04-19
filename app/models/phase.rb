@@ -40,6 +40,6 @@ class Phase < ApplicationRecord
   end
 
   def percentage_completed_days
-    completed_days * 100.0 / total_days
+    total_days.positive? ? completed_days * 100.0 / total_days : 0
   end
 end

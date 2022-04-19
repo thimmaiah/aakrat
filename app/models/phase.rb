@@ -12,12 +12,12 @@ class Phase < ApplicationRecord
   monetize :payment_amount_cents, with_currency: ->(i) { i.project.currency }
   monetize :payment_due_cents, with_currency: ->(i) { i.project.currency }
 
-  validates :name, :start_date, :end_date, :days, presence: true
+  validates :name, :start_date, :days, presence: true
   validates :days, numericality: { greater_than: 0 }
 
   scope :payment_required, -> { where(payment_required: true) }
 
-  before_validation :set_end_date
+  before_save :set_end_date
   before_save :set_payment_status
   before_save :set_completed
 

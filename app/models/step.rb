@@ -8,10 +8,10 @@ class Step < ApplicationRecord
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
-  validates :name, :start_date, :end_date, :days, presence: true
+  validates :name, :start_date, :days, presence: true
   validates :days, numericality: { greater_than: 0 }
 
-  before_validation :set_end_date
+  before_save :set_end_date
 
   counter_culture :phase,
                   column_name: proc { |s| s.completed ? 'completed_days' : nil },

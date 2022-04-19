@@ -30,7 +30,9 @@ class Payment < ApplicationRecord
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
-  validates :amount_cents, presence: true
+  validates :amount, :due_date, presence: true
+  validates :amount, numericality: { greater_than: 0 }
+
   monetize :amount_cents, with_currency: ->(i) { i.project.currency }
 
   counter_culture :phase,

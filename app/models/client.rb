@@ -2,6 +2,8 @@ class Client < ApplicationRecord
   belongs_to :user
   belongs_to :company
 
+  validates :first_name, :last_name, :email, :phone, presence: true
+
   before_validation :set_user
   def set_user
     self.user = User.where(email: email).first

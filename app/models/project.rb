@@ -9,6 +9,8 @@ class Project < ApplicationRecord
   has_many :notes, as: :owner, dependent: :destroy
   has_rich_text :details
 
+  validates :name, :start_date, :end_date, presence: true
+
   STATUS = ["Not Started", "In Progress", "Completed", "Halted", "Abandoned"].freeze
   PAYMENT_STATUS = ["Not Paid", "Partial Payment", "Paid", "N/A"].freeze
 

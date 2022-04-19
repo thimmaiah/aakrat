@@ -9,6 +9,7 @@ class Step < ApplicationRecord
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
   validates :name, :start_date, :end_date, :days, presence: true
+  validates :days, numericality: { greater_than: 0 }
 
   before_validation :set_end_date
 

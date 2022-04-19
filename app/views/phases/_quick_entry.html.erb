@@ -1,7 +1,7 @@
 <%= turbo_frame_tag "phase_quick_entry" do %>
 
 
-<%= form_with(model: phase, class: "form-inline") do |form| %>
+<%= form_with(model: phase, class: "form-inline", validate: true) do |form| %>
  
   <% if phase.id.present? %>
     <span class="alert alert-info">Editing <%= phase.name %></span>

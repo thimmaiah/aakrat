@@ -14,8 +14,10 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     @payment.company_id = current_user.company_id
     @payment.user_id = current_user.id
-    @payment.due_date = @payment.phase.end_date + 1.week
-    @payment.amount = @payment.phase.due_amount
+    if @payment.phase
+      @payment.due_date = @payment.phase.end_date + 1.week
+      @payment.amount = @payment.phase.due_amount
+    end
     authorize @payment
   end
 

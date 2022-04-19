@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "step_quick_entry" do %>
 
-<%= form_with(model: step, class: "form-inline") do |form| %>
+<%= form_with(model: step, class: "form-inline", validate: true) do |form| %>
   <% if step.id.present? %>
     <span class="alert alert-info">Editing <%= step.name %></span>
   <% end %>

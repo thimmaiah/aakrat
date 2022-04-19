@@ -1,0 +1,14 @@
+
+<p>
+
+    There is an important update to the project <%= @step.project.name %>.
+    Work has progressed on <%= @step.name %>. Please see details below
+
+</p>
+<p>
+    <%= render "/step_mailer/step", step: @step %>
+</p>
+<p>
+    <p class="btn btn-primary"><%= link_to  "View Project", project_url(@step.project) %></p>
+
+</p>

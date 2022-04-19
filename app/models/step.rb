@@ -28,6 +28,8 @@ class Step < ApplicationRecord
                   column_name: 'total_days',
                   delta_column: 'days'
 
+  after_save ->(_s) { StepMailer.with(step_id: id).notify_update.deliver_later }
+
   def set_end_date
     self.end_date ||= start_date + days.days
     self.days = (self.end_date - start_date).to_i if days.zero?

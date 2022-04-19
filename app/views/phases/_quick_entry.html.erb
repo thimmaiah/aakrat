@@ -4,14 +4,14 @@
 <%= form_with(model: phase, class: "form-inline") do |form| %>
  
   <% if phase.id.present? %>
-    <small class="alert alert-info">Editing <%= phase.name %></small>
+    <span class="alert alert-info">Editing <%= phase.name %></span>
   <% end %>
 
   <div class="form-row">
 
   <div class="form-group large-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control"  %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter phase name"  %>
     <%= form.text_field :project_id, hidden: true  %>
   </div>
 

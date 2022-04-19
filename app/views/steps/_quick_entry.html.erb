@@ -2,14 +2,14 @@
 
 <%= form_with(model: step, class: "form-inline") do |form| %>
   <% if step.id.present? %>
-    <small class="alert alert-info">Editing <%= step.name %></small>
+    <span class="alert alert-info">Editing <%= step.name %></span>
   <% end %>
   
   <div class="form-row">
 
     <div class="form-group large-group">
         <%= form.label :name %>
-        <%= form.text_field :name, class: "form-control"  %>
+        <%= form.text_field :name, class: "form-control", placeholder: "Enter step name"  %>
     </div>
 
     <div class="form-group">

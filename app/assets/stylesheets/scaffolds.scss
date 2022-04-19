@@ -279,6 +279,9 @@ div.divider {
 
   display: block;
   text-align: center;
+  .alert {
+    top: -15px;
+  }
 
   .form-inline {
     border: 1px solid lighten($color: lightgray, $amount: 8) ;

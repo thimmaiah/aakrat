@@ -11,11 +11,17 @@ class Phase < ApplicationRecord
   has_rich_text :details
   monetize :payment_amount_cents, with_currency: ->(i) { i.project.currency }
 
-  validates :start_date, :end_date, :name, presence: true
+  validates :name, :start_date, :end_date, :days, presence: true
 
+  before_validation :set_end_date
   before_save :set_payment_status
 
   STATUS = ["Not Started", "In Progress", "Client Review", "Completed", "Halted"].freeze
+
+  def set_end_date
+    self.end_date ||= start_date + days.days
+    self.days = (self.end_date - start_date).to_i if days.zero?
+  end
 
   def set_payment_status
     if payment_required

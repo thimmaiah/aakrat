@@ -7,7 +7,7 @@
 
 <div class="quick_entry">
     <%= render "/steps/quick_entry", step: Step.new(phase_id: @phase.id, 
-                    project_id: @phase.project_id, start_date: Time.zone.today) if @phase %>
+                    project_id: @phase.project_id, start_date: Time.zone.today, days: 10) if @phase %>
 </div>
 
 

@@ -8,7 +8,9 @@ class Step < ApplicationRecord
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
-  before_save :set_days
+  validates :name, :start_date, :end_date, :days, presence: true
+
+  before_validation :set_end_date
 
   counter_culture :phase,
                   column_name: proc { |s| s.completed ? 'completed_days' : nil },
@@ -26,8 +28,9 @@ class Step < ApplicationRecord
                   column_name: 'total_days',
                   delta_column: 'days'
 
-  def set_days
-    self.days = (end_date - start_date).to_i
+  def set_end_date
+    self.end_date ||= start_date + days.days
+    self.days = (self.end_date - start_date).to_i if days.zero?
   end
 
   def delayed?

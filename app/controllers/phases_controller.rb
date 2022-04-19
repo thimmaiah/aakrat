@@ -92,7 +92,7 @@ class PhasesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def phase_params
-    params.require(:phase).permit(:name, :start_date, :end_date, :status, :project_id,
+    params.require(:phase).permit(:name, :start_date, :end_date, :days, :status, :project_id,
                                   :assigned_to_id, :visible_to_client, :payment_status,
                                   :percentage_complete, :completed, :details, :payment_required)
   end

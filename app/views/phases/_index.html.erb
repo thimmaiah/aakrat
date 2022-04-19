@@ -5,7 +5,7 @@
   </div>
   
   <div class="quick_entry">
-    <%= render "/phases/quick_entry", phase: Phase.new(project_id: @project.id, start_date: Time.zone.today) if @project %>
+    <%= render "/phases/quick_entry", phase: Phase.new(project_id: @project.id, start_date: Time.zone.today, days: 10) if @project %>
   </div>
 
   <div class="table-responsive">

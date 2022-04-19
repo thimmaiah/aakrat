@@ -89,7 +89,7 @@ class StepsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def step_params
-    params.require(:step).permit(:name, :start_date, :end_date, :status, :project_id,
+    params.require(:step).permit(:name, :start_date, :end_date, :days, :status, :project_id,
                                  :phase_id, :assigned_to_id, :visible_to_client, :completed,
                                  :details, attachments: [])
   end

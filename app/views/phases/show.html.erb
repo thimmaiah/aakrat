@@ -101,43 +101,47 @@
       </td>
     </tr>
 
-    <tr>
-      <td>
-        Payment Status
-      </td>
-      <td>
-        <%= @phase.payment_status %>
-      </td>
-    </tr>
+    <% if @phase.payment_required %>
+
+      <tr>
+        <td>
+          Payment Status
+        </td>
+        <td>
+          <%= @phase.payment_status %>
+        </td>
+      </tr>
 
 
-    <tr>
-      <td>
-        Payment Due Percentage
-      </td>
-      <td>
-        <%= @phase.payment_due_percentage %> %
-      </td>
-    </tr>
+      <tr>
+        <td>
+          Payment Due Percentage
+        </td>
+        <td>
+          <%= @phase.payment_due_percentage %> %
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        Payment Due
-      </td>
-      <td>
-        <%= money_to_currency @phase.payment_due, params %>
-      </td>
-    </tr>
+      <tr>
+        <td>
+          Payment Due
+        </td>
+        <td>
+          <%= money_to_currency @phase.payment_due, params %>
+        </td>
+      </tr>
 
 
-    <tr>
-      <td>
-        Payment Received
-      </td>
-      <td>
-        <%= money_to_currency @phase.payment_amount, params %>
-      </td>
-    </tr>
+      <tr>
+        <td>
+          Payment Received
+        </td>
+        <td>
+          <%= money_to_currency @phase.payment_amount, params %>
+        </td>
+      </tr>
+
+    <% end %>
 
 
     <tr>

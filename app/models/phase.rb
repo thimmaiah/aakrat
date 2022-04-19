@@ -14,8 +14,11 @@ class Phase < ApplicationRecord
 
   validates :name, :start_date, :end_date, :days, presence: true
 
+  scope :payment_required, -> { where(payment_required: true) }
+
   before_validation :set_end_date
   before_save :set_payment_status
+
 
   STATUS = ["Not Started", "In Progress", "Client Review", "Completed", "Halted"].freeze
 

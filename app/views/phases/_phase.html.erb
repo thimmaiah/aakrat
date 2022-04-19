@@ -3,10 +3,8 @@
     <%= link_to phase.name, phase %>
   </td>
   <td>
-    <div><%= number_with_precision phase.percentage_completed_days, precision: 2 %> %</div>
-    
-    <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">
-      <%= phase.completed ? "Yes" : "No" %>
+    <span class="badge <%= phase_completion_badge(phase) %>">
+      <%= number_with_precision phase.percentage_completed_days, precision: 2 %>%
     </span>
   </td>
   <td>

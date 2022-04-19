@@ -39,7 +39,12 @@ class Payment < ApplicationRecord
                   column_name: 'payment_amount_cents',
                   delta_column: 'amount_cents'
 
+  before_save :set_status
   after_save ->(p) { PaymentStatusJob.perform_later(p.id) }
+
+  def set_status
+    self.status = "Overdue" if Time.zone.today > due_date
+  end
 
   def overdue?
     due_date && Time.zone.today > due_date && status == "Pending"

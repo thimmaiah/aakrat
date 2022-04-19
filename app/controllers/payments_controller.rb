@@ -14,6 +14,8 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     @payment.company_id = current_user.company_id
     @payment.user_id = current_user.id
+    @payment.due_date = @payment.phase.end_date + 1.week
+    @payment.amount = @payment.phase.due_amount
     authorize @payment
   end
 
@@ -26,6 +28,7 @@ class PaymentsController < ApplicationController
     @payment.company_id = current_user.company_id
     @payment.user_id = current_user.id
     @payment.amount_cents = payment_params[:amount].to_d * 100
+
     authorize @payment
 
     respond_to do |format|

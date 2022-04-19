@@ -26,7 +26,7 @@ class Phase < ApplicationRecord
 
   def set_payment_status
     if payment_required
-      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0
+      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0 if payment_due_percentage
       self.payment_status = if payment_amount_cents.zero?
                               completed ? "Payment Pending" : "Not Paid"
                             else
@@ -49,6 +49,10 @@ class Phase < ApplicationRecord
     else
       Time.zone.today < end_date ? "On-Time" : "Delayed"
     end
+  end
+
+  def due_amount
+    payment_due - payment_amount
   end
 
   def percentage_completed_days

@@ -37,7 +37,7 @@ class Phase < ApplicationRecord
     end
   end
 
-  after_save ->(_p) { PhaseMailer.with(phase_id: id).notify_update.deliver_later }
+  after_update ->(_p) { PhaseMailer.with(phase_id: id).notify_update.deliver_later }
 
   def delayed?
     Time.zone.today >= end_date && !completed

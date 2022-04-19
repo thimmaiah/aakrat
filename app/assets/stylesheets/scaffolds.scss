@@ -290,18 +290,36 @@ div.divider {
     margin-right: auto;
 
     .form-group {
-      padding: 20px;
+      padding: 10px;
       display: block !important;
       label {
-        margin-right: 5px;
+        margin-right: 1px;
       }
       .checkmark {
-        width: 30px !important;      
+        width: 20px !important;      
+      }
+
+      .form-control {
+        max-width: 150px;
+        text-align: center;
+      }
+
+    }
+
+    .small-group {
+      max-width: 100px;
+      .form-control {
+        max-width: 70px;
       }
     }
+
 
     .btn {
       margin-top: 15px;
     }
   }
+}
+
+.button_to {
+  display: inline;
 }

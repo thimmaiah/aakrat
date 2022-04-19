@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     patch 'clone_phases', on: :member
+    post 'clone', on: :member
   end
 
   resources :payments

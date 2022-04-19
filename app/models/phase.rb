@@ -19,7 +19,6 @@ class Phase < ApplicationRecord
   before_validation :set_end_date
   before_save :set_payment_status
 
-
   STATUS = ["Not Started", "In Progress", "Client Review", "Completed", "Halted"].freeze
 
   def set_end_date

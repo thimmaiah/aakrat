@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_052628) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_104940) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -192,6 +192,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_052628) do
     t.integer "total_days", default: 0
     t.integer "completed_days", default: 0
     t.decimal "payment_amount_cents", precision: 20, scale: 2, default: "0.0"
+    t.integer "cloned_from"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"

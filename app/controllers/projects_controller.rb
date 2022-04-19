@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy clone_phases]
+  before_action :set_project, only: %i[show edit update destroy clone_phases clone]
 
   # GET /projects or /projects.json
   def index
@@ -62,13 +62,26 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def clone_phases
+  def clone
     @clone = @project.dup
+    @clone.cloned_from = @project.id
+    @clone.name = ""
+    @clone.start_date = Time.zone.today
+    @clone.end_date = Time.zone.today + (@project.end_date - @project.start_date).to_i.days
+    @clone.status = "Not Started"
+
     @clone.save
 
-    CloneProjectJob.perform_later(@project.id, @clone.id)
     respond_to do |format|
-      format.html { redirect_to edit_project_url(@clone), notice: "Please be patient, copying stages takes some time. Checkback in a minute." }
+      format.html { redirect_to edit_project_url(@clone), notice: "Please change key fields in the project. Then click 'Clone Phases' button" }
+      format.json { render :show, status: :ok, location: @clone }
+    end
+  end
+
+  def clone_phases
+    CloneProjectJob.perform_later(@project.cloned_from, @project.id)
+    respond_to do |format|
+      format.html { redirect_to project_url(@project), notice: "Please be patient, copying stages takes some time. Checkback in a minute." }
       format.json { render :show, status: :ok, location: @project }
     end
   end

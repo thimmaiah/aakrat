@@ -45,6 +45,14 @@ class ProjectPolicy < ApplicationPolicy
     update?
   end
 
+  def clone?
+    update?
+  end
+
+  def clone_phases?
+    update?
+  end
+
   def destroy?
     false
   end

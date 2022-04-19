@@ -3,7 +3,7 @@
         partial: "steps/step", locals: { step: @step }) %>
 
     <%= turbo_stream.replace('toasts', partial: "layouts/success_toast",
-        locals: { message: "Step '#{@step.name}' created updated" }) %>
+        locals: { message: "Step '#{@step.name}' updated" }) %>
 
     <% 
         step = @step.dup 

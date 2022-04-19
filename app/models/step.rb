@@ -31,8 +31,7 @@ class Step < ApplicationRecord
   after_update ->(_s) { StepMailer.with(step_id: id).notify_update.deliver_later if project.status == "In Progress" }
 
   def set_end_date
-    self.end_date ||= start_date + days.days
-    self.days = (self.end_date - start_date).to_i if days.zero?
+    self.end_date = start_date + days.days
   end
 
   def delayed?

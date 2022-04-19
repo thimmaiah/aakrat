@@ -44,6 +44,7 @@ class PhasesController < ApplicationController
   def update
     respond_to do |format|
       if @phase.update(phase_params)
+        format.turbo_stream { render :update }
         format.html { redirect_to phase_url(@phase), notice: "Phase was successfully updated." }
         format.json { render :show, status: :ok, location: @phase }
       else

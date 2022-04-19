@@ -1,5 +1,12 @@
+<%= turbo_frame_tag "phase_quick_entry" do %>
+
+
 <%= form_with(model: phase, class: "form-inline") do |form| %>
  
+  <% if phase.id.present? %>
+    <small class="alert alert-info">Editing <%= phase.name %></small>
+  <% end %>
+
   <div class="form-row">
 
   <div class="form-group">
@@ -41,7 +48,13 @@
 
   <div class="form-group">
     <%= form.submit "Save", {class: "btn btn-primary"}%>
+    <%= link_to "Clear", new_phase_path("phase[project_id]": phase.project_id, 
+                          quick_entry:true), 
+                          {class: "btn btn-primary", data: { turbo_frame: 'phase_quick_entry' }}%>
   </div>
 
   </div>
+
+<% end %>
+
 <% end %>

@@ -1,3 +1,9 @@
-<h1>New Phase</h1>
 
-<%= render "form", phase: @phase %>
+<% if params[:quick_entry].present? %>
+    <%=render "quick_entry", phase: @phase %>
+<% else %>
+<div data-turbo="false">
+    <h1>New Phase</h1>
+    <%=render "form", phase: @phase %>
+</div>
+<% end %>

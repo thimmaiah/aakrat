@@ -52,6 +52,7 @@
   
   <td>
     <%#= link_to "Show" , phase , {class: "btn btn-primary" }%>
+    <%= link_to "Edit" , edit_phase_path(phase, quick_entry:true) , {class: "btn btn-primary", data: { turbo_frame: 'phase_quick_entry' } }%>
     <% label = phase.completed ? "Incomplete" : "Completed" %>
     <%= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
 

@@ -60,14 +60,7 @@
         </span>
       </td>
     </tr>
-    <tr>
-      <td>
-        Payment Status
-      </td>
-      <td>
-        <%= @phase.payment_status %>
-      </td>
-    </tr>
+    
 
     <tr>
       <td>
@@ -97,6 +90,35 @@
       </td>    
     </tr>
 
+    <tr>
+      <td>
+        Payment on Completion
+      </td>
+      <td>
+        <span class="badge <%= @phase.payment_required ? 'bg-success' : 'bg-warning' %>">
+          <%= @phase.payment_required ? "Yes" : "No" %>
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Payment Status
+      </td>
+      <td>
+        <%= @phase.payment_status %>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Payment Amount
+      </td>
+      <td>
+        <%= money_to_currency @phase.payment_amount, params %>
+      </td>
+    </tr>
 
     <tr>
       <td>
@@ -116,7 +138,6 @@
   <div>
     <%= link_to "Edit" , edit_phase_path(@phase), {class: "btn btn-primary" } %> |
     <%= link_to "Add Note" , new_note_path("note[owner_id]": @phase.id, "note[owner_type]": @phase.class.name) , {class: "btn btn-success" }%> |
-    <%= link_to "Payment" , new_payment_path("payment[phase_id]": @phase.id, "payment[project_id]": @phase.project_id) , {class: "btn btn-success" }%> |
 
     <%= button_to "Delete" , @phase, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>

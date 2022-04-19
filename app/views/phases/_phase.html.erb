@@ -28,7 +28,13 @@
     </span>
   </td>
   <td>
-    <%= phase.payment_status %>
+    <% if phase.payment_status == "Payment Pending" %>
+      <span class="badge bg-danger">
+        <%= phase.payment_status %>
+      </span>
+    <% else %>
+      <%= money_to_currency phase.payment_amount, params %>
+    <% end %>
   </td>
   <td>
     <%= number_with_precision phase.percentage_completed_days, precision: 2 %>  

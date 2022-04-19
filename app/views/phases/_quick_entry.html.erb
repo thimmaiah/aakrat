@@ -24,6 +24,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :payment_required, "Payment required" %>
+    <%= form.check_box :payment_required, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :visible_to_client %>
     <%= form.check_box :visible_to_client, class: "form-control"  %>
   </div>

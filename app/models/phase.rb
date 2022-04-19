@@ -9,8 +9,23 @@ class Phase < ApplicationRecord
   has_many :payments, dependent: :destroy
 
   has_rich_text :details
+  monetize :payment_amount_cents, with_currency: ->(i) { i.project.currency }
 
   validates :start_date, :end_date, :name, presence: true
+
+  before_save :set_payment_status
+
+  def set_payment_status
+    if payment_required
+      self.payment_status = if payment_amount_cents.zero?
+                              completed ? "Payment Pending" : "Not Paid"
+                            else
+                              "Paid #{payment_amount}"
+                            end
+    else
+      self.payment_status ||= "N/A"
+    end
+  end
 
   def delayed?
     Time.zone.today >= end_date && !completed

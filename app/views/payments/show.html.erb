@@ -4,12 +4,13 @@
 
     <tr>
       <td>
-        Company
+        Client
       </td>
       <td>
-        <%= @payment.company.name %>
+        <%= @payment.project.client.full_name %>
       </td>
     </tr>
+
     <tr>
       <td>
         Amount
@@ -18,12 +19,23 @@
         <%= money_to_currency @payment.amount, params %>
       </td>
     </tr>
+
+
+    <tr>
+      <td>
+        Project
+      </td>
+      <td>
+        <%= link_to  @payment.project.name, @payment.project %>
+      </td>
+    </tr>
+
     <tr>
       <td>
         Phase
       </td>
       <td>
-        <%= @payment.project.client.full_name %> : <%= @payment.project.name %> : <%= @payment.phase.name %>
+        <%= link_to  @payment.phase.name, @payment.project %>
       </td>
     </tr>
     <tr>
@@ -82,7 +94,7 @@
 
   </table>
 
-  <% if current_user.has_cached_role?(:super) %>
+  <% if current_user.has_cached_role?(:team_lead) %>
     <div>
       <%= link_to "Edit" , edit_payment_path(@payment), {class: "btn btn-primary" } %> |
       <%= button_to "Delete" , @payment, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>

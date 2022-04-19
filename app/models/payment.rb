@@ -20,6 +20,7 @@ class Payment < ApplicationRecord
   belongs_to :company
   belongs_to :user
   belongs_to :phase
+
   belongs_to :project
 
   has_rich_text :details
@@ -27,4 +28,14 @@ class Payment < ApplicationRecord
 
   validates :amount_cents, presence: true
   monetize :amount_cents, with_currency: ->(i) { i.project.currency }
+
+  counter_culture :phase,
+                  column_name: 'payment_amount_cents',
+                  delta_column: 'amount_cents'
+
+  counter_culture :project,
+                  column_name: 'payment_amount_cents',
+                  delta_column: 'amount_cents'
+
+  after_save ->(p) { PaymentStatusJob.perform_later(p.id) }
 end

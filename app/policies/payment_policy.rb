@@ -34,6 +34,6 @@ class PaymentPolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    create?
   end
 end

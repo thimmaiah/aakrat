@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     @payment.company_id = current_user.company_id
     @payment.user_id = current_user.id
+    @payment.amount_cents = payment_params[:amount].to_d * 100
     authorize @payment
 
     respond_to do |format|

@@ -26,7 +26,8 @@ FactoryBot.define do
     visible_to_client { rand(2) }
     payment_status {  }
     percentage_complete { rand(100) }
-    completed { rand(1) }
+    completed { rand(2) }
+    payment_required { rand(2) }
     details { Faker::Quotes::Rajnikanth.joke }
   end
 
@@ -46,11 +47,12 @@ FactoryBot.define do
 
   factory :payment do
     company { Company.all.sample }
-    amount { rand(100)*10 + rand(100) * 10 }
-    plan { Company::PLANS[rand(Company::PLANS.length)] }
+    amount_cents { rand(100)*100 + rand(100) * 100 }
+    project { company.projects.sample }
+    phase { project.phases.sample }
     discount { 0 }
     reference_number { (0...8).map { (65 + rand(26)).chr }.join }
-    user { company.employees.sample }
+    user { company.users.sample }
   end
 
 

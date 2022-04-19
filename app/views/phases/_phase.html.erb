@@ -16,7 +16,7 @@
     <%= l phase.end_date %>
   </td>
   <td>
-    <%= (phase.end_date - phase.start_date).to_i %>
+    <%= phase.days %>
   </td>
   <td>
     <div><%= phase.status %></div>
@@ -35,26 +35,27 @@
     </span>
   </td>
   <td>
-    <% if phase.payment_status == "Payment Pending" %>
-      <span class="badge bg-danger">
-        <%= phase.payment_status %>
-      </span>
-    <% else %>
-      <%= phase.payment_amount > 0 ? money_to_currency(phase.payment_amount, params) : phase.payment_status %>
+    <% if phase.payment_amount > 0 %>
+      <div><%= money_to_currency(phase.payment_amount, params) %></div>
     <% end %>
+    <span class="badge <%= phase_payment_status_badge(phase) %>">
+      <%= phase.payment_status %>
+    </span>
   </td>
   <td>
     <%= phase.payment_due_percentage %> %  
   </td>
   <td>
-    <%= money_to_currency phase.due_amount, params %>
+    <span class="<%= (phase.completed && phase.due_amount != 0) ? 'text-danger':'' %>" >
+      <%= money_to_currency phase.due_amount, params %>
+    </span>    
   </td>
   
   <td>
     <%#= link_to "Show" , phase , {class: "btn btn-primary" }%>
     <%= link_to "Edit" , edit_phase_path(phase, quick_entry:true) , {class: "btn btn-primary", data: { turbo_frame: 'phase_quick_entry' } }%>
-    <% label = phase.completed ? "Incomplete" : "Completed" %>
-    <%= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
+    <% label = phase.completed ? "Not Complete" : "Completed" %>
+    <%#= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
 
     <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <% #= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>

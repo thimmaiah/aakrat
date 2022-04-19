@@ -45,10 +45,10 @@ namespace :vk do
       (1..5).each do 
         p = FactoryBot.create(:project, company: c)        
         puts p.to_json
-        (1..10).each do |i|
+        (1..5).each do |i|
           s = FactoryBot.create(:phase, name: "Phase #{i}", company: c, project: p)        
 
-          (1..10).each do |j|
+          (1..3).each do |j|
             t = FactoryBot.create(:step, name: "Step #{j}", company: c, project: p, phase: s)        
           end
         end

@@ -48,6 +48,7 @@ class PhasesController < ApplicationController
         format.html { redirect_to phase_url(@phase), notice: "Phase was successfully updated." }
         format.json { render :show, status: :ok, location: @phase }
       else
+        format.turbo_stream { render :error }
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @phase.errors, status: :unprocessable_entity }
       end

@@ -18,6 +18,7 @@ class Phase < ApplicationRecord
 
   before_validation :set_end_date
   before_save :set_payment_status
+  before_save :set_completed
 
   STATUS = ["Not Started", "In Progress", "Client Review", "Completed", "Halted"].freeze
 
@@ -25,16 +26,21 @@ class Phase < ApplicationRecord
     self.end_date = start_date + days.days
   end
 
+  def set_completed
+    self.completed = total_days.positive? && total_days == completed_days
+    self.status = "Completed" if completed
+  end
+
   def set_payment_status
     if payment_required
-      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0 if payment_due_percentage
+      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0
       self.payment_status = if payment_amount_cents.zero?
-                              completed ? "Payment Pending" : "Not Paid"
+                              completed ? "Pending" : "Not Paid"
                             else
-                              "Paid #{payment_amount}"
+                              due_amount.positive? ? "Partial" : "Paid"
                             end
     else
-      self.payment_status ||= "N/A"
+      self.payment_status = "N/A"
     end
   end
 

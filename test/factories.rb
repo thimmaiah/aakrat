@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :step do
     name { Faker::Company.catch_phrase }
     start_date { Time.zone.today - rand(10).days }
-    end_date { Time.zone.today + rand(10).days }
+    days { rand(10) + rand(10) }
     status {  }
     project { Project.all.sample }
     phase { project.phases.sample }
@@ -19,7 +19,7 @@ FactoryBot.define do
   factory :phase do
     name { Faker::Company.catch_phrase }
     start_date { Time.zone.today - rand(10).days }
-    end_date { Time.zone.today + rand(10).days }
+    days { rand(10) + rand(10) }
     status { Phase::STATUS[rand(Phase::STATUS.length)] }
     project { Project.all.sample }
     assigned_to { project.company.users.sample }

@@ -313,6 +313,14 @@ div.divider {
       }
     }
 
+    .large-group {
+      // max-width: 100px;
+      .form-control {
+        min-width: unset;
+        max-width: unset;
+        width: 300px;
+      }
+    }
 
     .btn {
       margin-top: 15px;

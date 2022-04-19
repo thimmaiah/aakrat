@@ -19,6 +19,8 @@ class Payment < ApplicationRecord
 
   STATUS = %w[Pending Received Confirmed Overdue Defaulted].freeze
 
+  RECVD_STATUS = %w[Received Confirmed].freeze
+
   belongs_to :company
   belongs_to :user
   belongs_to :phase
@@ -32,11 +34,11 @@ class Payment < ApplicationRecord
   monetize :amount_cents, with_currency: ->(i) { i.project.currency }
 
   counter_culture :phase,
-                  column_name: 'payment_amount_cents',
+                  column_name: proc { |p| p.status && RECVD_STATUS.include?(p.status) ? 'payment_amount_cents' : nil },
                   delta_column: 'amount_cents'
 
   counter_culture :project,
-                  column_name: 'payment_amount_cents',
+                  column_name: proc { |p| p.status && RECVD_STATUS.include?(p.status) ? 'payment_amount_cents' : nil },
                   delta_column: 'amount_cents'
 
   before_save :set_status

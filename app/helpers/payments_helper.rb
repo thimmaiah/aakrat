@@ -3,7 +3,7 @@ module PaymentsHelper
     case payment.status
     when "Confirmed"
       "bg-success"
-    when "Halted", "Overdue"
+    when "Halted", "Overdue", "Defaulted"
       "bg-danger"
     when "Received"
       "bg-info"

@@ -17,7 +17,7 @@
     <%= l payment.received_on if payment.received_on %>
   </td>
   <td>
-    <%= link_to payment.project.name, payment.project %>
+    <%= link_to payment.project.name, project_path(payment.project, tab: "payments-tab")  %>
   </td>
   <td>
     <%= link_to payment.phase.name, payment.phase %>

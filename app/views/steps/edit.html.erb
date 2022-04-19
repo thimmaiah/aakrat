@@ -1,3 +1,8 @@
-<h1>Editing Step</h1>
-
-<%=render "form", step: @step %>
+<% if params[:quick_entry].present? %>
+    <%=render "quick_entry", step: @step %>
+<% else %>
+    <div data-turbo="false">
+        <h1>Edit Step</h1>
+        <%=render "form", step: @step %>
+    </div>
+<% end %>

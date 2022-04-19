@@ -41,6 +41,7 @@ class StepsController < ApplicationController
   def update
     respond_to do |format|
       if @step.update(step_params)
+        format.turbo_stream { render :update }
         format.html { redirect_to step_url(@step), notice: "Step was successfully updated." }
         format.json { render :show, status: :ok, location: @step }
       else

@@ -1,10 +1,9 @@
 
-    <%= turbo_stream.prepend('steps_tbody',
+    <%= turbo_stream.replace("#{dom_id @step}",
         partial: "steps/step", locals: { step: @step }) %>
 
     <%= turbo_stream.replace('toasts', partial: "layouts/success_toast",
-        locals: { message: "Step '#{@step.name}' created successfully" }) %>
-
+        locals: { message: "Step '#{@step.name}' created updated" }) %>
 
     <% 
         step = @step.dup 

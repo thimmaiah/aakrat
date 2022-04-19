@@ -1,3 +1,7 @@
-<h1>New Step</h1>
 
-<%= render "form", step: @step %>
+<% if params[:quick_entry].present? %>
+    <%=render "quick_entry", step: @step %>
+<% else %>
+    <h1>New Step</h1>
+    <%=render "form", step: @step %>
+<% end %>

@@ -54,7 +54,7 @@
         Project
       </td>
       <td>
-        <%= link_to  @payment.project.name, @payment.project %>
+        <%= link_to  @payment.project.name, project_path(@payment.project, tab: "payments-tab") %>
       </td>
     </tr>
 

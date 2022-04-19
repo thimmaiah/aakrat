@@ -1,5 +1,10 @@
+<%= turbo_frame_tag "step_quick_entry" do %>
+
 <%= form_with(model: step, class: "form-inline") do |form| %>
- 
+  <% if step.id.present? %>
+    <small class="alert alert-info">Editing <%= step.name %></small>
+  <% end %>
+  
   <div class="form-row">
 
     <div class="form-group">
@@ -34,7 +39,12 @@
 
   <div class="form-group">
     <%= form.submit "Save", {class: "btn btn-primary"}%>
+    <%= link_to "Clear", new_step_path("step[project_id]": step.project_id, 
+                          "step[phase_id]": step.phase_id, quick_entry:true), 
+                          {class: "btn btn-primary", data: { turbo_frame: 'step_quick_entry' }}%>
   </div>
 
   </div>
+<% end %>
+
 <% end %>

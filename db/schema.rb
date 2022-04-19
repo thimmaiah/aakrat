@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_104940) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_132038) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -61,6 +61,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_104940) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "first_name", limit: 30
+    t.string "last_name", limit: 30
+    t.string "email"
+    t.string "phone", limit: 20
+    t.bigint "user_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_clients_on_company_id"
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -272,7 +285,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_104940) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "phone", limit: 100
+    t.string "phone", limit: 20
     t.boolean "active", default: true
     t.string "confirmation_token"
     t.datetime "confirmed_at"
@@ -313,6 +326,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_104940) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "clients", "companies"
+  add_foreign_key "clients", "users"
   add_foreign_key "notes", "companies"
   add_foreign_key "notes", "users"
   add_foreign_key "payments", "companies"

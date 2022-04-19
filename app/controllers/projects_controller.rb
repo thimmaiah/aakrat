@@ -65,7 +65,7 @@ class ProjectsController < ApplicationController
   def clone
     @clone = @project.dup
     @clone.cloned_from = @project.id
-    @clone.name = ""
+    @clone.name = "Cloned from #{@project.name}"
     @clone.start_date = Time.zone.today
     @clone.end_date = Time.zone.today + (@project.end_date - @project.start_date).to_i.days
     @clone.status = "Not Started"

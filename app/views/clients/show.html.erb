@@ -1,0 +1,63 @@
+<%= render "/layouts/alerts" %>
+
+<table class="table table-bordered dataTable">
+
+          <tr>
+        <td>
+          First Name
+        </td>
+        <td>
+          <%= @client.first_name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Last Name
+        </td>
+        <td>
+          <%= @client.last_name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Email
+        </td>
+        <td>
+          <%= @client.email %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Phone
+        </td>
+        <td>
+          <%= @client.phone %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          User
+        </td>
+        <td>
+          <%= @client.user_id %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Company
+        </td>
+        <td>
+          <%= @client.company.name %>
+        </td>    
+      </tr>
+    
+  
+</table>
+
+
+<div>
+  <%= link_to "Edit", edit_client_path(@client), {class: "btn btn-primary"} %> |
+  <%= link_to "Back", :back, {class: "btn btn-primary"} %> |
+
+  <%= button_to "Delete", @client, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+</div>

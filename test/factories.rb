@@ -1,4 +1,13 @@
 FactoryBot.define do
+  factory :client do
+    first_name { "MyString" }
+    last_name { "MyString" }
+    email { "MyString" }
+    phone { "MyString" }
+    user { nil }
+    company { nil }
+  end
+
   factory :step do
     name { Faker::Company.catch_phrase }
     start_date { Time.zone.today - rand(10).days }

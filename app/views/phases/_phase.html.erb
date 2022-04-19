@@ -1,6 +1,13 @@
 <tr id="<%= dom_id phase %>">
   <td>
-    <%= phase.name %>
+    <%= link_to phase.name, phase %>
+  </td>
+  <td>
+    <div><%= number_with_precision phase.percentage_completed_days, precision: 2 %> %</div>
+    
+    <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">
+      <%= phase.completed ? "Yes" : "No" %>
+    </span>
   </td>
   <td>
     <%= l phase.start_date %>
@@ -42,17 +49,9 @@
   <td>
     <%= money_to_currency phase.payment_due, params %>
   </td>
+  
   <td>
-    <div><%= number_with_precision phase.percentage_completed_days, precision: 2 %> %</div>
-    
-    <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">
-      <%= phase.completed ? "Yes" : "No" %>
-    </span>
-    
-
-  </td>
-  <td>
-    <%= link_to "Show" , phase , {class: "btn btn-primary" }%>
+    <%#= link_to "Show" , phase , {class: "btn btn-primary" }%>
     <% label = phase.completed ? "Incomplete" : "Completed" %>
     <%= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
 

@@ -1,6 +1,11 @@
 <tr id="<%= dom_id step %>">
   <td>
-    <%= step.name %>
+    <%= link_to step.name, step %>
+  </td>
+  <td>
+    <span class="badge <%= step.completed ? 'bg-success' : 'bg-warning' %>">
+      <%= step.completed ? "Yes" : "No" %>
+    </span>  
   </td>
   <td>
     <%= l step.start_date %>
@@ -26,13 +31,9 @@
       <%= step.visible_to_client ? "Yes" : "No" %>
     </span>  
   </td>
+  
   <td>
-    <span class="badge <%= step.completed ? 'bg-success' : 'bg-warning' %>">
-      <%= step.completed ? "Yes" : "No" %>
-    </span>  
-  </td>
-  <td>
-    <%= link_to "Show" , step , {class: "btn btn-primary" }%>
+    <%#= link_to "Show" , step , {class: "btn btn-primary" }%>
     <% label = step.completed ? "Incomplete" : "Completed" %>
     <%= button_to label , toggle_completed_step_path(step) , {class: "btn btn-success", method: :patch }%>
     <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "btn btn-success" }%>

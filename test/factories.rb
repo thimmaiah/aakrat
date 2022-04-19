@@ -24,11 +24,11 @@ FactoryBot.define do
     project { Project.all.sample }
     assigned_to { project.company.users.sample }
     visible_to_client { rand(2) }
+    payment_required { rand(2) }
     payment_status {  }
-    payment_due_percentage { rand(10) }
+    payment_due_percentage { payment_required ? rand(10) : 0 }
     percentage_complete { rand(100) }
     completed { rand(2) }
-    payment_required { rand(2) }
     details { Faker::Quotes::Rajnikanth.joke }
   end
 
@@ -52,8 +52,8 @@ FactoryBot.define do
     project { company.projects.sample }
     phase { project.phases.sample }
     status { Payment::STATUS[rand(Payment::STATUS.length)] }
-    due_date { phase.payment_required ? phase.end_date + rand(10).days : nil }
-    received_on { phase.payment_required ? due_date + rand(10).days - rand(10).days : nil }
+    due_date { phase.end_date + rand(10).days }
+    received_on { due_date + rand(10).days - rand(10).days }
     discount { 0 }
     reference_number { (0...8).map { (65 + rand(26)).chr }.join }
     user { company.users.sample }

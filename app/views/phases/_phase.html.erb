@@ -43,12 +43,13 @@
     <%= money_to_currency phase.payment_due, params %>
   </td>
   <td>
-    <%= number_with_precision phase.percentage_completed_days, precision: 2 %> %
-  </td>
-  <td>
+    <div><%= number_with_precision phase.percentage_completed_days, precision: 2 %> %</div>
+    
     <span class="badge <%= phase.completed ? 'bg-success' : 'bg-warning' %>">
       <%= phase.completed ? "Yes" : "No" %>
     </span>
+    
+
   </td>
   <td>
     <%= link_to "Show" , phase , {class: "btn btn-primary" }%>

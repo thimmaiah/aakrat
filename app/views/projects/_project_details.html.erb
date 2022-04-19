@@ -10,17 +10,17 @@
     <div class="tab-content">
         <div id="phases-tab" class="tab-pane fade show active">
             <div id="phases" class="associated_entity">
-                <%= render "/phases/index" , phases: project.phases.order(start_date: :desc) %>
+                <%= render "/phases/index" , phases: project.phases.order(start_date: :asc).includes(:assigned_to) %>
             </div>
         </div>
         <div id="payments-tab" class="tab-pane fade">
             <div id="payments" class="associated_entity">
-                <%= render "/payments/index", payments: project.payments %>
+                <%= render "/payments/index", payments: project.payments.includes(:project, :phase, :user) %>
             </div>
         </div>
         <div id="notes-tab" class="tab-pane fade">
             <div id="notes" class="associated_entity">
-                <%= render "/notes/index", notes: project.notes, owner: project %>
+                <%= render "/notes/index", notes: project.notes.with_all_rich_text, owner: project %>
             </div>
         </div>
     </div>

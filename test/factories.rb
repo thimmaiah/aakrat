@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :client do
-    first_name { "MyString" }
-    last_name { "MyString" }
-    email { "MyString" }
-    phone { "MyString" }
-    user { nil }
+    user { User.clients.sample }
+    first_name { user.first_name }
+    last_name { user.last_name }
+    email { user.email }
+    phone { user.phone }
     company { nil }
   end
 

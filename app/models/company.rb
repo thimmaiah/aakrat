@@ -56,6 +56,7 @@ class Company < ApplicationRecord
   # Will have many employees
   has_many :users, dependent: :destroy
   has_many :projects, dependent: :destroy
+  has_many :clients, dependent: :destroy
 
   TYPES = ["Architect"].freeze
 

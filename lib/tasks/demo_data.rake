@@ -42,6 +42,11 @@ namespace :vk do
   desc "generates fake Projects for testing"
   task generateFakeProjects: :environment do
     Company.all.each do |c| 
+      
+      (1..3).each do
+        FactoryBot.create(:client, company: c)
+      end
+
       (1..5).each do 
         p = FactoryBot.create(:project, company: c)        
         puts p.to_json

@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="form-group">
+    <%= form.label :client_id, "Client" %>
+    <%= form.select :client_id, current_user.company.clients.collect(&:user).map{|u| [u.full_name, u.id]}, {}, {class: "form-control"} %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :name %>
     <%= form.text_field :name, class: "form-control"  %>
   </div>

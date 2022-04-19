@@ -33,7 +33,7 @@
         <%= phase.payment_status %>
       </span>
     <% else %>
-      <%= money_to_currency phase.payment_amount, params %>
+      <%= phase.payment_amount > 0 ? money_to_currency(phase.payment_amount, params) : phase.payment_status %>
     <% end %>
   </td>
   <td>

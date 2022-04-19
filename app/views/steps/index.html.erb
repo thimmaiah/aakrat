@@ -1,2 +1,4 @@
 <%= render "/layouts/alerts" %>
-<%= render "/steps/index", steps: @steps %>
+<div data-controller="datatable">
+    <%= render "/steps/index", steps: @steps, show_project_phase: "Yes" %>
+</div>

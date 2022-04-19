@@ -10,14 +10,22 @@
                     project_id: @phase.project_id, start_date: Time.zone.today, days: 10) if @phase %>
 </div>
 
-
+<% show_project_phase ||= "No" %>
 <div class="table-responsive">
 
     <table id="steps" class="table table-bordered dataTable jqDataTable">
         <thead>
             <tr>
+                <% if show_project_phase == "Yes" %>
                 <th>
-                    Name
+                    Project
+                </th>
+                <th>
+                    Phase
+                </th>    
+                <% end %>
+                <th>
+                    Step
                 </th>
                 <th>
                     Completed
@@ -47,7 +55,7 @@
         </thead>
         <tbody id="steps_tbody">
             <% steps.each do |step| %>
-                <%= render step %>
+                <%= render step, show_project_phase: show_project_phase %>
             <% end %>
         </tbody>
     </table>

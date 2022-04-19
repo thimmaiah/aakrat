@@ -4,6 +4,8 @@ class StepsController < ApplicationController
   # GET /steps or /steps.json
   def index
     @steps = policy_scope(Step)
+    @steps = @steps.where(assigned_to: params[:user_id], completed: false) if params[:user_id]
+    @steps = @steps.order(start_date: :asc)
   end
 
   # GET /steps/1 or /steps/1.json

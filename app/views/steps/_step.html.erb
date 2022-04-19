@@ -1,4 +1,13 @@
 <tr id="<%= dom_id step %>">
+  <% if show_project_phase == "Yes" %>
+  <td>
+    <%= link_to step.project.name, step.project %>
+  </td>
+  <td>
+    <%= link_to step.phase.name, step.phase %>
+  </td>
+  <% end %>
+  
   <td>
     <%= link_to step.name, step %>
   </td>

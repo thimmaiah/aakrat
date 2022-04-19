@@ -1,0 +1,4 @@
+
+    <%= turbo_stream.replace('toasts', partial: "layouts/error_toast",
+        locals: { message: "#{@step.errors.full_messages.join(", ")}" }) %>
+

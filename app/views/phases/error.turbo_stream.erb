@@ -1,4 +1,4 @@
 
-    <%= turbo_stream.replace('toasts', partial: "layouts/success_toast",
-        locals: { message: "Errors '#{@phase.errors.full_messages}'" }) %>
+    <%= turbo_stream.replace('toasts', partial: "layouts/error_toast",
+        locals: { message: "#{@phase.errors.full_messages.join(", ")}" }) %>
 

@@ -12,7 +12,7 @@
     <%= (phase.end_date - phase.start_date).to_i %>
   </td>
   <td>
-    <%= phase.status %>
+    <div><%= phase.status %></div>
     <span class="badge <%= phase.delayed? ? 'bg-danger' : 'bg-success' %>">
       <%= phase.on_time_status %>
     </span>
@@ -35,6 +35,12 @@
     <% else %>
       <%= phase.payment_amount > 0 ? money_to_currency(phase.payment_amount, params) : phase.payment_status %>
     <% end %>
+  </td>
+  <td>
+    <%= phase.payment_due_percentage %> %  
+  </td>
+  <td>
+    <%= money_to_currency phase.payment_due, params %>
   </td>
   <td>
     <%= number_with_precision phase.percentage_completed_days, precision: 2 %> %

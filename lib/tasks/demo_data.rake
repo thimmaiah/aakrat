@@ -60,8 +60,19 @@ namespace :vk do
   end
 
 
+  desc "generates fake Payments for testing"
+  task generateFakePayments: :environment do
+    Phase.where(payment_required: true).each do |p| 
+      t = FactoryBot.create(:payment, company: p.company, project: p.project, phase: p)              
+    end
+  rescue Exception => e
+    puts e.backtrace.join("\n")
+    raise e
+  end
+
+
   
-  task :generateAll => [:generateFakeCompanies, :generateFakeUsers, :generateFakeProjects] do
+  task :generateAll => [:generateFakeCompanies, :generateFakeUsers, :generateFakeProjects, :generateFakePayments] do
     puts "Generating all Fake Data"
     Sidekiq.redis(&:flushdb)
   end

@@ -43,6 +43,17 @@
         <%= money_to_currency @project.cost_estimate, params %>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        Payment Amount
+      </td>
+      <td>
+        <%= money_to_currency @project.payment_amount, params %>
+      </td>
+    </tr>
+
+
     <tr>
       <td>
         Percentage Completed

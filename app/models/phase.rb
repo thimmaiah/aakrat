@@ -10,6 +10,7 @@ class Phase < ApplicationRecord
 
   has_rich_text :details
   monetize :payment_amount_cents, with_currency: ->(i) { i.project.currency }
+  monetize :payment_due_cents, with_currency: ->(i) { i.project.currency }
 
   validates :name, :start_date, :end_date, :days, presence: true
 
@@ -25,6 +26,7 @@ class Phase < ApplicationRecord
 
   def set_payment_status
     if payment_required
+      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0
       self.payment_status = if payment_amount_cents.zero?
                               completed ? "Payment Pending" : "Not Paid"
                             else

@@ -1,12 +1,20 @@
 <tr id="<%= dom_id payment %>">
   <td>
-    <%= payment.company.name %>
+    <%= payment.project.client.full_name %>
   </td>
   <td>
     <%= money_to_currency payment.amount, params %>
   </td>
   <td>
-    <%= payment.project.client.full_name %>
+    <span class="badge <%= payment_status_badge(payment) %>">
+      <%= payment.status %>  
+    </span>
+  </td>
+  <td>
+    <%= l payment.due_date if payment.due_date %>
+  </td>
+  <td>
+    <%= l payment.received_on if payment.received_on %>
   </td>
   <td>
     <%= link_to payment.project.name, payment.project %>

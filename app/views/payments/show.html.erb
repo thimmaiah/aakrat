@@ -20,6 +20,34 @@
       </td>
     </tr>
 
+    <tr>
+      <td>
+        Status
+      </td>
+      <td>
+        <%= @payment.status %>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Due Date
+      </td>
+      <td>
+        <%= l @payment.due_date if @payment.due_date %>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td>
+        Received On
+      </td>
+      <td>
+        <%= l @payment.received_on if @payment.received_on %>
+      </td>
+    </tr>
 
     <tr>
       <td>

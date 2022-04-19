@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_project, only: %i[show edit update destroy clone_phases]
 
   # GET /projects or /projects.json
   def index
@@ -59,6 +59,17 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to projects_url, notice: "Project was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  def clone_phases
+    @clone = @project.dup
+    @clone.save
+
+    CloneProjectJob.perform_later(@project.id, @clone.id)
+    respond_to do |format|
+      format.html { redirect_to edit_project_url(@clone), notice: "Please be patient, copying stages takes some time. Checkback in a minute." }
+      format.json { render :show, status: :ok, location: @project }
     end
   end
 

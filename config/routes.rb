@@ -2,11 +2,17 @@ Rails.application.routes.draw do
   resources :steps do
     patch 'toggle_completed', on: :member
   end
+
   resources :notes
+
   resources :phases do
     patch 'toggle_completed', on: :member
   end
-  resources :projects
+
+  resources :projects do
+    patch 'clone_phases', on: :member
+  end
+
   resources :payments
 
   namespace :admin do

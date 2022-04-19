@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_19_020251) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_19_044925) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -140,6 +140,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_19_020251) do
     t.bigint "phase_id", null: false
     t.bigint "project_id", null: false
     t.decimal "amount_cents", precision: 20, scale: 2, default: "0.0"
+    t.string "status", limit: 50
+    t.date "due_date"
+    t.date "received_on"
     t.index ["company_id"], name: "index_payments_on_company_id"
     t.index ["deleted_at"], name: "index_payments_on_deleted_at"
     t.index ["phase_id"], name: "index_payments_on_phase_id"

@@ -15,6 +15,8 @@ class Phase < ApplicationRecord
 
   before_save :set_payment_status
 
+  STATUS = ["Not Started", "In Progress", "Client Review", "Completed", "Halted"].freeze
+
   def set_payment_status
     if payment_required
       self.payment_status = if payment_amount_cents.zero?

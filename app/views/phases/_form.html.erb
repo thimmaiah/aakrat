@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <%= form.label :status %>
-    <%= form.text_field :status, class: "form-control"  %>
+    <%= form.select :status, Phase::STATUS, {}, class: "form-control"  %>
   </div>
 
   <div class="form-group">

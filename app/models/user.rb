@@ -16,9 +16,10 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A[^@\s]+@[^@\s]+\z/ }, presence: true
 
   # "CxO", "Founder", "Angel", "VC", "Admin",
-  ROLES = %i[client team_lead team_member contractor company_admin].freeze
+  ROLES = %i[client team_lead team_member contractor accountant company_admin].freeze
 
   scope :admins, -> { where('roles.name': :company_admin).joins(:roles) }
+  scope :accountants, -> { where('roles.name': :accountant).joins(:roles) }
   scope :clients, -> { where('roles.name': :client).joins(:roles) }
   scope :contractors, -> { where('roles.name': :contractor).joins(:roles) }
   scope :team_leads, -> { where('roles.name': :team_lead).joins(:roles) }

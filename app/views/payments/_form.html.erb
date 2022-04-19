@@ -24,6 +24,22 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :status %>
+    <%= form.select :status, Payment::STATUS, {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :due_date %>
+    <%= form.date_field :due_date, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :received_on %>
+    <%= form.date_field :received_on, class: "form-control"  %>
+  </div>
+
+
+  <div class="form-group">
     <%= form.label :discount %>
     <%= form.text_field :discount, class: "form-control"  %>
   </div>

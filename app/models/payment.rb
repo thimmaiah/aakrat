@@ -17,6 +17,8 @@
 class Payment < ApplicationRecord
   include Trackable
 
+  STATUS = %w[Pending Received Confirmed Overdue Defaulted].freeze
+
   belongs_to :company
   belongs_to :user
   belongs_to :phase
@@ -38,4 +40,8 @@ class Payment < ApplicationRecord
                   delta_column: 'amount_cents'
 
   after_save ->(p) { PaymentStatusJob.perform_later(p.id) }
+
+  def overdue?
+    due_date && Time.zone.today > due_date && status == "Pending"
+  end
 end

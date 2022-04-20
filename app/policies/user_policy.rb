@@ -3,8 +3,10 @@ class UserPolicy < ApplicationPolicy
     def resolve
       if user.has_cached_role?(:super)
         scope.all
-      else
+      elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
+      else
+        scope.none
       end
     end
   end

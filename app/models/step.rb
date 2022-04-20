@@ -11,6 +11,8 @@ class Step < ApplicationRecord
   validates :name, :start_date, :days, presence: true
   validates :days, numericality: { greater_than: 0 }
 
+  scope :visible_to_client, -> { where(visible_to_client: true) }
+
   before_save :set_end_date
 
   counter_culture :phase,

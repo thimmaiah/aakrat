@@ -17,6 +17,7 @@ class Phase < ApplicationRecord
   validates :days, numericality: { greater_than: 0 }
 
   scope :payment_required, -> { where(payment_required: true) }
+  scope :visible_to_client, -> { where(visible_to_client: true) }
 
   before_save :set_end_date
   before_save :set_payment_status

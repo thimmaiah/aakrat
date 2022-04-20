@@ -6,7 +6,9 @@
         <% end %>
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#site-visits-tab">Site Visits</a>
 
-        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+        <% if policy(:note).index? %>
+            <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+        <% end %>
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#accesses-tab">Access</a>
     </nav>
 
@@ -15,7 +17,7 @@
     <div class="tab-content">
         <div id="phases-tab" class="tab-pane fade show active">
             <div id="phases" class="associated_entity">
-                <%= render "/phases/index" , phases: project.phases.order(start_date: :asc).includes(:assigned_to) %>
+                <%= render "/phases/index" , phases: policy_scope(project.phases).order(start_date: :asc).includes(:assigned_to) %>
             </div>
         </div>
         <% if policy(:payment).index? %>
@@ -32,15 +34,17 @@
             </div>
         </div>
 
-        <div id="notes-tab" class="tab-pane fade">
-            <div id="notes" class="associated_entity">
-                <%= render "/notes/index", notes: project.notes.with_all_rich_text, owner: project %>
+        <% if policy(:note).index? %>
+            <div id="notes-tab" class="tab-pane fade">
+                <div id="notes" class="associated_entity">
+                    <%= render "/notes/index", notes: project.notes.with_all_rich_text, owner: project %>
+                </div>
             </div>
-        </div>
+        <% end %>
 
         <div id="accesses-tab" class="tab-pane fade">
             <div id="accesses" class="associated_entity">
-                <%= render "/project_accesses/index", project_accesses: project.project_accesses %>
+                <%= render "/project_accesses/index", project_accesses: policy_scope(project.project_accesses).includes(:company, :user) %>
             </div>
         </div>
 

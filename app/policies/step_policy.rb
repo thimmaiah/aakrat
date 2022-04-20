@@ -3,8 +3,12 @@ class StepPolicy < ApplicationPolicy
     def resolve
       if user.has_cached_role?(:super)
         scope.all
-      else
+      elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
+      elsif user.has_cached_role?(:client)
+        scope.joins(project: :project_accesses).visible_to_client.where("project_accesses.user_id=?", user.id)
+      else
+        scope.none
       end
     end
   end
@@ -25,7 +29,9 @@ class StepPolicy < ApplicationPolicy
     if user.has_cached_role?(:super) || user.company_id == record.company_id
       true
     else
-      user.company_id != record.id
+      Step.joins(project: :project_accesses).visible_to_client
+          .where("project_accesses.user_id=?", user.id)
+          .where(id: record.id).present?
     end
   end
 

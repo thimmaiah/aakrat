@@ -5,6 +5,8 @@ class PaymentPolicy < ApplicationPolicy
         scope.all
       elsif user.has_cached_role?(:team_lead)
         scope.where(company_id: user.company_id)
+      elsif user.has_cached_role?(:client) || user.has_cached_role?(:accountant)
+        scope.joins(project: :project_accesses).where("project_accesses.user_id=?", user.id)
       else
         Payment.none
       end
@@ -16,7 +18,13 @@ class PaymentPolicy < ApplicationPolicy
   end
 
   def show?
-    user.has_cached_role?(:super) || (user.has_cached_role?(:team_lead) && user.company_id == record.company_id)
+    if user.has_cached_role?(:super) || (user.has_cached_role?(:team_lead) && user.company_id == record.company_id)
+      true
+    else
+      Payment.joins(project: :project_accesses)
+             .where("project_accesses.user_id=?", user.id)
+             .where(id: record.id).present?
+    end
   end
 
   def create?

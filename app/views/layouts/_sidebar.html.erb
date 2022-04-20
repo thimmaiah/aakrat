@@ -40,7 +40,9 @@
 
             </li>
 
-            <% if current_user %>
+
+            <% if current_user && (current_user.has_cached_role?(:team_lead) || current_user.has_cached_role?(:team_member)) %>
+
             <li class="nav-item">
 
                 <a class="nav-link collapsed" href="/steps?user_id=<%=current_user.id%>">
@@ -49,8 +51,7 @@
                 </a>
 
             </li>
-            <% end %>
-            
+
             <li class="nav-item">
 
                 <a class="nav-link collapsed" href="/site_visits">
@@ -59,6 +60,12 @@
                 </a>
 
             </li>
+            
+
+            <% end %>
+            
+            
+            <% if current_user && current_user.has_cached_role?(:team_lead) %>
 
             <li class="nav-item">
 
@@ -96,6 +103,31 @@
                 </a>
                
             </li>
+
+            <% elsif current_user && current_user.has_cached_role?(:client) %>
+
+            <li class="nav-item">
+
+                <a class="nav-link collapsed" href="/site_visits">
+                    <i class="fas fa-fw fa-location"></i>
+                    <span>Site Visits</span>
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="nav-link collapsed" href="/payments">
+                    <i class="fas fa-fw fa-dollar"></i>
+                    <span>Payments</span>
+                </a>
+
+            </li>
+
+
+            <% end %>
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

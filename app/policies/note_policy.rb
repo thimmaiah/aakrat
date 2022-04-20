@@ -3,14 +3,16 @@ class NotePolicy < ApplicationPolicy
     def resolve
       if user.has_cached_role?(:super)
         scope.all
-      else
+      elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
+      else
+        scope.none
       end
     end
   end
 
   def index?
-    true
+    user.has_cached_role?(:super) || user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
   end
 
   def dashboard?
@@ -22,11 +24,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.company_id
-      true
-    else
-      user.company_id != record.id
-    end
+    user.has_cached_role?(:super) || user.company_id == record.company_id
   end
 
   def create?

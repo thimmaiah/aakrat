@@ -1,5 +1,4 @@
 module PhasesHelper
-
   def phase_payment_status_badge(phase)
     case phase.payment_status
     when "Paid"
@@ -22,5 +21,4 @@ module PhasesHelper
       "bg-success"
     end
   end
-
 end

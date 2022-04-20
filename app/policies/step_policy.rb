@@ -30,7 +30,7 @@ class StepPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_cached_role?(:team_lead) && user.company_id == record.company_id
+    user.has_cached_role?(:team_member) && user.company_id == record.company_id
   end
 
   def new?
@@ -38,7 +38,7 @@ class StepPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    create? && (record.assigned_to_id == user.id || user.has_cached_role?(:team_lead))
   end
 
   def edit?

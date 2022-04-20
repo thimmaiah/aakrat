@@ -160,10 +160,12 @@
 
 
   <div>
-    <%= link_to "Edit" , edit_phase_path(@phase), {class: "btn btn-primary" } %> |
-    <%= link_to "Add Note" , new_note_path("note[owner_id]": @phase.id, "note[owner_type]": @phase.class.name) , {class: "btn btn-success" }%> |
+    <% if policy(@phase).update? %>
+      <%= link_to "Edit" , edit_phase_path(@phase), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @phase, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %> |
+    <% end %>
+    <%= link_to "Add Note" , new_note_path("note[owner_id]": @phase.id, "note[owner_type]": @phase.class.name) , {class: "btn btn-success" }%> 
 
-    <%= button_to "Delete" , @phase, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>
 
   <div data-controller="datatable">

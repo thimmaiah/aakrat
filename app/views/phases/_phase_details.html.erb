@@ -1,7 +1,7 @@
 <div class="associated_entity" data-controller="tabs">
     <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
         <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#steps-tab">Steps</a>
-        <% if phase.payment_required %>
+        <% if phase.payment_required && policy(:payment).index? %>
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#payments-tab">Payments</a>
         <% end %>
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
@@ -15,10 +15,10 @@
                 <%= render "/steps/index" , steps: phase.steps.order(start_date: :asc).includes(:assigned_to) %>
             </div>
         </div>
-        <% if phase.payment_required %>
+        <% if phase.payment_required && policy(:payment).index? %>
             <div id="payments-tab" class="tab-pane fade">
                 <div id="payments" class="associated_entity">
-                    <%= render "/payments/index", payments: phase.payments.includes(:project, :phase, :user) %>
+                    <%= render "/payments/index", payments: policy_scope(phase.payments).includes(:project, :phase, :user) %>
                 </div>
             </div>
         <% end %>

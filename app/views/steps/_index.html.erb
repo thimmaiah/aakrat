@@ -4,11 +4,16 @@
                     {class: "btn btn-primary" } if @phase %> 
 </div>
 
+<% if @phase %>
+    <% step = Step.new(phase_id: @phase.id, company_id: @phase.company_id,
+                    project_id: @phase.project_id, start_date: Time.zone.today, days: 10)%>
 
-<div class="quick_entry">
-    <%= render "/steps/quick_entry", step: Step.new(phase_id: @phase.id, 
-                    project_id: @phase.project_id, start_date: Time.zone.today, days: 10) if @phase %>
-</div>
+    <% if policy(step).create? %>
+        <div class="quick_entry">
+            <%= render "/steps/quick_entry", step: step %>
+        </div>
+    <% end %>
+<% end %>
 
 <% show_project_phase ||= "No" %>
 <div class="table-responsive">

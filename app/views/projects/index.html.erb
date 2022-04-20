@@ -2,7 +2,9 @@
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Projects</h1>
-    <%= link_to "New Project" , new_project_path, {class: "btn btn-primary" } %>
+    <% project = Project.new(company_id: current_user.company_id) %>
+    <%= link_to "New Project" , new_project_path("project[company_id]": project.company_id), 
+        {class: "btn btn-primary"}  if policy(project).new? %>
   </div>
 
   <div class="table-responsive" data-controller="datatable">

@@ -94,7 +94,7 @@
 
   <div class="row">
     <% @site_visit.attachments.each do |file| %>
-
+      <% if file.image? %>
       <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
           <div class="card-body site_visit_image">
@@ -102,7 +102,7 @@
           </div>
         </div>
       </div>
-      
+      <% end %>
     <% end %>
   </div>
     

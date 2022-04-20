@@ -71,15 +71,6 @@
       </td>
     </tr>
 
-    <tr>
-      <td>
-        Fees
-      </td>
-      <td>
-        <%= money_to_currency @project.fees, params %>
-      </td>
-    </tr>
-
     <% if  @project.percentage_of_estimated_budget > 0 %>
     <tr>
       <td>
@@ -101,6 +92,17 @@
       </td>
     </tr>
     <% end %>
+    
+    <tr>
+      <td>
+        Fees
+      </td>
+      <td>
+        <%= money_to_currency @project.fees, params %>
+      </td>
+    </tr>
+
+    
 
 
     <tr>

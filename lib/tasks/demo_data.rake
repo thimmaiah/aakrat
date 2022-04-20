@@ -56,6 +56,10 @@ namespace :vk do
           (1..3).each do |j|
             t = FactoryBot.create(:step, name: "Step #{j}", company: c, project: p, phase: s)        
           end
+
+          (1..1).each do |j|
+            t = FactoryBot.create(:site_visit, company: c, project: p, phase: s)        
+          end
         end
       end
     end

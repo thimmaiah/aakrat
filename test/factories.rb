@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :site_visit do
-    project { nil }
-    company { nil }
-    phase { nil }
-    cost_cents { "9.99" }
-    scheduled_on { "2022-04-20" }
-    conducted_on { "2022-04-20" }
-    assigned_to { nil }
-    completed { false }
+    company { Company.all.sample }
+    project { company.projects.sample }
+    phase { project.phases.sample }
+    cost_cents { (rand(2) + 1) * 1000_00 }
+    scheduled_on { Date.today + rand(10).days }
+    conducted_on {  }
+    assigned_to { company.users.sample }
+    completed { rand(2) }
   end
 
   factory :project_access do
@@ -37,7 +37,7 @@ FactoryBot.define do
     phase { project.phases.sample }
     assigned_to { project.company.users.sample }
     visible_to_client { rand(2) }
-    completed { rand(1) }
+    completed { rand(2) }
     details { Faker::Quotes::Rajnikanth.joke }
   end
 

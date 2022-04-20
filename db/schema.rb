@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_030959) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_20_041007) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -190,6 +190,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_030959) do
     t.index ["project_id"], name: "index_phases_on_project_id"
   end
 
+  create_table "project_accesses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.string "role_name", limit: 20
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_project_accesses_on_company_id"
+    t.index ["project_id"], name: "index_project_accesses_on_project_id"
+    t.index ["user_id"], name: "index_project_accesses_on_user_id"
+  end
+
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -338,6 +350,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_030959) do
   add_foreign_key "phases", "companies"
   add_foreign_key "phases", "projects"
   add_foreign_key "phases", "users", column: "assigned_to_id"
+  add_foreign_key "project_accesses", "companies"
+  add_foreign_key "project_accesses", "projects"
+  add_foreign_key "project_accesses", "users"
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "client_id"
   add_foreign_key "projects", "users", column: "team_lead_id"

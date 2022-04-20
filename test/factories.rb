@@ -1,4 +1,12 @@
 FactoryBot.define do
+  factory :project_access do
+    company { nil }
+    user { nil }
+    project { nil }
+    role_name { "MyString" }
+  end
+
+
   factory :client do
     user { User.clients.sample }
     first_name { user.first_name }

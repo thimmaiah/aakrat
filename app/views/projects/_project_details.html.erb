@@ -5,6 +5,7 @@
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#payments-tab">Payments</a>
         <% end %>
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#accesses-tab">Access</a>
     </nav>
 
 
@@ -27,6 +28,13 @@
                 <%= render "/notes/index", notes: project.notes.with_all_rich_text, owner: project %>
             </div>
         </div>
+
+        <div id="accesses-tab" class="tab-pane fade">
+            <div id="accesses" class="associated_entity">
+                <%= render "/project_accesses/index", project_accesses: project.project_accesses %>
+            </div>
+        </div>
+
     </div>
 
 </div>

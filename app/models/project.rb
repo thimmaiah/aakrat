@@ -1,10 +1,13 @@
 class Project < ApplicationRecord
+  resourcify
+
   belongs_to :company
   belongs_to :client, class_name: "User"
   belongs_to :team_lead, class_name: "User"
 
   has_many :phases, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :project_accesses, dependent: :destroy
 
   has_many :notes, as: :owner, dependent: :destroy
   has_rich_text :details

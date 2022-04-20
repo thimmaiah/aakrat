@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :project_accesses
   resources :clients
   resources :steps do
     patch 'toggle_completed', on: :member

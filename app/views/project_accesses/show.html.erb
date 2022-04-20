@@ -1,0 +1,45 @@
+<%= render "/layouts/alerts" %>
+
+<table class="table table-bordered dataTable">
+
+          <tr>
+        <td>
+          Company
+        </td>
+        <td>
+          <%= @project_access.company.name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          User
+        </td>
+        <td>
+          <%= @project_access.user.full_name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Project
+        </td>
+        <td>
+          <%= link_to @project_access.project.name, @project_access.project %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Role Name
+        </td>
+        <td>
+          <%= @project_access.role_name.titlecase.camelcase %>
+        </td>    
+      </tr>
+    
+  
+</table>
+
+
+<div>
+  <%= link_to "Edit", edit_project_access_path(@project_access), {class: "btn btn-primary"} %> |
+  <%= button_to "Delete", @project_access, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+</div>

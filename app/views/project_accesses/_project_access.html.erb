@@ -1,0 +1,18 @@
+<tr id="<%= dom_id project_access %>">
+  <td>
+    <%= project_access.company.name %>
+  </td>
+  <td>
+    <%= project_access.user.full_name %>
+  </td>
+  <td>
+    <%= link_to project_access.project.name, project_access.project %>
+  </td>
+  <td>
+    <%= project_access.role_name.titlecase %>
+  </td>
+  <td>
+    <%= link_to "Show" , project_access , {class: "btn btn-primary" }%>
+    <%= button_to "Delete" , project_access_path(project_access) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
+  </td>
+</tr>

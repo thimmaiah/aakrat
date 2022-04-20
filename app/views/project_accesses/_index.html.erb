@@ -1,0 +1,46 @@
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Project Accesses</h1>
+    <% if @project %>
+        <%= link_to "Grant Access" , new_project_access_path("project_access[company_id]": current_user.company_id,
+                            "project_access[project_id]": @project.id),
+                            {class: "btn btn-primary" } %>
+
+    <% else %>
+        <%= link_to "Grant Access" , new_project_access_path("project_access[company_id]": current_user.company_id),
+                                            {class: "btn btn-primary" } %>
+    <% end %>
+  </div>
+
+  <div class="table-responsive" data-controller="datatable">
+
+    <table id="project_accesses" class="table table-bordered dataTable jqDataTable">
+
+      <thead>
+        <tr>
+          <th>
+            Company
+          </th>
+          <th>
+            User
+          </th>
+          <th>
+            Project
+          </th>
+          <th>
+            Role Name
+          </th>
+
+          <th>
+          </th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        <% project_accesses.each do |project_access| %>
+          <%= render project_access %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>

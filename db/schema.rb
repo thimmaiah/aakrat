@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_091713) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_20_103922) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -258,7 +258,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_091713) do
     t.datetime "updated_at", null: false
     t.bigint "company_id", null: false
     t.integer "days", default: 0
-    t.boolean "approved", default: false
+    t.string "approval_status", limit: 10, default: "N/A"
     t.index ["assigned_to_id"], name: "index_steps_on_assigned_to_id"
     t.index ["company_id"], name: "index_steps_on_company_id"
     t.index ["phase_id"], name: "index_steps_on_phase_id"

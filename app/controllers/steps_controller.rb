@@ -56,7 +56,11 @@ class StepsController < ApplicationController
   end
 
   def toggle_completed
-    @step.completed = !@step.completed
+    if params[:approval].present?
+      @step.approval_status = @step.approval_status == "Approved" ? "Rejected" : "Approved"
+    else
+      @step.completed = !@step.completed
+    end
     @step.save
     respond_to do |format|
       format.turbo_stream do

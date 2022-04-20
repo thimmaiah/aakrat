@@ -19,6 +19,11 @@
     </span>  
   </td>
   <td>
+    <span class="badge <%= step.approval_status == 'Approved' ? 'bg-success' : 'bg-warning' %>">
+      <%= step.approval_status %>
+    </span>  
+  </td>
+  <td>
     <%= l step.start_date %>
   </td>
   <td>
@@ -47,8 +52,16 @@
     <% if policy(step).update? %>
       <%= link_to "Edit" , edit_step_path(step, quick_entry: true), {class: "btn btn-primary", data: { turbo_frame: 'step_quick_entry' } } %>
       <%= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
+
       <% label = step.completed ? "Incomplete" : "Completed" %>
-      <%= button_to label , toggle_completed_step_path(step) , {class: "btn btn-success", method: :patch }%>
+      <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
+
+      <%= button_to label , toggle_completed_step_path(step) , {class: "btn #{complete_btn_color}", method: :patch }%>
+
+      <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
+      <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
+      <%= button_to approved , toggle_completed_step_path(step, approval: true) , {class: "btn #{approve_btn_color}", method: :patch }%>
+
       <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "btn btn-success" }%>
     <% end %>
   </td>

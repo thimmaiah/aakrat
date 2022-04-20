@@ -3,8 +3,10 @@ class ProjectPolicy < ApplicationPolicy
     def resolve
       if user.has_cached_role?(:super)
         scope.all
-      else
+      elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
+      else
+        scope.joins(:project_accesses).where("project_accesses.user_id=?", user.id)
       end
     end
   end
@@ -25,7 +27,8 @@ class ProjectPolicy < ApplicationPolicy
     if user.has_cached_role?(:super) || user.company_id == record.company_id
       true
     else
-      user.company_id != record.id
+      Project.joins(:project_accesses).where("project_accesses.user_id=?", user.id)
+             .where(id: record.id).first.present?
     end
   end
 

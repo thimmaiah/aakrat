@@ -13,13 +13,14 @@ FactoryBot.define do
     last_name { user.last_name }
     email { user.email }
     phone { user.phone }
+    user_type { Client::TYPES[rand(Client::TYPES.length)]}
     company { nil }
   end
 
   factory :step do
     name { Faker::Company.catch_phrase }
     start_date { Time.zone.today - rand(10).days }
-    days { rand(10) + rand(10) }
+    days { rand(10) + rand(5)  + 4}
     status {  }
     project { Project.all.sample }
     phase { project.phases.sample }
@@ -36,7 +37,7 @@ FactoryBot.define do
   factory :phase do
     name { Faker::Company.catch_phrase }
     start_date { Time.zone.today - rand(10).days }
-    days { rand(10) + rand(10) }
+    days { rand(10) + rand(5)  + 4}
     status { Phase::STATUS[rand(Phase::STATUS.length)] }
     project { Project.all.sample }
     assigned_to { project.company.users.sample }
@@ -53,7 +54,9 @@ FactoryBot.define do
     name { ["Villa Project", "Industrial Shed", "Interior Design", "Farm House", "Vacation Home", "Low cost housing"][rand(6)] }
     start_date { Time.zone.today - rand(10).days }
     end_date { Time.zone.today + rand(10).days + rand(24).months }
-    cost_estimate_cents { (rand(100) + rand(100) ) * 100_000_00 }
+    client_estimated_budget { (rand(100) + rand(100) ) * 100_000 }
+    estimated_builtup_area { (rand(5) + 1)*1000 }
+    percentage_of_estimated_budget { (rand(2) + 1)*10 }
     percentage_completed { rand(100) }
     status { Project::STATUS[rand(Project::STATUS.length)] }
     company { Company.all.sample }

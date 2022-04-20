@@ -12,15 +12,25 @@ class Project < ApplicationRecord
   has_many :notes, as: :owner, dependent: :destroy
   has_rich_text :details
 
-  validates :name, :start_date, :end_date, presence: true
+  validates :name, :start_date, :end_date, :client_estimated_budget,
+            :estimated_builtup_area, presence: true
 
   STATUS = ["Not Started", "In Progress", "Completed", "Halted", "Abandoned"].freeze
   PAYMENT_STATUS = ["Not Paid", "Partial Payment", "Paid", "N/A"].freeze
 
-  monetize :cost_estimate_cents, with_model_currency: :currency
-  monetize :payment_amount_cents, with_model_currency: :currency
+  monetize :payment_amount_cents, :client_estimated_budget_cents,
+           :actual_cost_cents, :fees_cents, :per_sq_ft_rate_cents, with_model_currency: :currency
 
   def percentage_completed_days
     completed_days * 100.0 / total_days
+  end
+
+  before_save :set_fees
+  def set_fees
+    if per_sq_ft_rate.positive?
+      self.fees = per_sq_ft_rate * estimated_builtup_area
+    elsif percentage_of_estimated_budget.positive?
+      self.fees = percentage_of_estimated_budget * client_estimated_budget / 100.0
+    end
   end
 end

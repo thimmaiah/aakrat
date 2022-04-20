@@ -104,10 +104,12 @@
 
 
   <div>
-    <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
+    <% if policy(@step).update? %>
+      <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %> |
+    <% end %>
     <%= link_to "Add Note" , new_note_path("note[owner_id]": @step.id, "note[owner_type]": @step.class.name) ,
-          {class: "btn btn-success" }%> |
-    <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+          {class: "btn btn-success" }%> 
   </div>
 
   <%= render "/steps/step_details" , step: @step %>

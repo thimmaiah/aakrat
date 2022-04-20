@@ -37,12 +37,71 @@
     </tr>
     <tr>
       <td>
-        Cost Estimate Cents
+        Client Budget Estimate
       </td>
       <td>
-        <%= money_to_currency @project.cost_estimate, params %>
+        <%= money_to_currency @project.client_estimated_budget, params %>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        Actual Cost
+      </td>
+      <td>
+        <%= money_to_currency @project.actual_cost, params %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Estimated BuiltUp Area
+      </td>
+      <td>
+        <%= custom_format_number @project.estimated_builtup_area, params %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Actual BuiltUp Area
+      </td>
+      <td>
+        <%= custom_format_number @project.actual_builtup_area, params %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Fees
+      </td>
+      <td>
+        <%= money_to_currency @project.fees, params %>
+      </td>
+    </tr>
+
+    <% if  @project.percentage_of_estimated_budget > 0 %>
+    <tr>
+      <td>
+        Fees as % of Budget
+      </td>
+      <td>
+        <%=  @project.percentage_of_estimated_budget %> %
+      </td>
+    </tr>
+    <% end %>
+
+    <% if  @project.per_sq_ft_rate > 0 %>
+    <tr>
+      <td>
+        Fees as Rate per SqFt
+      </td>
+      <td>
+        <%=  money_to_currency @project.per_sq_ft_rate, params %>
+      </td>
+    </tr>
+    <% end %>
+
 
     <tr>
       <td>

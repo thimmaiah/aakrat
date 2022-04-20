@@ -34,7 +34,7 @@ class Phase < ApplicationRecord
 
   def set_payment_status
     if payment_required
-      self.payment_due_cents = payment_due_percentage * project.cost_estimate_cents / 100.0
+      self.payment_due_cents = payment_due_percentage * project.fees_cents / 100.0
       self.payment_status = if payment_amount_cents.zero?
                               completed ? "Pending" : "Not Paid"
                             else

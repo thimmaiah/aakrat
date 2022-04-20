@@ -1,9 +1,9 @@
 <tr id="<%= dom_id site_visit %>">
   <td>
-    <%= site_visit.project.name %>
+    <%= link_to site_visit.project.name, site_visit.project %>
   </td>
   <td>
-    <%= site_visit.phase.name %>
+    <%= link_to site_visit.phase.name, site_visit.phase %>
   </td>
   <td>
     <%= money_to_currency site_visit.cost,params %>

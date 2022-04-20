@@ -3,8 +3,10 @@ class SiteVisitPolicy < ApplicationPolicy
     def resolve
       if user.has_cached_role?(:super)
         scope.all
-      else
+      elsif user.has_cached_role?(:team_lead)
         scope.where(company_id: user.company_id)
+      else
+        scope.where(assigned_to_id: user.id)
       end
     end
   end

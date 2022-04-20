@@ -26,7 +26,7 @@
 
         <div id="site-visits-tab" class="tab-pane fade">
             <div id="site_visits" class="associated_entity">
-                <%= render "/site_visits/index", site_visits: phase.site_visits %>
+                <%= render "/site_visits/index", site_visits: policy_scope(phase.site_visits).includes(:project, :phase, :assigned_to) %>
             </div>
         </div>
 

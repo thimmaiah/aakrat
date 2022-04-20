@@ -3,7 +3,7 @@ class SiteVisitsController < ApplicationController
 
   # GET /site_visits or /site_visits.json
   def index
-    @site_visits = policy_scope(SiteVisit)
+    @site_visits = policy_scope(SiteVisit).includes(:project, :phase, :assigned_to)
   end
 
   # GET /site_visits/1 or /site_visits/1.json

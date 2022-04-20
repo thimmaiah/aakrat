@@ -49,8 +49,10 @@
 
 
   <div>
-    <%= link_to "Edit" , edit_note_path(@note), {class: "btn btn-primary" } %> |
-    <%= button_to "Delete" , @note, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    <% if policy(@note).update? %>
+      <%= link_to "Edit" , edit_note_path(@note), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @note, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    <% end %>
   </div>
 
   <%= render "/layouts/display_attachments", attachments: @note.attachments %>

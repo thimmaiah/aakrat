@@ -37,6 +37,10 @@ class StepPolicy < ApplicationPolicy
     create?
   end
 
+  def approve?
+    user.has_cached_role?(:team_lead) && user.company_id == record.company_id
+  end
+
   def update?
     create? && (record.assigned_to_id == user.id || user.has_cached_role?(:team_lead))
   end

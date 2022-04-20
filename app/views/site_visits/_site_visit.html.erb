@@ -23,6 +23,8 @@
     </span>  </td>
   <td>
     <%= link_to "Show" , site_visit , {class: "btn btn-primary" }%>
-    <%= link_to "Edit" , edit_site_visit_path(site_visit) , {class: "btn btn-success" }%>
+    <% if policy(site_visit).update? %>
+      <%= link_to "Edit" , edit_site_visit_path(site_visit) , {class: "btn btn-success" }%>
+    <% end %>
   </td>
 </tr>

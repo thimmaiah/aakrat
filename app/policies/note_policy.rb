@@ -46,6 +46,6 @@ class NotePolicy < ApplicationPolicy
   end
 
   def destroy?
-    false
+    update?
   end
 end

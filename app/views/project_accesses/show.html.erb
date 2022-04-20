@@ -40,6 +40,8 @@
 
 
 <div>
-  <%= link_to "Edit", edit_project_access_path(@project_access), {class: "btn btn-primary"} %> |
-  <%= button_to "Delete", @project_access, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+  <% if policy(@project_access).update? %>
+    <%= link_to "Edit", edit_project_access_path(@project_access), {class: "btn btn-primary"} %> |
+    <%= button_to "Delete", @project_access, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+  <% end %>
 </div>

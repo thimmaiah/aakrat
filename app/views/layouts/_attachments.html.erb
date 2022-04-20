@@ -5,8 +5,10 @@
           <i class="fas fa-download"></i>
           <%= file.filename.to_s.capitalize %>
         <% end %>
-        <%= button_to delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" do %>
-          <i class="fas fa-trash-alt"></i>                
+        <% if policy(file.record).update? %>
+          <%= button_to delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" do %>
+            <i class="fas fa-trash-alt"></i>                
+          <% end %>
         <% end %>
       </li>
       <% end %>

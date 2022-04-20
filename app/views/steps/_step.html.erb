@@ -1,4 +1,4 @@
-<% show_project_phase ||= "No" %>
+<% show_project_phase ||= params[:show_project_phase] %>
 
 <tr id="<%= dom_id step %>">
   <% if show_project_phase == "Yes" %>
@@ -56,12 +56,12 @@
       <% label = step.completed ? "Incomplete" : "Completed" %>
       <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
 
-      <%= button_to label , toggle_completed_step_path(step) , {class: "btn #{complete_btn_color}", method: :patch }%>
+      <%= button_to label , toggle_completed_step_path(step, show_project_phase: show_project_phase) , {class: "btn #{complete_btn_color}", method: :patch }%>
 
       <% if policy(step).approve? %>
         <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
         <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
-        <%= button_to approved , toggle_completed_step_path(step, approval: true) , {class: "btn #{approve_btn_color}", method: :patch }%>
+        <%= button_to approved , toggle_completed_step_path(step, approval: true, show_project_phase: show_project_phase) , {class: "btn #{approve_btn_color}", method: :patch }%>
       <% end %>
 
       <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "btn btn-success" }%>

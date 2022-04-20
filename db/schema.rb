@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_103922) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_20_110232) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -244,6 +244,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_103922) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "site_visits", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "phase_id", null: false
+    t.decimal "cost_cents", precision: 20, scale: 2, default: "0.0"
+    t.date "scheduled_on"
+    t.date "conducted_on"
+    t.bigint "assigned_to_id", null: false
+    t.boolean "completed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assigned_to_id"], name: "index_site_visits_on_assigned_to_id"
+    t.index ["company_id"], name: "index_site_visits_on_company_id"
+    t.index ["phase_id"], name: "index_site_visits_on_phase_id"
+    t.index ["project_id"], name: "index_site_visits_on_project_id"
+  end
+
   create_table "steps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.date "start_date"
@@ -364,6 +381,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_103922) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "client_id"
   add_foreign_key "projects", "users", column: "team_lead_id"
+  add_foreign_key "site_visits", "companies"
+  add_foreign_key "site_visits", "phases"
+  add_foreign_key "site_visits", "projects"
+  add_foreign_key "site_visits", "users", column: "assigned_to_id"
   add_foreign_key "steps", "companies"
   add_foreign_key "steps", "phases"
   add_foreign_key "steps", "projects"

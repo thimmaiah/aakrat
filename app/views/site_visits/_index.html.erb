@@ -1,0 +1,48 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Site Visits</h1>
+    <%= link_to "New Site Visit" , new_site_visit_path("site_visit[project_id]": @project.id), 
+                {class: "btn btn-primary" } if @project %>
+    <%= link_to "New Site Visit" , new_site_visit_path("site_visit[project_id]": @phase.project_id,
+                "site_visit[phase_id]": @phase.id), 
+                {class: "btn btn-primary" } if @phase %>
+  </div>
+
+  <div class="table-responsive" data-controller="datatable">
+
+    <table id="site_visits" class="table table-bordered dataTable">
+      <thead>
+        <tr>
+          <th>
+            Project
+          </th>
+          <th>
+            Phase
+          </th>
+          <th>
+            Cost
+          </th>
+          <th>
+            Scheduled On
+          </th>
+          <th>
+            Conducted On
+          </th>
+          <th>
+            Assigned To
+          </th>
+          <th>
+            Completed
+          </th>
+
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% site_visits.each do |site_visit| %>
+          <%= render site_visit %>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>

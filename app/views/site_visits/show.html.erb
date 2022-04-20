@@ -1,0 +1,99 @@
+<%= render "/layouts/alerts" %>
+
+  <table class="table table-bordered dataTable">
+
+    <tr>
+      <td>
+        Project
+      </td>
+      <td>
+        <%= link_to @site_visit.project.name, @site_visit.project %>
+      </td>
+    </tr>
+    </tr>
+    <tr>
+      <td>
+        Phase
+      </td>
+      <td>
+        <%= link_to @site_visit.phase.name, @site_visit.phase %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Cost Cents
+      </td>
+      <td>
+        <%= money_to_currency @site_visit.cost, params %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Scheduled On
+      </td>
+      <td>
+        <%= l @site_visit.scheduled_on if @site_visit.scheduled_on %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Conducted On
+      </td>
+      <td>
+        <%= l @site_visit.conducted_on if @site_visit.conducted_on %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Assigned To
+      </td>
+      <td>
+        <%= @site_visit.assigned_to.full_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Completed
+      </td>
+      <td>
+        <span class="badge <%= @site_visit.completed ? 'bg-success' : 'bg-warning' %>">
+          <%= @site_visit.completed ? "Yes" : "No" %>
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Details
+      </td>
+      <td>
+        <%= @site_visit.details %>
+      </td>    
+    </tr>
+
+    <tr>
+      <td>
+        Attachments
+      </td>
+      <td>
+        <ul>
+          <% @site_visit.attachments.each do |file| %>
+            <li>
+              <%= link_to rails_blob_path(file, disposition: :attachment), class: "btn btn-sm btn-primary" do%>
+                <i class="fas fa-download"></i>
+                <%= file.filename.to_s.capitalize %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+      </td>
+    </tr>
+
+  </table>
+
+
+  <div>
+    <%= link_to "Edit" , edit_site_visit_path(@site_visit), {class: "btn btn-primary" } %> |
+    <%= button_to "Delete" , @site_visit, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+  </div>

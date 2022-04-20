@@ -4,6 +4,8 @@
         <% if policy(:payment).index? %>
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#payments-tab">Payments</a>
         <% end %>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#site-visits-tab">Site Visits</a>
+
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
         <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#accesses-tab">Access</a>
     </nav>
@@ -23,6 +25,13 @@
                 </div>
             </div>
         <% end %>
+        
+        <div id="site-visits-tab" class="tab-pane fade">
+            <div id="site_visits" class="associated_entity">
+                <%= render "/site_visits/index", site_visits: project.site_visits %>
+            </div>
+        </div>
+
         <div id="notes-tab" class="tab-pane fade">
             <div id="notes" class="associated_entity">
                 <%= render "/notes/index", notes: project.notes.with_all_rich_text, owner: project %>

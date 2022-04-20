@@ -5,6 +5,7 @@ class Phase < ApplicationRecord
 
   has_many :notes, as: :owner, dependent: :destroy
 
+  has_many :site_visits, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :payments, dependent: :destroy
 

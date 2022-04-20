@@ -1,0 +1,28 @@
+<tr id="<%= dom_id site_visit %>">
+  <td>
+    <%= site_visit.project.name %>
+  </td>
+  <td>
+    <%= site_visit.phase.name %>
+  </td>
+  <td>
+    <%= money_to_currency site_visit.cost,params %>
+  </td>
+  <td>
+    <%= l site_visit.scheduled_on %>
+  </td>
+  <td>
+    <%= l site_visit.conducted_on if site_visit.conducted_on %>
+  </td>
+  <td>
+    <%= site_visit.assigned_to.full_name %>
+  </td>
+  <td>
+    <span class="badge <%= site_visit.completed ? 'bg-success' : 'bg-warning' %>">
+      <%= site_visit.completed ? "Yes" : "No" %>
+    </span>  </td>
+  <td>
+    <%= link_to "Show" , site_visit , {class: "btn btn-primary" }%>
+    <%= link_to "Edit" , edit_site_visit_path(site_visit) , {class: "btn btn-success" }%>
+  </td>
+</tr>

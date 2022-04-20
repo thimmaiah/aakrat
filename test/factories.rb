@@ -1,4 +1,15 @@
 FactoryBot.define do
+  factory :site_visit do
+    project { nil }
+    company { nil }
+    phase { nil }
+    cost_cents { "9.99" }
+    scheduled_on { "2022-04-20" }
+    conducted_on { "2022-04-20" }
+    assigned_to { nil }
+    completed { false }
+  end
+
   factory :project_access do
     company { nil }
     user { nil }

@@ -1,0 +1,62 @@
+<%= form_with(model: site_visit) do |form| %>
+  <% if site_visit.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(site_visit.errors.count, "error") %> prohibited this site_visit from being saved:</h2>
+
+      <ul>
+        <% site_visit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :project_id, hidden: true  %>
+  <%= form.text_field :company_id, hidden: true  %>
+
+  <div class="form-group">
+    <%= form.label :phase_id %>
+    <%= form.select :phase_id, site_visit.project.phases.map{|p| [p.name, p.id]}, {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cost %>
+    <%= form.text_field :cost, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :scheduled_on %>
+    <%= form.date_field :scheduled_on, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :conducted_on %>
+    <%= form.date_field :conducted_on, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assigned_to_id %>
+    <%= form.select :assigned_to_id, current_user.company.users.team_members.map{|u| [u.full_name, u.id]}, {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :completed %>
+    <%= form.check_box :completed, class: "form-control form-checkbox"  %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.rich_text_area :details, class: "form-control trix-content"  %>
+  </div>
+
+  <div class="field" class="form-group" data-controller="directuploads" >
+    <%= form.label :attachments, "Attachments" %>
+    <%= form.file_field :attachments, class: "form-control", direct_upload: true, multiple:true %>
+    <small class="text-muted"> Upload multiple attachements. </small>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Save", {class: "btn btn-primary"}%>
+  </div>
+<% end %>

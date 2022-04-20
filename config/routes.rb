@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :site_visits
   resources :project_accesses
   resources :clients
   resources :steps do

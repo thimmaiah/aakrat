@@ -82,7 +82,10 @@
               <%= link_to rails_blob_path(file, disposition: :attachment), class: "btn btn-sm btn-primary" do%>
                 <i class="fas fa-download"></i>
                 <%= file.filename.to_s.capitalize %>
-                  <% end %>
+              <% end %>
+              <%= button_to delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" do %>
+                <i class="fas fa-trash-alt"></i>                
+              <% end %>
             </li>
             <% end %>
         </ul>
@@ -92,13 +95,23 @@
 
   </table>
 
-  <div class="row">
+
+  <div>
+    <% if policy(@site_visit).update? %>
+      <%= link_to "Edit" , edit_site_visit_path(@site_visit), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @site_visit, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    <% end %>
+  </div>
+
+
+  <div class="row associated_entity">
     <% @site_visit.attachments.each do |file| %>
       <% if file.image? %>
       <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
           <div class="card-body site_visit_image">
             <%= image_tag url_for(file) %>
+            <%= button_to "Delete", delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" %>
           </div>
         </div>
       </div>
@@ -106,7 +119,3 @@
     <% end %>
   </div>
     
-      <div>
-        <%= link_to "Edit" , edit_site_visit_path(@site_visit), {class: "btn btn-primary" } %> |
-        <%= button_to "Delete" , @site_visit, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
-      </div>

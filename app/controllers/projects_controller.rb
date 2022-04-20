@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy clone_phases clone]
+  after_action :verify_authorized, except: %i[index search delete_attachment]
 
   # GET /projects or /projects.json
   def index
@@ -83,6 +84,18 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to project_url(@project), notice: "Please be patient, copying stages takes some time. Checkback in a minute." }
       format.json { render :show, status: :ok, location: @project }
+    end
+  end
+
+  # Special method to delete attachments for any model
+  def delete_attachment
+    attachment = ActiveStorage::Attachment.where(id: params[:attachment_id]).first
+    record = attachment.record
+    if policy(record).update?
+      attachment.purge_later
+      redirect_to record, notice: "Attachment Deleted"
+    else
+      redirect_to record, notice: "Attachment Deletion Failed: Access Denied"
     end
   end
 

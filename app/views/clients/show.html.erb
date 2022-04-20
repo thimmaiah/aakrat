@@ -1,61 +1,74 @@
 <%= render "/layouts/alerts" %>
 
-<table class="table table-bordered dataTable">
+  <table class="table table-bordered dataTable">
 
-          <tr>
-        <td>
-          First Name
-        </td>
-        <td>
-          <%= @client.first_name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Last Name
-        </td>
-        <td>
-          <%= @client.last_name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Email
-        </td>
-        <td>
-          <%= @client.email %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Phone
-        </td>
-        <td>
-          <%= @client.phone %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          User
-        </td>
-        <td>
-          <%= @client.user_id %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Company
-        </td>
-        <td>
-          <%= @client.company.name %>
-        </td>    
-      </tr>
-    
-  
-</table>
+    <tr>
+      <td>
+        First Name
+      </td>
+      <td>
+        <%= @client.first_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Last Name
+      </td>
+      <td>
+        <%= @client.last_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Email
+      </td>
+      <td>
+        <%= @client.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Phone
+      </td>
+      <td>
+        <%= @client.phone %>
+      </td>
+    </tr>
+
+    </tr>
+    <tr>
+      <td>
+        Type
+      </td>
+      <td>
+        <%= @client.user_type %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        User
+      </td>
+      <td>
+        <%= @client.user_id %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Company
+      </td>
+      <td>
+        <%= @client.company.name %>
+      </td>
+    </tr>
 
 
-<div>
-  <%= link_to "Edit", edit_client_path(@client), {class: "btn btn-primary"} %> |
-  <%= button_to "Delete", @client, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
-</div>
+  </table>
+
+
+  <div>
+    <% if policy(@client).update? %>
+      <%= link_to "Edit" , edit_client_path(@client), {class: "btn btn-primary" } %> |
+      <%= button_to "Delete" , @client, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    <% end %>
+  </div>

@@ -166,7 +166,6 @@
   <% if policy(@project).update? %>
   <div>
     <%= link_to "Edit" , edit_project_path(@project), {class: "btn btn-primary" } %> |
-    <%= link_to "Add Phase" , new_phase_path(project_id: @project.id), {class: "btn btn-success" } %> |
     <% if @project.cloned_from.present? && @project.phases.count == 0 %>
       <%= button_to "Clone Phases" , clone_phases_project_path(@project), {class: "btn btn-success", method: :patch } %> |
     <% else %>

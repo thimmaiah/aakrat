@@ -6,7 +6,7 @@
     <%= project_access.user.full_name %>
   </td>
   <td>
-    <%= link_to project_access.project.name, project_access.project %>
+    <%= link_to project_access.project.name, project_path(project_access.project, tab: "accesses-tab") %>
   </td>
   <td>
     <%= project_access.role_name.titlecase %>

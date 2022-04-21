@@ -23,7 +23,7 @@
           Project
         </td>
         <td>
-          <%= link_to @project_access.project.name, @project_access.project %>
+          <%= link_to @project_access.project.name, project_path(@project_access.project, tab: "accesses-tab") %>
         </td>    
       </tr>
           <tr>

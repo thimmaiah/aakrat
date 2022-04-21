@@ -59,14 +59,26 @@
           <%= link_to @attachment.step.name, @attachment.step %>
         </td>    
       </tr>
+
+      <tr>
+        <td>
+          Attachments
+        </td>
+        <td>
+          <ul>
+            <%= render "/layouts/attachments", attachments: @attachment.attachments %>
+          </ul>
+  
+        </td>
+      </tr>
     
   
 </table>
 
 
 <div>
-  <%= link_to "Edit", edit_attachment_path(@attachment), {class: "btn btn-primary"} %> |
-  <%= link_to "Back", :back, {class: "btn btn-primary"} %> |
-
-  <%= button_to "Delete", @attachment, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+  <% if policy(@attachment).update? %>
+    <%= link_to "Edit", edit_attachment_path(@attachment), {class: "btn btn-primary"} %> |
+    <%= button_to "Delete", @attachment, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+  <% end %>
 </div>

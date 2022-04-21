@@ -1,29 +1,31 @@
 <div class="associated_entity" data-controller="tabs">
     <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
+
+        <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#attachments-tab">Attachments</a>
+
         <% if policy(:note).index? %>
-            <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
+            <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
         <% end %>
-        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#attachments-tab">Attachments</a>
 
     </nav>
 
     <div class="tab-content">
 
+        <div id="attachments-tab" class="tab-pane fade  show active">
+            <div id="attachments" class="associated_entity">
+                <%= render "/attachments/index" , attachments: policy_scope(step.client_attachments).includes(:step) %>
+            </div>
+        </div>
+
         <% if policy(:note).index? %>
 
-            <div id="notes-tab" class="tab-pane fade show active">
+            <div id="notes-tab" class="tab-pane fade">
                 <div id="notes" class="associated_entity">
                     <%= render "/notes/index" , notes: step.notes %>
                 </div>
             </div>
 
         <% end %>
-
-        <div id="attachments-tab" class="tab-pane fade">
-            <div id="attachments" class="associated_entity">
-                <%= render "/attachments/index" , attachments: step.client_attachments %>
-            </div>
-        </div>
 
     </div>
 

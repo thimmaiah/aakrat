@@ -10,4 +10,6 @@ class Attachment < ApplicationRecord
   has_many_attached :attachments, service: :amazon, dependent: :destroy
 
   validates :name, presence: true
+
+  scope :visible_to_client, -> { where(approval_status: "Approved") }
 end

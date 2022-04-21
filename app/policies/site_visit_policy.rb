@@ -7,10 +7,9 @@ class SiteVisitPolicy < ApplicationPolicy
         scope.where(company_id: user.company_id)
       elsif user.has_cached_role?(:team_member)
         scope.where(assigned_to_id: user.id)
-      elsif user.has_cached_role?(:client)
-        scope.joins(project: :project_accesses).where("project_accesses.user_id=?", user.id)
       else
-        scope.none
+        scope.joins(project: :project_accesses)
+             .where("project_accesses.user_id=? and project_accesses.role_name in (?)", user.id, %w[Client Contractor])
       end
     end
   end

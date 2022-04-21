@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: %i[show edit update destroy]
+  before_action :set_payment, only: %i[edit update destroy]
 
   # GET /payments or /payments.json
   def index
@@ -7,7 +7,10 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/1 or /payments/1.json
-  def show; end
+  def show
+    @payment = Payment.with_attached_attachments.find(params[:id])
+    authorize @payment
+  end
 
   # GET /payments/new
   def new

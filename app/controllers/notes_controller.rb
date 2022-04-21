@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_action :set_note, only: %i[show edit update destroy]
+  before_action :set_note, only: %i[edit update destroy]
 
   # GET /notes or /notes.json
   def index
@@ -7,7 +7,10 @@ class NotesController < ApplicationController
   end
 
   # GET /notes/1 or /notes/1.json
-  def show; end
+  def show
+    @note = Note.with_attached_attachments.find(params[:id])
+    authorize @note
+  end
 
   # GET /notes/new
   def new

@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-  before_action :set_step, only: %i[show edit update destroy toggle_completed]
+  before_action :set_step, only: %i[edit update destroy toggle_completed]
 
   # GET /steps or /steps.json
   def index
@@ -9,7 +9,10 @@ class StepsController < ApplicationController
   end
 
   # GET /steps/1 or /steps/1.json
-  def show; end
+  def show
+    @step = Step.with_attached_attachments.find(params[:id])
+    authorize @step
+  end
 
   # GET /steps/new
   def new

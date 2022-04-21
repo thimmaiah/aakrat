@@ -1,5 +1,5 @@
 class SiteVisitsController < ApplicationController
-  before_action :set_site_visit, only: %i[show edit update destroy]
+  before_action :set_site_visit, only: %i[edit update destroy]
 
   # GET /site_visits or /site_visits.json
   def index
@@ -7,7 +7,10 @@ class SiteVisitsController < ApplicationController
   end
 
   # GET /site_visits/1 or /site_visits/1.json
-  def show; end
+  def show
+    @site_visit = SiteVisit.with_attached_attachments.find(params[:id])
+    authorize @site_visit
+  end
 
   # GET /site_visits/new
   def new

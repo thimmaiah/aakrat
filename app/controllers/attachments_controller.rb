@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  before_action :set_attachment, only: %i[show edit update destroy toggle_approval]
+  before_action :set_attachment, only: %i[edit update destroy toggle_approval]
 
   # GET /attachments or /attachments.json
   def index
@@ -7,7 +7,10 @@ class AttachmentsController < ApplicationController
   end
 
   # GET /attachments/1 or /attachments/1.json
-  def show; end
+  def show
+    @attachment = Attachment.with_attached_attachments.find(params[:id])
+    authorize @attachment
+  end
 
   # GET /attachments/new
   def new

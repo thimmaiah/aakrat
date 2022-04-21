@@ -46,7 +46,7 @@ class SiteVisitPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    (user.has_cached_role?(:team_lead) && user.company_id == record.company_id)
   end
 
   def edit?

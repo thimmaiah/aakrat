@@ -3,6 +3,8 @@ class Client < ApplicationRecord
 
   belongs_to :user
   belongs_to :company
+  has_many :notes, as: :owner, dependent: :destroy
+  has_rich_text :details
 
   validates :first_name, :last_name, :email, :phone, :user_type, presence: true
 

@@ -15,7 +15,7 @@ class SiteVisitsController < ApplicationController
   # GET /site_visits/new
   def new
     @site_visit = SiteVisit.new(site_visit_params)
-    @site_visit.company_id = current_user.company_id
+    @site_visit.company_id = @site_visit.project.company_id
     authorize @site_visit
   end
 
@@ -25,7 +25,8 @@ class SiteVisitsController < ApplicationController
   # POST /site_visits or /site_visits.json
   def create
     @site_visit = SiteVisit.new(site_visit_params)
-    @site_visit.company_id = current_user.company_id
+    @site_visit.company_id = @site_visit.project.company_id
+    @site_visit.cost = 500 if @site_visit.cost.zero?
     authorize @site_visit
 
     respond_to do |format|

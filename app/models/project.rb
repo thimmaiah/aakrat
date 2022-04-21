@@ -35,4 +35,9 @@ class Project < ApplicationRecord
       self.fees = percentage_of_estimated_budget * client_estimated_budget / 100.0
     end
   end
+
+  def client?(user)
+    project_accesses.where("project_accesses.user_id=? and project_accesses.role_name=?",
+                           user.id, "Client").present?
+  end
 end

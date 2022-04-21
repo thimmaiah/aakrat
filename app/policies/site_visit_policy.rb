@@ -37,7 +37,8 @@ class SiteVisitPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_cached_role?(:team_lead) && user.company_id == record.company_id
+    (user.has_cached_role?(:team_lead) && user.company_id == record.company_id) ||
+      record.project.client?(user)
   end
 
   def new?

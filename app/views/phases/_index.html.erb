@@ -1,4 +1,4 @@
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Phases</h1>
     <% if @project && policy(@project).update? %>
       <%= link_to "New Phase" , new_phase_path("phase[project_id]": @project.id), 
@@ -6,8 +6,15 @@
     <% end %>
   </div>
   
-  <% if @project %>
+  <%
+    current_user_is_client = false 
+    if @project 
+
+      current_user_is_client = @project.client?(current_user)
+  %>
     
+    
+
     <% phase = Phase.new(company_id: @project.company_id, project_id: @project.id, 
                          start_date: Time.zone.today, days: 10) %>
                          
@@ -48,7 +55,7 @@
             Assigned
           </th>
           <th>
-            Client Visible
+            Unlocked
           </th>
           <th>
             Payment
@@ -68,7 +75,7 @@
 
       <tbody id="phases_tbody">
         <% phases.each do |phase| %>
-          <%= render phase %>
+          <%= render phase, current_user_is_client: current_user_is_client %>
         <% end %>
       </tbody>
     </table>

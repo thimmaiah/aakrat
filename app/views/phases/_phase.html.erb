@@ -1,6 +1,6 @@
 <tr id="<%= dom_id phase %>">
   <td>
-    <%= link_to phase.name, phase %>
+    <%= current_user_is_client && !phase.visible_to_client ? phase.name : link_to(phase.name, phase) %>
   </td>
   <td>
     <span class="badge <%= phase_completion_badge(phase) %>">

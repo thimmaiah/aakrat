@@ -60,7 +60,7 @@
     </tr>
     <tr>
       <td>
-        Visible To Client
+        Unlocked
       </td>
       <td>
         <span class="badge <%= @step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
@@ -118,4 +118,6 @@
     
   </div>
 
-  <%= render "/steps/step_details" , step: @step %>
+  <div data-controller="datatable">
+    <%= render "/steps/step_details" , step: @step %>
+  </div>

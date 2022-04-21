@@ -6,12 +6,8 @@ class PhasePolicy < ApplicationPolicy
       elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
       else
-        scope.joins(project: :project_accesses).visible_to_client
-             .merge(ProjectAccess.for(user, %w[Client]))
-             .or(
-               scope.joins(project: :project_accesses)
-                  .merge(ProjectAccess.for(user, %w[Contractor Accountant]))
-             )
+        scope.joins(project: :project_accesses)
+             .merge(ProjectAccess.for(user, %w[Client Contractor Accountant]))
 
       end
     end
@@ -33,8 +29,14 @@ class PhasePolicy < ApplicationPolicy
     if user.has_cached_role?(:super) || user.company_id == record.company_id
       true
     else
+      # If the user is a Client then the phase must be visible
       Phase.joins(project: :project_accesses).visible_to_client
-           .where("project_accesses.user_id=?", user.id)
+           .merge(ProjectAccess.for(user, %w[Client]))
+           .or(
+             # If user is a Contractor or Accountant then he can view
+             Phase.joins(project: :project_accesses)
+                  .merge(ProjectAccess.for(user, %w[Contractor Accountant]))
+           )
            .where(id: record.id).present?
     end
   end

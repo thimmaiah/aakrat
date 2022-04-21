@@ -1,0 +1,59 @@
+<%= form_with(model: quote) do |form| %>
+  <% if quote.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(quote.errors.count, "error") %> prohibited this quote from being saved:</h2>
+
+      <ul>
+        <% quote.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= form.text_field :company_id, hidden: true  %>
+    <%= form.text_field :user_id, hidden: true  %>
+    <%= form.text_field :client_id, hidden: true  %>
+
+  <div class="form-group">
+    <%= form.label :project_type %>
+    <%= form.select :project_type, ENV["PROJECT_TYPES"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :scale %>
+    <%= form.select :scale, ENV["SCALE"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :style %>
+    <%= form.select :style, ENV["STYLES"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pattern %>
+    <%= form.select :pattern, ENV["PATTERNS"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :services %>
+    <%= form.select :services, ENV["SERVICES"].split(","), {include_blank: false, include_hidden: false}, 
+        class: "form-control select2", multiple: "multiple"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :details %>
+    <%= form.rich_text_area :details, class: "form-control trix-content"  %>
+  </div>
+
+  <div class="field" class="form-group" data-controller="directuploads" >
+    <%= form.label :attachments, "Attachments" %>
+    <%= form.file_field :attachments, class: "form-control", direct_upload: true, multiple:true %>
+    <small class="text-muted"> Upload multiple attachements. </small>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.submit "Save", {class: "btn btn-primary"}%>
+  </div>
+<% end %>

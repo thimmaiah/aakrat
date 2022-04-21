@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_21_021439) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_21_152129) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -250,6 +250,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_021439) do
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"
   end
 
+  create_table "quotes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
+    t.string "project_type", limit: 30
+    t.string "scale", limit: 20
+    t.string "style", limit: 30
+    t.string "pattern", limit: 30
+    t.text "services"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_quotes_on_client_id"
+    t.index ["company_id"], name: "index_quotes_on_company_id"
+    t.index ["user_id"], name: "index_quotes_on_user_id"
+  end
+
   create_table "roles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -406,6 +422,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_021439) do
   add_foreign_key "projects", "companies"
   add_foreign_key "projects", "users", column: "client_id"
   add_foreign_key "projects", "users", column: "team_lead_id"
+  add_foreign_key "quotes", "clients"
+  add_foreign_key "quotes", "companies"
+  add_foreign_key "quotes", "users"
   add_foreign_key "site_visits", "companies"
   add_foreign_key "site_visits", "phases"
   add_foreign_key "site_visits", "projects"

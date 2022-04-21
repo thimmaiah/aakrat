@@ -1,4 +1,15 @@
 FactoryBot.define do
+  factory :quote do
+    company { nil }
+    user { nil }
+    client { nil }
+    project_type { "MyString" }
+    scale { "MyString" }
+    style { "MyString" }
+    pattern { "MyString" }
+    services { "MyText" }
+  end
+
   factory :attachment do
     name { "MyString" }
     attached_by { nil }

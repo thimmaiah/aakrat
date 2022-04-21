@@ -22,5 +22,6 @@
   </td>
   <td>
     <%= link_to "Show" , client , {class: "btn btn-primary" }%>
+    <%= link_to "Create Quote" , new_quote_path("quote[client_id]": client.id) , {class: "btn btn-primary"} if client.user_type == "Client" %>
   </td>
 </tr>

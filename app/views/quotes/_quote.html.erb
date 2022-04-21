@@ -1,0 +1,28 @@
+
+
+<tr id="<%= dom_id quote %>">
+  <td>
+    <%= quote.user.full_name %>
+  </td>
+  <td>
+    <%= link_to quote.client.first_name, quote.client %>
+  </td>
+  <td>
+    <%= quote.project_type %>
+  </td>
+  <td>
+    <%= quote.scale %>
+  </td>
+  <td>
+    <%= quote.style %>
+  </td>
+  <td>
+    <%= quote.pattern %>
+  </td>
+  <td>
+    <%= quote.services.join(", ") if quote.services %>
+  </td>
+  <td>
+    <%= link_to "Show" , quote , {class: "btn btn-primary" }%>
+  </td>
+</tr>

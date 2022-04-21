@@ -1,0 +1,47 @@
+<%= render "/layouts/alerts" %>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Quotes</h1>
+  
+</div>
+
+<div class="table-responsive" data-controller="datatable">
+
+  <table id="quotes" class="table table-bordered dataTable">
+    <thead>
+      <tr>
+        <th>
+          User
+        </th>
+        <th>
+          Client
+        </th>
+        <th>
+          Project Type
+        </th>
+        <th>
+          Scale
+        </th>
+        <th>
+          Style
+        </th>
+        <th>
+          Pattern
+        </th>
+        <th>
+          Services
+        </th>
+    
+        <th>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+    <% @quotes.each do |quote| %>
+      <%= render quote %>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>

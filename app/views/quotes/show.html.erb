@@ -1,0 +1,98 @@
+<%= render "/layouts/alerts" %>
+
+  <table class="table table-bordered dataTable">
+
+    <tr>
+      <td>
+        Company
+      </td>
+      <td>
+        <%= @quote.company.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        User
+      </td>
+      <td>
+        <%= @quote.user.full_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Client
+      </td>
+      <td>
+        <%= link_to @quote.client.first_name, @quote.client %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Project Type
+      </td>
+      <td>
+        <%= @quote.project_type %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Scale
+      </td>
+      <td>
+        <%= @quote.scale %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Style
+      </td>
+      <td>
+        <%= @quote.style %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Pattern
+      </td>
+      <td>
+        <%= @quote.pattern %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Services
+      </td>
+      <td>
+        <%= @quote.services.join(", ") if @quote.services %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Details
+      </td>
+      <td>
+        <%= @quote.details %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Attachments
+      </td>
+      <td>
+        <ul>
+          <%= render "/layouts/attachments" , attachments: @quote.attachments %>
+        </ul>
+
+      </td>
+    </tr>
+
+
+  </table>
+
+
+  <div>
+    <%= link_to "Edit" , edit_quote_path(@quote), {class: "btn btn-primary" } %> |
+    <%= button_to "Delete" , @quote, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+  </div>

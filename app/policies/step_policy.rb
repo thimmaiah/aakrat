@@ -7,7 +7,7 @@ class StepPolicy < ApplicationPolicy
         scope.where(company_id: user.company_id)
       else
         scope.joins(project: :project_accesses).visible_to_client
-             .where("project_accesses.user_id=? and project_accesses.role_name in (?)", user.id, %w[Client Contractor Accountant])
+             .merge(ProjectAccess.for(user, %w[Client Contractor Accountant]))
       end
     end
   end

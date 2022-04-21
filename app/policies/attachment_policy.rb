@@ -7,7 +7,7 @@ class AttachmentPolicy < ApplicationPolicy
         scope.where(company_id: user.company_id)
       else
         scope.joins(project: :project_accesses).visible_to_client
-             .where("project_accesses.user_id=? and project_accesses.role_name in (?)", user.id, ["Client"])
+             .merge(ProjectAccess.for(user, %w[Client]))
       end
     end
   end

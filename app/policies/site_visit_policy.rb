@@ -9,7 +9,7 @@ class SiteVisitPolicy < ApplicationPolicy
         scope.where(assigned_to_id: user.id)
       else
         scope.joins(project: :project_accesses)
-             .where("project_accesses.user_id=? and project_accesses.role_name in (?)", user.id, %w[Client Contractor])
+             .merge(ProjectAccess.for(user, %w[Client Contractor]))
       end
     end
   end

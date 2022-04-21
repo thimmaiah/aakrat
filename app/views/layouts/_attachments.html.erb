@@ -1,3 +1,4 @@
+<% allow_delete ||= "Yes" %>
 <ul>
     <% attachments.each do |file| %>
       <li>
@@ -5,7 +6,7 @@
           <i class="fas fa-download"></i>
           <%= file.filename.to_s.capitalize %>
         <% end %>
-        <% if policy(file.record).update? %>
+        <% if policy(file.record).update? && allow_delete == "Yes" %>
           <%= button_to delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" do %>
             <i class="fas fa-trash-alt"></i>                
           <% end %>

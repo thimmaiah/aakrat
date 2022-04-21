@@ -340,3 +340,14 @@ div.divider {
     width: 100%;
   }
 }
+
+.close-icon {
+  margin-top: 10px;  
+  .filename {
+    margin-top: 5px;
+  }  
+  .btn-sm {
+    float: right !important;
+    margin-right: 10px;
+  }
+}

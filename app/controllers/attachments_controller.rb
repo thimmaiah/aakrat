@@ -3,7 +3,7 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments or /attachments.json
   def index
-    @attachments = policy_scope(Attachment)
+    @attachments = policy_scope(Attachment).with_attached_attachments.includes(attachments: :blob)
   end
 
   # GET /attachments/1 or /attachments/1.json
@@ -21,7 +21,9 @@ class AttachmentsController < ApplicationController
   end
 
   # GET /attachments/1/edit
-  def edit; end
+  def edit
+    @attachment.approval_status = params[:approval_status] if params[:approval_status]
+  end
 
   # POST /attachments or /attachments.json
   def create
@@ -72,7 +74,11 @@ class AttachmentsController < ApplicationController
   end
 
   def toggle_approval
-    @attachment.approval_status = @attachment.approval_status == "Approved" ? "Rejected" : "Approved"
+    @attachment.approval_status = if params[:approval_status].present?
+                                    params[:approval_status]
+                                  else
+                                    (@attachment.approval_status == "Approved" ? "Rejected" : "Approved")
+                                  end
     @attachment.save
     respond_to do |format|
       format.turbo_stream do

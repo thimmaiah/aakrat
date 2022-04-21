@@ -5,6 +5,9 @@
     <%= attachment.name %>
   </td>
   <td>
+    <%= render "/layouts/attachments", attachments: attachment.attachments, allow_delete: "No" %>
+  </td>
+  <td>
     <%= attachment.attached_by.full_name %>
   </td>
   <td>
@@ -22,9 +25,8 @@
     <%= link_to "Show" , attachment , {class: "btn btn-primary" }%>
     <%= button_to "Delete" , attachment_path(attachment) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <% if policy(attachment).toggle_approval? %>
-      <% approved = (attachment.approval_status == "Approved") ?  "Reject" : "Approve" %>
-      <% approve_btn_color = (attachment.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
-      <%= button_to approved , toggle_approval_attachment_path(attachment) , {class: "btn #{approve_btn_color}", method: :patch }%>
+      <%= button_to "Approve" , toggle_approval_attachment_path(attachment, approval_status: "Approved") , {class: "btn btn-success", method: :patch }%>
+      <%= link_to "Reject" , edit_attachment_path(attachment, approval_status: "Rejected") , {class: "btn btn-warning" }%> 
     <% end %>
   </td>
 </tr>

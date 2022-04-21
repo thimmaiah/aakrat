@@ -3,6 +3,13 @@
       <% if file.image? %>
       <div class="col-lg-6 mb-4">
         <div class="card shadow mb-4">
+          <span class="close-icon text-center" data-effect="fadeOut">
+            <span class="alert alert-info"><%= file.filename %> </span> 
+            <%= button_to delete_attachment_projects_path(attachment_id: file.id), class: "btn-sm btn-danger" do %>
+              <i class="fas fa-trash-alt"></i>                
+            <% end %>
+          </span>
+          
           <div class="card-body site_visit_image">
             <%= image_tag url_for(file) %>
           </div>

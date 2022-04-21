@@ -38,6 +38,7 @@ gem 'dotenv-rails'
 gem 'exception_notification'
 gem 'sassc-rails'
 gem 'sidekiq', '~> 6.4'
+gem "nokogiri", ">= 1.13.4"
 
 gem "aws-sdk-s3", require: false
 gem 'thinking-sphinx', '~> 5.4'

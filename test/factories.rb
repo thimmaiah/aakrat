@@ -1,4 +1,15 @@
 FactoryBot.define do
+  factory :attachment do
+    name { "MyString" }
+    attached_by { nil }
+    approval_status { "MyString" }
+    approved_by { nil }
+    company { nil }
+    project { nil }
+    phase { nil }
+    step { nil }
+  end
+
   factory :site_visit do
     company { Company.all.sample }
     project { company.projects.sample }

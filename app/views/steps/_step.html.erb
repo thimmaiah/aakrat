@@ -50,7 +50,7 @@
   
   <td>
     <% if policy(step).update? %>
-      <%= link_to "Edit" , edit_step_path(step, quick_entry: true), {class: "btn btn-primary", data: { turbo_frame: 'step_quick_entry' } } %>
+      <%= link_to "Quick Edit" , edit_step_path(step, quick_entry: true), {class: "btn btn-primary", data: { turbo_frame: 'step_quick_entry' } } %>
       <%= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
 
       <% label = step.completed ? "Incomplete" : "Completed" %>

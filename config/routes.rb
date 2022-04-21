@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :attachments do
+    patch 'toggle_approval', on: :member
+  end
   resources :site_visits
   resources :project_accesses
   resources :clients

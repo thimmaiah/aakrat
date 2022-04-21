@@ -1,0 +1,30 @@
+
+
+<tr id="<%= dom_id attachment %>">
+  <td>
+    <%= attachment.name %>
+  </td>
+  <td>
+    <%= attachment.attached_by.full_name %>
+  </td>
+  <td>
+    <span class="badge <%= attachment.approval_status == 'Approved' ? 'bg-success' : 'bg-danger' %>">
+      <%= attachment.approval_status %>
+    </span> 
+  </td>
+  <td>
+    <%= attachment.approved_by.full_name if attachment.approved_by  %>
+  </td>
+  <td>
+    <%= attachment.step.name %>
+  </td>
+  <td>
+    <%= link_to "Show" , attachment , {class: "btn btn-primary" }%>
+    <%= button_to "Delete" , attachment_path(attachment) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
+    <% if policy(attachment).toggle_approval? %>
+      <% approved = (attachment.approval_status == "Approved") ?  "Reject" : "Approve" %>
+      <% approve_btn_color = (attachment.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
+      <%= button_to approved , toggle_approval_attachment_path(attachment) , {class: "btn #{approve_btn_color}", method: :patch }%>
+    <% end %>
+  </td>
+</tr>

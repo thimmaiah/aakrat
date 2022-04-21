@@ -1,0 +1,39 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Attachments</h1>
+    <%= link_to "New Attachment", new_attachment_path("attachment[step_id]": @step.id), 
+            {class: "btn btn-primary"} if @step  %>
+</div>
+  
+<div class="table-responsive" data-controller="datatable">
+
+    <table id="attachments" class="table table-bordered dataTable">
+      <thead>
+        <tr>
+          <th>
+            Name
+          </th>
+          <th>
+            Attached By
+          </th>
+          <th>
+            Approval Status
+          </th>
+          <th>
+            Approved By
+          </th>
+          <th>
+            Step
+          </th>
+      
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% attachments.each do |attachment| %>
+        <%= render attachment %>
+      <% end %>
+      </tbody>
+    </table>
+  
+  </div>

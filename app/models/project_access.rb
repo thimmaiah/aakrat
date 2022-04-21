@@ -1,5 +1,5 @@
 class ProjectAccess < ApplicationRecord
-  ROLES = { "Client" => :client, "Accountant" => :accountant, "Contractor" => :contractor }.freeze
+  ROLES = %w[Client Accountant Contractor].freeze
 
   belongs_to :company
   belongs_to :user
@@ -10,10 +10,10 @@ class ProjectAccess < ApplicationRecord
   after_destroy :delete_role
   after_save :set_role
   def set_role
-    user.add_role role_name.to_sym, project
+    user.add_role role_name.downcase.to_sym, project
   end
 
   def delete_role
-    user.remove_role role_name.to_sym, project
+    user.remove_role role_name.downcase.to_sym, project
   end
 end

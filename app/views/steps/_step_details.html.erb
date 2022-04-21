@@ -3,19 +3,29 @@
         <% if policy(:note).index? %>
             <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
         <% end %>
+        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#attachments-tab">Attachments</a>
+
     </nav>
 
-
-    <% if policy(:note).index? %>
-
     <div class="tab-content">
-        <div id="notes-tab" class="tab-pane fade show active">
-            <div id="notes" class="associated_entity">
-                <%= render "/notes/index" , notes: step.notes %>
+
+        <% if policy(:note).index? %>
+
+            <div id="notes-tab" class="tab-pane fade show active">
+                <div id="notes" class="associated_entity">
+                    <%= render "/notes/index" , notes: step.notes %>
+                </div>
+            </div>
+
+        <% end %>
+
+        <div id="attachments-tab" class="tab-pane fade">
+            <div id="attachments" class="associated_entity">
+                <%= render "/attachments/index" , attachments: step.client_attachments %>
             </div>
         </div>
+
     </div>
 
-    <% end %>
 
 </div>

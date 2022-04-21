@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_20_110232) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_21_021439) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -61,6 +61,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_110232) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.bigint "attached_by_id", null: false
+    t.string "approval_status", limit: 10
+    t.bigint "approved_by_id"
+    t.bigint "company_id", null: false
+    t.bigint "project_id", null: false
+    t.bigint "phase_id", null: false
+    t.bigint "step_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approved_by_id"], name: "index_attachments_on_approved_by_id"
+    t.index ["attached_by_id"], name: "index_attachments_on_attached_by_id"
+    t.index ["company_id"], name: "index_attachments_on_company_id"
+    t.index ["phase_id"], name: "index_attachments_on_phase_id"
+    t.index ["project_id"], name: "index_attachments_on_project_id"
+    t.index ["step_id"], name: "index_attachments_on_step_id"
   end
 
   create_table "clients", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -364,6 +383,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_20_110232) do
   end
 
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attachments", "companies"
+  add_foreign_key "attachments", "phases"
+  add_foreign_key "attachments", "projects"
+  add_foreign_key "attachments", "steps"
+  add_foreign_key "attachments", "users", column: "approved_by_id"
+  add_foreign_key "attachments", "users", column: "attached_by_id"
   add_foreign_key "clients", "companies"
   add_foreign_key "clients", "users"
   add_foreign_key "notes", "companies"

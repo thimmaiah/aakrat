@@ -1,0 +1,72 @@
+<%= render "/layouts/alerts" %>
+
+<table class="table table-bordered dataTable">
+
+          <tr>
+        <td>
+          Name
+        </td>
+        <td>
+          <%= @attachment.name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Attached By
+        </td>
+        <td>
+          <%= @attachment.attached_by.full_name %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Approval Status
+        </td>
+        <td>
+          <%= @attachment.approval_status %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Approved By
+        </td>
+        <td>
+          <%= @attachment.approved_by&.full_name  %>
+        </td>    
+      </tr>
+         
+          <tr>
+        <td>
+          Project
+        </td>
+        <td>
+          <%= link_to @attachment.project.name, @attachment.project %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Phase
+        </td>
+        <td>
+          <%= link_to @attachment.phase.name, @attachment.phase %>
+        </td>    
+      </tr>
+          <tr>
+        <td>
+          Step
+        </td>
+        <td>
+          <%= link_to @attachment.step.name, @attachment.step %>
+        </td>    
+      </tr>
+    
+  
+</table>
+
+
+<div>
+  <%= link_to "Edit", edit_attachment_path(@attachment), {class: "btn btn-primary"} %> |
+  <%= link_to "Back", :back, {class: "btn btn-primary"} %> |
+
+  <%= button_to "Delete", @attachment, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
+</div>

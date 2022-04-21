@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
   # GET /clients or /clients.json
   def index
     @clients = policy_scope(Client)
+    @clients = @clients.where(user_id: params[:user_id]) if params[:user_id]
   end
 
   # GET /clients/1 or /clients/1.json

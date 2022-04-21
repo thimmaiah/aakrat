@@ -6,11 +6,13 @@ namespace :vk do
   
   desc "generates fake Company for testing"
   task generateFakeCompanies: :environment do
+    user_count = 1
     (1..3).each do 
       e = FactoryBot.create(:company, company_type: "Architect")
       puts "Company #{e.name}"
       (1..2).each do |j|
-        user = FactoryBot.create(:user, company: e, first_name: "Emp#{j}")
+        user = FactoryBot.create(:user, company: e, first_name: "Emp#{user_count}", email: "emp#{user_count}@gmail.com")
+        user_count += 1
         user.add_role(:team_lead)
         puts user.to_json
       end
@@ -27,10 +29,10 @@ namespace :vk do
 
   desc "generates fake Users for testing"
   task generateFakeUsers: :environment do
-    (1..10).each do 
-      u = FactoryBot.create(:user)
-      u.add_role([:client, :contractor][rand(2)])  
-      
+    (1..10).each do |i|
+      role = [:client, :contractor][rand(2)]
+      u = FactoryBot.create(:user, email: "#{role}#{i}@yahoo.com")
+      u.add_role(role)        
       puts u.to_json
     end
   rescue Exception => e

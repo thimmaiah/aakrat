@@ -8,7 +8,14 @@ export default class extends Controller {
         $(document).on('turbo:load', function () {
             $("#project_client_name").autocomplete({
                 source: "/clients/search.json",
-                minLength: 2,
+                minLength: 3,
+                response: function( event, ui ) {
+                    console.log(ui.content);
+                    if(ui.content.length == 0) {
+                        alert("No results found for this client name");
+                        $("#project_client_name").val("");
+                    }
+                },
                 select: function (event, ui) {
                     ui.item.label = ui.item.full_name;                
                     $("#project_client_id").val(ui.item.user_id);

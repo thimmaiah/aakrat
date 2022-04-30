@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_21_152129) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_30_031503) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -245,6 +245,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_21_152129) do
     t.decimal "fees_cents", precision: 20, scale: 2, default: "0.0"
     t.decimal "percentage_of_estimated_budget", precision: 5, scale: 2, default: "0.0"
     t.decimal "per_sq_ft_rate_cents", precision: 10, scale: 2, default: "0.0"
+    t.string "fee_type", limit: 20
+    t.string "project_type", limit: 30
+    t.string "scale", limit: 20
+    t.string "style", limit: 30
+    t.string "pattern", limit: 30
+    t.text "services"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"

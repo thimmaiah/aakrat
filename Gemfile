@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.1"
+ruby "3.1.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -36,9 +36,9 @@ gem "rolify"
 
 gem 'dotenv-rails'
 gem 'exception_notification'
+gem "nokogiri", ">= 1.13.4"
 gem 'sassc-rails'
 gem 'sidekiq', '~> 6.4'
-gem "nokogiri", ">= 1.13.4"
 
 gem "aws-sdk-s3", require: false
 gem 'thinking-sphinx', '~> 5.4'

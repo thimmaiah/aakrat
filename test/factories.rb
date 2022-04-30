@@ -41,11 +41,18 @@ FactoryBot.define do
 
 
   factory :client do
-    user { User.clients.sample }
-    first_name { user.first_name }
-    last_name { user.last_name }
-    email { user.email }
-    phone { user.phone }
+    if User.clients.count > 0
+    user { User.clients.sample  }
+      first_name { user.first_name }
+      last_name { user.last_name }
+      email { user.email }
+      phone { user.phone }
+    else
+      first_name { Faker::Name.first_name }
+      last_name  { Faker::Name.last_name }
+      email { company ? "#{first_name.downcase}@#{company.name.parameterize}.com" : Faker::Internet.email }
+      phone { Faker::PhoneNumber.cell_phone }      
+    end
     user_type { Client::TYPES[rand(Client::TYPES.length)]}
     company { nil }
   end
@@ -89,6 +96,7 @@ FactoryBot.define do
     end_date { Time.zone.today + rand(10).days + rand(24).months }
     client_estimated_budget { (rand(100) + rand(100) ) * 100_000 }
     estimated_builtup_area { (rand(5) + 1)*1000 }
+    actual_builtup_area { estimated_builtup_area }
     percentage_of_estimated_budget { (rand(2) + 1)*10 }
     percentage_completed { rand(100) }
     status { Project::STATUS[rand(Project::STATUS.length)] }

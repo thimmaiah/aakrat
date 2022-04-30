@@ -4,6 +4,7 @@ class ClientsController < ApplicationController
   # GET /clients or /clients.json
   def index
     @clients = policy_scope(Client)
+    @clients = @clients.where(user_type: params[:user_type]) if params[:user_type]
     @clients = @clients.where(user_id: params[:user_id]) if params[:user_id]
   end
 
@@ -12,7 +13,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/new
   def new
-    @client = Client.new
+    @client = Client.new(client_params)
     @client.company_id = current_user.company_id
     authorize @client
   end

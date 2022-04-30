@@ -8,11 +8,11 @@ Scenario Outline: Login Successfully
   Then I should see the "<msg>"
 
   Examples:
-  	|user	              |company               |msg	|
-  	|  	                |company_type=VC       |Signed in successfully|
-    |  	                |company_type=Startup  |Signed in successfully|
-    |accept_terms=false |company_type=Startup  |Please accept the Terms and Conditions|
-    |system_created=true|company_type=Startup  |Please change your password at the earliest|
+  	|user	              |company                 |msg	|
+  	|  	                |company_type=Architect  |Signed in successfully|
+    |  	                |company_type=Architect  |Signed in successfully|
+    |accept_terms=false |company_type=Architect  |Please accept the Terms and Conditions|
+    |system_created=true|company_type=Architect  |Please change your password at the earliest|
 
 Scenario Outline: Login Successfully
   Given there is a user "<user>"

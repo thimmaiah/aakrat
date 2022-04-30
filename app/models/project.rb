@@ -17,6 +17,9 @@ class Project < ApplicationRecord
   validates :name, :start_date, :end_date, :client_estimated_budget,
             :estimated_builtup_area, presence: true
 
+  serialize :services
+
+  FEE_TYPE = ["% of Budget", "Rate / SqFt"].freeze
   STATUS = ["Not Started", "In Progress", "Completed", "Halted", "Abandoned"].freeze
   PAYMENT_STATUS = ["Not Paid", "Partial Payment", "Paid", "N/A"].freeze
 
@@ -24,7 +27,7 @@ class Project < ApplicationRecord
            :actual_cost_cents, :fees_cents, :per_sq_ft_rate_cents, with_model_currency: :currency
 
   def percentage_completed_days
-    completed_days * 100.0 / total_days
+    total_days.positive? ? completed_days * 100.0 / total_days : 0
   end
 
   before_save :set_fees

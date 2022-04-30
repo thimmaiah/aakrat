@@ -13,7 +13,7 @@
 
     <tr>
       <td>
-        Name
+        Project Name
       </td>
       <td>
         <%= @project.name %>
@@ -35,6 +35,48 @@
         <%= l @project.end_date %>
       </td>
     </tr>
+
+    <tr>
+      <td>
+        Project Type
+      </td>
+      <td>
+        <%= @project.project_type %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Scale
+      </td>
+      <td>
+        <%= @project.scale %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Style
+      </td>
+      <td>
+        <%= @project.style %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Pattern
+      </td>
+      <td>
+        <%= @project.pattern %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Services
+      </td>
+      <td>
+        <%= @project.services.join(", ") if @project.services %>
+      </td>
+    </tr>
+
     <tr>
       <td>
         Client Budget Estimate
@@ -71,7 +113,16 @@
       </td>
     </tr>
 
-    <% if  @project.percentage_of_estimated_budget > 0 %>
+    <tr>
+      <td>
+        Fees Type
+      </td>
+      <td>
+        <%=  @project.fee_type %> 
+      </td>
+    </tr>
+
+    <% if  @project.fee_type == "% of Budget" %>
     <tr>
       <td>
         Fees as % of Budget
@@ -80,9 +131,7 @@
         <%=  @project.percentage_of_estimated_budget %> %
       </td>
     </tr>
-    <% end %>
-
-    <% if  @project.per_sq_ft_rate > 0 %>
+    <% elsif  @project.fee_type == "Rate / SqFt" %>
     <tr>
       <td>
         Fees as Rate per SqFt

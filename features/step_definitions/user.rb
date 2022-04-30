@@ -56,3 +56,10 @@
       @created_user.has_cached_role?(role.to_sym).should == true
     end
   end
+
+
+  Given('I have the role {string}') do |role|
+    @user.add_role(role)
+  end
+  
+  

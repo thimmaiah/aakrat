@@ -11,8 +11,8 @@ Scenario Outline: View sale - not externally visible
 
   Examples:
   	|user	    |company               |sale             |msg	|
-  	|  	        |company_type=Startup  |name=Grand Sale  |Secondary sale was successfully created|
-    |  	        |company_type=Startup  |name=Winter Sale |Secondary sale was successfully created|
+  	|  	        |company_type=Architect  |name=Grand Sale  |Secondary sale was successfully created|
+    |  	        |company_type=Architect  |name=Winter Sale |Secondary sale was successfully created|
 
 
 
@@ -26,8 +26,8 @@ Scenario Outline: View sale - externally visible, but no access
 
   Examples:
   	|user	    |company               |sale                                     |msg	|
-  	|  	        |company_type=Startup  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
-    |  	        |company_type=Startup  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|
+  	|  	        |company_type=Architect  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
+    |  	        |company_type=Architect  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|
 
 Scenario Outline: View sale - externally visible, with access
   Given there is a user "<user>" for an company "<company>"
@@ -40,8 +40,8 @@ Scenario Outline: View sale - externally visible, with access
 
   Examples:
   	|user	    |company               |sale                                     |msg	|
-  	|  	        |company_type=Startup  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
-    |  	        |company_type=Startup  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|
+  	|  	        |company_type=Architect  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
+    |  	        |company_type=Architect  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|
 
 
 Scenario Outline: View sale - make offer
@@ -63,5 +63,5 @@ Scenario Outline: View sale - make offer
 
   Examples:
   	|user	    |company               |sale                                     |msg	|
-  	|  	        |company_type=Startup  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
-    |  	        |company_type=Startup  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|
+  	|  	        |company_type=Architect  |name=Grand Sale;visible_externally=true  |Secondary sale was successfully created|
+    |  	        |company_type=Architect  |name=Winter Sale;visible_externally=true |Secondary sale was successfully created|

@@ -2,7 +2,7 @@
 
 MoneyRails.configure do |config|
   # To set the default currency
-  # config.default_currency = ENV['DEFAULT_CURRENCY'].to_sym
+  config.default_currency = ENV['DEFAULT_CURRENCY'].to_sym
 
   # Add exchange rates to current money bank object.
   # (The conversion rate refers to one direction only)

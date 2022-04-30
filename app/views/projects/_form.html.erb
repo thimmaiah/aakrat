@@ -14,10 +14,11 @@
   <div class="form-group">
     <%= form.label :client_id, "Client" %>
     <%= form.select :client_id, current_user.company.clients.collect(&:user).map{|u| [u.full_name, u.id]}, {}, {class: "form-control"} %>
+    <small class=class="text-muted">Click to create <%= link_to "New Client", new_client_path("client[user_type]": "Client") %></small>
   </div>
 
   <div class="form-group">
-    <%= form.label :name %>
+    <%= form.label :name, "Project Name" %>
     <%= form.text_field :name, class: "form-control"  %>
   </div>
 
@@ -31,6 +32,33 @@
     <%= form.date_field :end_date, class: "form-control"  %>
   </div>
 
+
+  <div class="form-group">
+    <%= form.label :project_type %>
+    <%= form.select :project_type, ENV["PROJECT_TYPES"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :scale %>
+    <%= form.select :scale, ENV["SCALE"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :style %>
+    <%= form.select :style, ENV["STYLES"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :pattern %>
+    <%= form.select :pattern, ENV["PATTERNS"].split(","), {}, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :services %>
+    <%= form.select :services, ENV["SERVICES"].split(","), {include_blank: false, include_hidden: false}, 
+        class: "form-control select2", multiple: "multiple"  %>
+  </div>
+  
   <div class="form-group">
     <%= form.label :client_estimated_budget %>
     <%= form.number_field :client_estimated_budget, class: "form-control"  %>
@@ -46,14 +74,22 @@
     <%= form.number_field :actual_builtup_area, class: "form-control"  %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :percentage_of_estimated_budget, "Fee as % of Budget" %>
-    <%= form.number_field :percentage_of_estimated_budget, class: "form-control"  %>
-  </div>
+  <div data-controller="fee">
+    <div class="form-group">
+      <%= form.label :fee_type %>
+      <%= form.select :fee_type, Project::FEE_TYPE, {}, class: "form-control",
+          "data-action": "change->fee#onChange" %>
+    </div>
 
-  <div class="form-group">
-    <%= form.label :per_sq_ft_rate, "Fee as Rate per SqFt " %>
-    <%= form.number_field :per_sq_ft_rate, class: "form-control"  %>
+    <div class="form-group" id="percentage_fee">
+      <%= form.label :percentage_of_estimated_budget, "Fee as % of Budget" %>
+      <%= form.number_field :percentage_of_estimated_budget, class: "form-control"  %>
+    </div>
+
+    <div class="form-group" id="per_sqft_fee">
+      <%= form.label :per_sq_ft_rate, "Fee as Rate / SqFt " %>
+      <%= form.number_field :per_sq_ft_rate, class: "form-control"  %>
+    </div>
   </div>
 
   <div class="form-group">

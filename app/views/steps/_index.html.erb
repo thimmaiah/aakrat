@@ -1,7 +1,12 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Steps</h1>
-    <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), 
+
+    <span>
+        <%= render "/steps/status_filter" %>
+    
+        <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), 
                     {class: "btn btn-primary" } if @phase %> 
+    </span>
 </div>
 
 <% if @phase %>

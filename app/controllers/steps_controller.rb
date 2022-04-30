@@ -4,8 +4,10 @@ class StepsController < ApplicationController
   # GET /steps or /steps.json
   def index
     @steps = policy_scope(Step)
-    @steps = @steps.where(assigned_to: params[:user_id], completed: false) if params[:user_id]
-    @steps = @steps.order(start_date: :asc)
+    @steps = @steps.where(assigned_to: params[:user_id]) if params[:user_id].present?
+    @steps = @steps.where(completed: params[:completed].strip == "Yes") if params[:completed].present?
+
+    @steps = @steps.order(start_date: :asc).limit(50)
   end
 
   # GET /steps/1 or /steps/1.json

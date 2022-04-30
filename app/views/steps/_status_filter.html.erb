@@ -1,10 +1,10 @@
-<%= form_with(model: nil, method: :get, action: "", id: "project_status_form") do |form| %>
+<%= form_with(model: nil, method: :get, action: "", id: "step_completed_form") do |form| %>
 
   <div class="form-group" data-controller="step">
-    <% selected = params[:status].present? ? params[:status] : cookies[:project_status] %>
-    <%= form.select :status, Project::STATUS, {selected: selected, include_blank: "Any Status"}, 
-        { id: "project_status", class: "form-control", 
-        data: { action: "change->project#setStatus", toggle: "tooltip", title: "Choose Project Status" } } %>
+    <% selected = params[:completed].present? ? params[:completed] : cookies[:step_completed] %>
+    <%= form.select :completed, [["Completed", "Yes"], ["Not Completed", "No"]], {selected: selected, include_blank: "Any Status"}, 
+        { id: "step_completed", class: "form-control", 
+        data: { action: "change->step#setStatus", toggle: "tooltip", title: "Choose Step Status" } } %>
   </div>
 
   

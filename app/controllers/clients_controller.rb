@@ -1,11 +1,18 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show edit update destroy]
+  after_action :verify_authorized, except: %i[index search]
 
   # GET /clients or /clients.json
   def index
     @clients = policy_scope(Client)
     @clients = @clients.where(user_type: params[:user_type]) if params[:user_type]
     @clients = @clients.where(user_id: params[:user_id]) if params[:user_id]
+  end
+
+  def search
+    @clients = Client.search(params[:term], star: true, with: { company_id: current_user.company_id })
+    Rails.logger.debug @clients.to_json
+    render "index"
   end
 
   # GET /clients/1 or /clients/1.json

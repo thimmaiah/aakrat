@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   end
   resources :site_visits
   resources :project_accesses
-  resources :clients
+  resources :clients do
+    get 'search', on: :collection
+  end
+
   resources :steps do
     patch 'toggle_completed', on: :member
   end

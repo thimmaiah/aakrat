@@ -3,6 +3,19 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     connect() {
         console.log("project connect");
+
+
+        $(document).on('turbo:load', function () {
+            $("#project_client_name").autocomplete({
+                source: "/clients/search.json",
+                minLength: 2,
+                select: function (event, ui) {
+                    ui.item.label = ui.item.full_name;                
+                    $("#project_client_id").val(ui.item.user_id);
+                }
+            });
+        });
+
     }
 
 

@@ -77,6 +77,9 @@
       </td>
       <td>
         <%= number_with_precision @phase.percentage_completed_days, precision: 2 %> %
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:<%=@phase.percentage_completed_days%>%" aria-valuenow="<%=@phase.percentage_completed_days%>" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
       </td>
     </tr>
 

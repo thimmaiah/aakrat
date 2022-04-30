@@ -19,6 +19,9 @@
   </td>
   <td>
     <%= number_with_precision project.percentage_completed_days, precision: 2 %> %
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <%=project.percentage_completed_days%>%" aria-valuenow="<%=project.percentage_completed_days%>" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
   </td>
   <td>
     <span class="badge <%= status_badge(project) %>">

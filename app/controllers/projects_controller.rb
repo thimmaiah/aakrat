@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @projects = policy_scope(Project)
+    @projects = @projects.where(status: params[:status]) if params[:status].present?
   end
 
   # GET /projects/1 or /projects/1.json

@@ -35,7 +35,9 @@
         <%= l @project.end_date %>
       </td>
     </tr>
-
+    <tr>
+      <td colspan="2" class="bg-info"></td>
+    </tr>
     <tr>
       <td>
         Project Type
@@ -76,7 +78,10 @@
         <%= @project.services.join(", ") if @project.services %>
       </td>
     </tr>
-
+    <tr>
+      <td colspan="2" class="bg-info"></td>
+    </tr>
+    
     <tr>
       <td>
         Client Budget Estimate
@@ -163,21 +168,29 @@
       </td>
     </tr>
 
-
     <tr>
-      <td>
-        Percentage Completed
-      </td>
-      <td>
-        <%= number_with_precision @project.percentage_completed_days, precision: 2 %> %
-      </td>
+      <td colspan="2" class="bg-info"></td>
     </tr>
+    
+    
     <tr>
       <td>
         Status
       </td>
       <td>
         <%= @project.status %>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+        Percentage Completed
+      </td>
+      <td>
+        <%= number_with_precision @project.percentage_completed_days, precision: 2 %> %
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <%=@project.percentage_completed_days%>%" aria-valuenow="<%=@project.percentage_completed_days%>" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
       </td>
     </tr>
     

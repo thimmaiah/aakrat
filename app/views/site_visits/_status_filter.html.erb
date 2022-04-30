@@ -1,0 +1,14 @@
+<%= form_with(model: nil, method: :get, action: "", id: "site_visit_completed_form") do |form| %>
+
+  <div class="form-group" data-controller="sitevisit">
+    <% selected = params[:completed].present? ? params[:completed] : cookies[:site_visit_completed] %>
+    <%= form.select :completed, [["Completed", "Yes"], ["Not Completed", "No"]], {selected: selected, include_blank: "Any Status"}, 
+        { id: "site_visit_completed", class: "form-control", 
+        data: { action: "change->sitevisit#setStatus", toggle: "tooltip", title: "Choose Visit Status" } } %>
+  </div>
+
+  
+  <%= form.submit "Submit", {hidden: true, id: "submit"}%>
+
+
+<% end %>

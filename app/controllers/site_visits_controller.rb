@@ -4,6 +4,7 @@ class SiteVisitsController < ApplicationController
   # GET /site_visits or /site_visits.json
   def index
     @site_visits = policy_scope(SiteVisit).includes(:project, :phase, :assigned_to)
+    @site_visits = @site_visits.where(completed: params[:completed] == "Yes") if params[:completed].present?
   end
 
   # GET /site_visits/1 or /site_visits/1.json

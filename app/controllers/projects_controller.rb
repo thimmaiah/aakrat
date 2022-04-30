@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    @project = Project.new
+    @project = Project.new(project_params)
     @project.company_id = current_user.company_id
     @project.team_lead_id = current_user.id
 

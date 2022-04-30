@@ -50,6 +50,12 @@
     </div>
   <% end %>
 
+    <div class="form-group" >
+      <%= form.select :role_ids, Role.where("name <> 'Super'").all.map{|r|[r.name.humanize, r.id]}, {include_blank: false, include_hidden: false}, 
+          class: "form-control select2", multiple: "multiple"  %>
+    </div>
+
+
   <%= form.text_field :company_id, class: "form-control", hidden: true %>
 
 

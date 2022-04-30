@@ -23,5 +23,6 @@
   <td>
     <%= link_to "Show" , client , {class: "btn btn-primary" }%>
     <%= link_to "Create Quote" , new_quote_path("quote[client_id]": client.id) , {class: "btn btn-primary"} if client.user_type == "Client" %>
+    <%= link_to "New Project" , new_project_path("project[client_id]": client.user_id) , {class: "btn btn-primary"} if client.user_type == "Client" %>
   </td>
 </tr>

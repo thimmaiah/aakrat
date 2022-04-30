@@ -59,7 +59,7 @@
             Roles
           </td>
           <td>
-            <%=@user.roles.collect(&:name).join(", ") %>
+            <%=@user.roles.collect(&:name).map(&:humanize).join(", ") %>
           </td>
         </tr>
 

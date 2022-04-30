@@ -3,6 +3,7 @@ class User < ApplicationRecord
   ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
 
   rolify
+  accepts_nested_attributes_for :roles, allow_destroy: true, reject_if: :all_blank
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

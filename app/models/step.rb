@@ -1,4 +1,7 @@
 class Step < ApplicationRecord
+  # Make all models searchable
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
+
   belongs_to :project
   belongs_to :company
   belongs_to :phase

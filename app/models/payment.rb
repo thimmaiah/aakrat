@@ -16,6 +16,8 @@
 
 class Payment < ApplicationRecord
   include Trackable
+  # Make all models searchable
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
 
   STATUS = %w[Pending Received Confirmed Overdue Defaulted].freeze
 

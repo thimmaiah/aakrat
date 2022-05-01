@@ -12,6 +12,10 @@ export default class extends Controller {
   onChange(event) {
     console.log("onChange");
     console.log("change");
+    // Clear the values
+    $('#project_percentage_of_estimated_budget').val(0);
+    $('#project_per_sq_ft_rate').val(0);
+
     let selected = $("#project_fee_type").val();
     switch (selected) {
       case "% of Budget":

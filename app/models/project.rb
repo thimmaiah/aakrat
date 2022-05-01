@@ -1,5 +1,7 @@
 class Project < ApplicationRecord
   resourcify
+  # Make all models searchable
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
 
   belongs_to :company
   belongs_to :client, class_name: "User"

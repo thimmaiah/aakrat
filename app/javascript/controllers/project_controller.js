@@ -14,7 +14,7 @@ export default class extends Controller {
                     if(ui.content.length == 0) {
                         alert("No results found for this client name");
                         $("#project_client_name").val("");
-                    }
+                    } 
                 },
                 select: function (event, ui) {
                     ui.item.label = ui.item.full_name;                

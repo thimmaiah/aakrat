@@ -1,4 +1,7 @@
 class Quote < ApplicationRecord
+  # Make all models searchable
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
+
   belongs_to :company
   belongs_to :user
   belongs_to :client

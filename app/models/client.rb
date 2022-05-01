@@ -1,4 +1,7 @@
 class Client < ApplicationRecord
+  # Make all models searchable
+  ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
+
   TYPES = %w[Client Accountant Contractor].freeze
 
   belongs_to :user

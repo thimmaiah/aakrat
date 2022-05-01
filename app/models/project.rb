@@ -35,9 +35,17 @@ class Project < ApplicationRecord
   before_save :set_fees
   def set_fees
     if per_sq_ft_rate.positive?
-      self.fees = per_sq_ft_rate * estimated_builtup_area
+      self.fees = per_sq_ft_rate * estimated_builtup_area * (1 - (discount / 100.0))
     elsif percentage_of_estimated_budget.positive?
-      self.fees = percentage_of_estimated_budget * client_estimated_budget / 100.0
+      self.fees = percentage_of_estimated_budget * client_estimated_budget * (1 - (discount / 100.0)) / 100.0
+    end
+  end
+
+  def gross_fees
+    if per_sq_ft_rate.positive?
+      per_sq_ft_rate * estimated_builtup_area
+    elsif percentage_of_estimated_budget.positive?
+      percentage_of_estimated_budget * client_estimated_budget / 100.0
     end
   end
 

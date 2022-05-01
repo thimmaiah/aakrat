@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_105233) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_01_111135) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -253,6 +253,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_105233) do
     t.string "pattern", limit: 30
     t.text "services"
     t.text "address"
+    t.decimal "discount", precision: 5, scale: 2, default: "0.0"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"

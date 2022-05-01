@@ -159,10 +159,21 @@
     
     <tr>
       <td>
+        Discount
+      </td>
+      <td>
+        <%= @project.discount %> %
+      </td>
+    </tr>
+
+    <tr>
+      <td>
         Fees
       </td>
       <td>
-        <%= money_to_currency @project.fees, params %>
+        <div>Gross: <%= money_to_currency @project.gross_fees, params %></div>
+        <div>Discount: <%= @project.discount %> %</div>
+        <div>Actual: <%= money_to_currency @project.fees, params %></div>
       </td>
     </tr>
 

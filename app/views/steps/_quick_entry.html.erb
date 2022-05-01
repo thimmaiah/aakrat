@@ -3,6 +3,8 @@
 <%= form_with(model: step, class: "form-inline", validate: true) do |form| %>
   <% if step.id.present? %>
     <span class="alert alert-info">Editing <%= step.name %></span>
+  <% else %>
+    <span class="alert alert-info">Add New Step</span>
   <% end %>
   
   <div class="form-row">

@@ -49,7 +49,9 @@ class Payment < ApplicationRecord
   after_save ->(p) { PaymentStatusJob.perform_later(p.id) }
 
   def set_status
-    self.status = "Overdue" if Time.zone.today > due_date
+    self.status = "Overdue" if Time.zone.today > due_date && status == "Pending"
+
+    self.received_on = Time.zone.now if status_changed? && (status == "Received" || status == "Confirmed")
   end
 
   def overdue?

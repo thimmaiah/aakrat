@@ -1,4 +1,4 @@
-
+    <% @phase = @step.phase %>
     <%= turbo_stream.replace("#{dom_id @step}",
         partial: "steps/step", locals: { step: @step }) %>
 

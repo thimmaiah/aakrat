@@ -31,6 +31,12 @@
     <%= form.text_field :phone, class: "form-control"  %>
   </div>
 
+
+  <div class="form-group">
+    <%= form.label :address %>
+    <%= form.text_area :address, class: "form-control"  %>
+  </div>
+
   <div class="form-group">
     <%= form.label :user_type %>
     <%= form.select :user_type, Client::TYPES, {}, class: "form-control"  %>

@@ -115,7 +115,7 @@ class ProjectsController < ApplicationController
                                     :estimated_builtup_area, :actual_builtup_area,
                                     :actual_cost, :fees, :per_sq_ft_rate, :percentage_of_estimated_budget,
                                     :percentage_completed, :status, :company_id, :details,
-                                    :project_type, :scale, :style, :pattern,
+                                    :project_type, :scale, :style, :pattern, :address,
                                     :fee_type, :details, services: [])
   end
 end

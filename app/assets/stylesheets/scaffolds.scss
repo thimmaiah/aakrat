@@ -209,6 +209,18 @@ div.divider {
   border: 3px solid white;
 }
 
+form {
+  div.form-divider {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color:  lighten($color: #4e73df, $amount: 5);
+    color: white;
+    font-size: 1.1em;
+    font-weight: 600;
+  }  
+}
+
 .large_rich_text_area {
   min-height: 200px;
 }

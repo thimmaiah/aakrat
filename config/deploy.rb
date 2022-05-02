@@ -2,7 +2,7 @@
 lock "~> 3.17.0"
 
 set :application, "Aakrat"
-set :repo_url, "git@github.com:thimmaiah/Aakrat.git"
+set :repo_url, "git@github.com:thimmaiah/aakrat.git"
 set :branch, 'main'
 
 # Default branch is :master

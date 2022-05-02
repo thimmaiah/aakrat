@@ -72,4 +72,8 @@ class Phase < ApplicationRecord
   def percentage_completed_days
     total_days.positive? ? completed_days * 100.0 / total_days : 0
   end
+
+  def visible_status
+    visible_to_client ? "Visible" : "Hidden"
+  end
 end

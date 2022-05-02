@@ -56,7 +56,7 @@
       </td>
       <td>
         <span class="badge <%= @phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-          <%= @phase.visible_to_client ? "Yes" : "No" %>
+          <%= @phase.visible_status %>
         </span>
       </td>
     </tr>

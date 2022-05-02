@@ -12,4 +12,8 @@ class Attachment < ApplicationRecord
   validates :name, presence: true
 
   scope :visible_to_client, -> { where(approval_status: "Approved") }
+
+  def visible_status
+    visible_to_client ? "Visible" : "Hidden"
+  end
 end

@@ -64,7 +64,7 @@
       </td>
       <td>
         <span class="badge <%= @step.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-          <%= @step.visible_to_client ? "Yes" : "No" %>
+          <%= @step.visible_status %>
         </span>
       </td>
     </tr>

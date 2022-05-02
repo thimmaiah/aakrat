@@ -55,4 +55,8 @@ class Step < ApplicationRecord
       Time.zone.today <= end_date ? "On-Time" : "Delayed"
     end
   end
+
+  def visible_status
+    visible_to_client ? "Visible" : "Hidden"
+  end
 end

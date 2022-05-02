@@ -30,7 +30,7 @@
   </td>
   <td>
     <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-      <%= phase.visible_to_client ? "Yes" : "No" %>
+      <%= phase.visible_status %>
     </span>
   </td>
   <td>
@@ -52,7 +52,7 @@
   
   <td>
     <% if policy(phase).update? %>
-      <%= link_to "Quick Edit" , edit_phase_path(phase, quick_entry:true) , {class: "btn btn-primary", data: { turbo_frame: 'phase_quick_entry' } }%>
+      <%= link_to "Edit" , edit_phase_path(phase) , {class: "btn btn-primary"}%>
       <% label = phase.completed ? "Not Complete" : "Completed" %>
       <%#= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
       <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>

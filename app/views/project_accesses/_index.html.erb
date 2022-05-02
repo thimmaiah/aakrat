@@ -1,10 +1,20 @@
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Project Accesses</h1>
-    <% if @project && policy(@project).update?  %>
-        <%= link_to "Grant Access" , new_project_access_path("project_access[company_id]": current_user.company_id,
-                            "project_access[project_id]": @project.id),
-                            {class: "btn btn-primary" } %>
-    <% end %>
+    
+    <span>
+      
+      <% if @project && policy(@project).update?  %>
+          <%= link_to "Grant Access" , new_project_access_path("project_access[company_id]": current_user.company_id,
+                              "project_access[project_id]": @project.id),
+                              {class: "btn btn-primary" } %>
+      <% end %>
+
+      <% label = (params[:user_type] == "Client") ? "Client" : "External User" %>
+
+      <%= link_to "New #{label}" , new_client_path("client[company_id]": current_user.company_id, 
+                  "client[user_type]": params[:user_type]), {class: "btn btn-primary" } %>
+    
+    </span>
   </div>
 
   <div class="table-responsive" data-controller="datatable">

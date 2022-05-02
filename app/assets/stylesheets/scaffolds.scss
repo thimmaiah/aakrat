@@ -373,3 +373,9 @@ table {
 #project_status_form {
   display: inline-block !important;
 }
+
+.sidebar-brand-icon {
+  img {
+    max-width: 60px;
+  }
+}

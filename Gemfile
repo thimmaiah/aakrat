@@ -36,7 +36,7 @@ gem "rolify"
 
 gem 'dotenv-rails'
 gem 'exception_notification'
-gem "nokogiri", "1.13.4"
+gem "nokogiri"
 gem 'sassc-rails'
 gem 'sidekiq', '~> 6.4'
 

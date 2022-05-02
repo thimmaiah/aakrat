@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.0"
 
-set :application, "Vishwakarma"
-set :repo_url, "git@github.com:thimmaiah/Vishwakarma.git"
+set :application, "Aakrat"
+set :repo_url, "git@github.com:thimmaiah/Aakrat.git"
 set :branch, 'main'
 
 # Default branch is :master
@@ -10,7 +10,7 @@ set :branch, 'main'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
-set :deploy_to, "/home/ubuntu/Vishwakarma"
+set :deploy_to, "/home/ubuntu/Aakrat"
 set :ssh_options, forward_agent: true
 set :ssh_options, keys: "/home/thimmaiah/.ssh/vk-keypair.pem"
 # Default value for :format is :airbrussh.
@@ -57,10 +57,10 @@ namespace :deploy do
   task :upload_env do
     on roles(:app) do
       rails_env = fetch(:rails_env)
-      upload!("/data/work/vishwakarma/.env", release_path.to_s, recursive: false)
-      upload!("/data/work/vishwakarma/.env.local", release_path.to_s, recursive: false)
-      upload!("/data/work/vishwakarma/.env.staging", release_path.to_s, recursive: false) # if rails_env == :staging
-      upload!("/data/work/vishwakarma/.env.production", release_path.to_s, recursive: false) if rails_env == :production
+      upload!("/data/work/aakrat/.env", release_path.to_s, recursive: false)
+      upload!("/data/work/aakrat/.env.local", release_path.to_s, recursive: false)
+      upload!("/data/work/aakrat/.env.staging", release_path.to_s, recursive: false) # if rails_env == :staging
+      upload!("/data/work/aakrat/.env.production", release_path.to_s, recursive: false) if rails_env == :production
     end
   end
 

@@ -73,7 +73,7 @@ Capybara.configure do |config|
   config.default_driver        = :selenium
 end
 
-module VishwakarmaUtils
+module AakratUtils
   def key_values(company, args)
     key_val = args.split(";").to_h { |kv| kv.split("=") }
     key_val.each do |k, v|
@@ -82,4 +82,4 @@ module VishwakarmaUtils
   end
 end
 
-World(VishwakarmaUtils)
+World(AakratUtils)

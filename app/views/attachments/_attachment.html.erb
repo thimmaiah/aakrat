@@ -2,7 +2,7 @@
 
 <tr id="<%= dom_id attachment %>">
   <td>
-    <%= attachment.name %>
+    <%= link_to attachment.name, attachment %>
   </td>
   <td>
     <%= render "/layouts/attachments", attachments: attachment.attachments, allow_delete: "No" %>
@@ -29,7 +29,7 @@
     <%= attachment.step.name %>
   </td>
   <td>
-    <%= link_to "Show" , attachment , {class: "btn btn-primary" }%>
+    <%#= link_to "Show" , attachment , {class: "btn btn-primary" }%>
     <%= button_to "Delete" , attachment_path(attachment) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <% if policy(attachment).toggle_approval? %>
       <%= button_to "Approve" , toggle_approval_attachment_path(attachment, approval_status: "Approved") , {class: "btn btn-success", method: :patch }%>

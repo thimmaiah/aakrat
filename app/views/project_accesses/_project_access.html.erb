@@ -1,6 +1,6 @@
 <tr id="<%= dom_id project_access %>">
   <td>
-    <%= project_access.company.name %>
+    <%= link_to project_access.company.name, project_access %>
   </td>
   <td>
     <%= project_access.user.full_name %>
@@ -12,7 +12,7 @@
     <%= project_access.role_name.titlecase %>
   </td>
   <td>
-    <%= link_to "Show" , project_access , {class: "btn btn-primary" }%>
+    <%#= link_to "Show" , project_access , {class: "btn btn-primary" }%>
     <% if policy(project_access).destroy? %>
       <%= button_to "Delete" , project_access_path(project_access) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <% end %>

@@ -1,8 +1,9 @@
 <%= render "/layouts/alerts" %>
-
+  <% label = (params[:user_type] == "Client") ? "Client" : "External User" %>
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">External Users</h1>
-    <%= link_to "New External User" , new_client_path("client[company_id]": current_user.company_id), {class: "btn btn-primary" } %>
+    <h1 class="h3 mb-0 text-gray-800"><%= label %></h1>
+    <%= link_to "New #{label}" , new_client_path("client[company_id]": current_user.company_id, 
+                "client[user_type]": params[:user_type]), {class: "btn btn-primary" } %>
   </div>
 
   <div class="table-responsive" data-controller="datatable">

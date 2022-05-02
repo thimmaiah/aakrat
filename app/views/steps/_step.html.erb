@@ -53,12 +53,13 @@
       <%= link_to "Quick Edit" , edit_step_path(step, quick_entry: true), {class: "btn btn-primary", data: { turbo_frame: 'step_quick_entry' } } if @phase %>
       <%= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
 
-      <% label = step.completed ? "Incomplete" : "Completed" %>
-      <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
-
-      <%= button_to label , toggle_completed_step_path(step, show_project_phase: show_project_phase) , {class: "btn #{complete_btn_color}", method: :patch }%>
-
-      <% if policy(step).approve? %>
+      <% if step.approval_status == "Approved" %>
+        <% label = step.completed ? "Rework" : "Completed" %>
+        <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
+        <%= button_to label , toggle_completed_step_path(step, show_project_phase: show_project_phase) , {class: "btn #{complete_btn_color}", method: :patch }%>
+      <% end %>
+      
+      <% if policy(step).approve?  %>
         <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
         <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
         <%= button_to approved , toggle_completed_step_path(step, approval: true, show_project_phase: show_project_phase) , {class: "btn #{approve_btn_color}", method: :patch }%>

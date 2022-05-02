@@ -1,84 +1,95 @@
 <%= render "/layouts/alerts" %>
 
-<table class="table table-bordered dataTable">
+  <table class="table table-bordered dataTable">
 
-          <tr>
-        <td>
-          Name
-        </td>
-        <td>
-          <%= @attachment.name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Attached By
-        </td>
-        <td>
-          <%= @attachment.attached_by.full_name %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Approval Status
-        </td>
-        <td>
-          <%= @attachment.approval_status %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Approved By
-        </td>
-        <td>
-          <%= @attachment.approved_by&.full_name  %>
-        </td>    
-      </tr>
-         
-          <tr>
-        <td>
-          Project
-        </td>
-        <td>
-          <%= link_to @attachment.project.name, @attachment.project %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Phase
-        </td>
-        <td>
-          <%= link_to @attachment.phase.name, @attachment.phase %>
-        </td>    
-      </tr>
-          <tr>
-        <td>
-          Step
-        </td>
-        <td>
-          <%= link_to @attachment.step.name, @attachment.step %>
-        </td>    
-      </tr>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        <%= @attachment.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Attached By
+      </td>
+      <td>
+        <%= @attachment.attached_by.full_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Approval Status
+      </td>
+      <td>
+        <%= @attachment.approval_status %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Approved By
+      </td>
+      <td>
+        <%= @attachment.approved_by&.full_name %>
+      </td>
+    </tr>
 
-      <tr>
-        <td>
-          Attachments
-        </td>
-        <td>
-          <ul>
-            <%= render "/layouts/attachments", attachments: @attachment.attachments %>
-          </ul>
-  
-        </td>
-      </tr>
-    
-  
-</table>
+    <tr>
+      <td>
+        Client Visible
+      </td>
+      <td>
+        <span class="badge <%= @attachment.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+          <%= @attachment.visible_to_client ? "Yes" : "No" %>
+        </span>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Project
+      </td>
+      <td>
+        <%= link_to @attachment.project.name, @attachment.project %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Phase
+      </td>
+      <td>
+        <%= link_to @attachment.phase.name, @attachment.phase %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Step
+      </td>
+      <td>
+        <%= link_to @attachment.step.name, @attachment.step %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Attachments
+      </td>
+      <td>
+        <ul>
+          <%= render "/layouts/attachments" , attachments: @attachment.attachments %>
+        </ul>
+
+      </td>
+    </tr>
 
 
-<div>
-  <% if policy(@attachment).update? %>
-    <%= link_to "Edit", edit_attachment_path(@attachment), {class: "btn btn-primary"} %> |
-    <%= button_to "Delete", @attachment, method: :delete, class: "btn btn-danger", form_class: "deleteButton" %>
-  <% end %>
-</div>
+  </table>
+
+
+  <div>
+    <% if policy(@attachment).update? %>
+      <%= link_to "Edit" , edit_attachment_path(@attachment), {class: "btn btn-primary" } %> |
+        <%= button_to "Delete" , @attachment, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+          <% end %>
+  </div>

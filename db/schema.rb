@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_01_111135) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_02_042848) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -74,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_01_111135) do
     t.bigint "step_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "visible_to_client", default: false
     t.index ["approved_by_id"], name: "index_attachments_on_approved_by_id"
     t.index ["attached_by_id"], name: "index_attachments_on_attached_by_id"
     t.index ["company_id"], name: "index_attachments_on_company_id"

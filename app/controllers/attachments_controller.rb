@@ -101,7 +101,7 @@ class AttachmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def attachment_params
-    params.require(:attachment).permit(:name, :attached_by_id, :approval_status,
+    params.require(:attachment).permit(:name, :attached_by_id, :approval_status, :visible_to_client,
                                        :approved_by_id, :company_id, :project_id, :phase_id,
                                        :step_id, :details, attachments: [])
   end

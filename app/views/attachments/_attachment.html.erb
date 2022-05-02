@@ -18,6 +18,13 @@
   <td>
     <%= attachment.approved_by.full_name if attachment.approved_by  %>
   </td>
+
+  <td>
+    <span class="badge <%= attachment.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+      <%= attachment.visible_to_client ? "Yes" : "No" %>
+    </span>  
+  </td>
+
   <td>
     <%= attachment.step.name %>
   </td>

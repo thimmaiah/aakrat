@@ -2,6 +2,8 @@ class Step < ApplicationRecord
   # Make all models searchable
   ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
 
+  STATUS = ["Not Started", "In Progress", "Completed", "Halted"].freeze
+
   belongs_to :project
   belongs_to :company
   belongs_to :phase
@@ -48,9 +50,9 @@ class Step < ApplicationRecord
 
   def on_time_status
     if completed
-      "Complete"
+      "Completed"
     else
-      Time.zone.today < end_date ? "On-Time" : "Delayed"
+      Time.zone.today <= end_date ? "On-Time" : "Delayed"
     end
   end
 end

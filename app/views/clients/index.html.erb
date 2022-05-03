@@ -6,6 +6,8 @@
                 "client[user_type]": params[:user_type]), {class: "btn btn-primary" } %>
   </div>
 
+  <%= render "/layouts/steps", steps: ["Create Clients", "Create Contractors", "Give Access to Projects", "Generate Quotes"].freeze %>
+
   <div class="table-responsive" data-controller="datatable">
 
     <table id="clients" class="table table-bordered dataTable">

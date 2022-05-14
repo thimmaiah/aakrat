@@ -1,28 +1,27 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
+
+
   connect() {
+      console.log(`sort = ${this.element.dataset.sort}`);
+      let sort = this.element.dataset.sort;
+      console.log(`sort = ${sort}`);
+      
+      let state = this.element.dataset.state;
+      if (state === undefined) {
+        state = true;
+      }
+      else {
+        state = state == 'true';
+      }
 
-      // let table = $('.jqDataTable').DataTable({        
-      //   stateSave: true,
-      //   retrieve: true,
-      //   language: {
-      //     search: '',
-      //     searchPlaceholder: "Search...",
-      //     paginate: {
-      //       "previous": "Prev"
-      //     }          
-      //   }
-      // });   
-      // // Ensure DataTable is destroyed, else it gets duplicated
-      // $(document).on('turbo:before-cache', function() {     
-      //   table.destroy();
-      // });
-
-
+      console.log(`state = ${state}`);
+    
       let options = {
-        stateSave: true,
+        stateSave: state,
         retrieve: true,
+        order: [[sort, 'asc']],
         language: {
           search: '',
           searchPlaceholder: "Search...",
@@ -31,6 +30,8 @@ export default class extends Controller {
           }
         }
       };
+
+      console.log(options);
   
       // Ensure  each DataTables is created
       let all = $(".jqDataTable").map(function() {

@@ -305,6 +305,7 @@ GEM
     hightop (0.3.0)
       activesupport (>= 5.2)
     htmlentities (4.3.4)
+    humanize (2.5.1)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -644,6 +645,7 @@ DEPENDENCIES
   foreman
   groupdate
   hightop
+  humanize
   image_processing (~> 1.2)
   importmap-rails
   impressionist

@@ -10,7 +10,7 @@ class Phase < ApplicationRecord
 
   has_many :site_visits, dependent: :destroy
   has_many :steps, dependent: :destroy
-  has_many :payments, dependent: :destroy
+  has_many :payments, dependent: :delete_all
   has_many :attachments, dependent: :destroy
 
   has_rich_text :details

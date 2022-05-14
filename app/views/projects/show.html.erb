@@ -1,5 +1,6 @@
 <%= render "/layouts/alerts" %>
 
+
   <table class="table table-bordered dataTable">
 
     <tr>
@@ -45,219 +46,224 @@
         <%= l @project.end_date %>
       </td>
     </tr>
-    <tr>
-      <td colspan="2" class="bg-primary"></td>
-    </tr>
-    <tr>
-      <td>
-        Project Type
-      </td>
-      <td>
-        <%= @project.project_type %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Scale
-      </td>
-      <td>
-        <%= @project.scale %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Style
-      </td>
-      <td>
-        <%= @project.style %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Pattern
-      </td>
-      <td>
-        <%= @project.pattern %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Services
-      </td>
-      <td>
-        <%= @project.services.join(", ") if @project.services %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" class="bg-primary"></td>
-    </tr>
-    
-    <tr>
-      <td>
-        Client Budget Estimate
-      </td>
-      <td>
-        <%= money_to_currency @project.client_estimated_budget, params %>
-      </td>
-    </tr>
 
-    <tr>
-      <td>
-        Actual Cost
-      </td>
-      <td>
-        <%= money_to_currency @project.actual_cost, params %>
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td colspan="2" class="bg-primary"></td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Project Type
+        </td>
+        <td>
+          <%= @project.project_type %>
+        </td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Scale
+        </td>
+        <td>
+          <%= @project.scale %>
+        </td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Style
+        </td>
+        <td>
+          <%= @project.style %>
+        </td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Pattern
+        </td>
+        <td>
+          <%= @project.pattern %>
+        </td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Services
+        </td>
+        <td>
+          <%= @project.services.join(", ") if @project.services %>
+        </td>
+      </tr>
+      <tr class="collapse multi-collapse">
+        <td colspan="2" class="bg-primary"></td>
+      </tr>
+      
+      <tr class="collapse multi-collapse">
+        <td>
+          Client Budget Estimate
+        </td>
+        <td>
+          <%= money_to_currency @project.client_estimated_budget, params %>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        Estimated BuiltUp Area
-      </td>
-      <td>
-        <%= custom_format_number @project.estimated_builtup_area, params %>
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Actual Cost
+        </td>
+        <td>
+          <%= money_to_currency @project.actual_cost, params %>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        Actual BuiltUp Area
-      </td>
-      <td>
-        <%= custom_format_number @project.actual_builtup_area, params %>
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Estimated BuiltUp Area
+        </td>
+        <td>
+          <%= custom_format_number @project.estimated_builtup_area, params %>
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        Fees Type
-      </td>
-      <td>
-        <%=  @project.fee_type %> 
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Actual BuiltUp Area
+        </td>
+        <td>
+          <%= custom_format_number @project.actual_builtup_area, params %>
+        </td>
+      </tr>
 
-    <% if  @project.fee_type == "% of Budget" %>
-    <tr>
-      <td>
-        Fees as % of Budget
-      </td>
-      <td>
-        <%=  @project.percentage_of_estimated_budget %> %
-      </td>
-    </tr>
-    <% elsif  @project.fee_type == "Rate / SqFt" %>
-    <tr>
-      <td>
-        Fees as Rate per SqFt
-      </td>
-      <td>
-        <%=  money_to_currency @project.per_sq_ft_rate, params %>
-      </td>
-    </tr>
-    <% end %>
-    
-    <tr>
-      <td>
-        Discount
-      </td>
-      <td>
-        <%= @project.discount %> %
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Fees Type
+        </td>
+        <td>
+          <%=  @project.fee_type %> 
+        </td>
+      </tr>
 
-    <tr>
-      <td>
-        Fees
-      </td>
-      <td>
-        <div>Gross: <%= money_to_currency @project.gross_fees, params %></div>
-        <div>Discount: <%= @project.discount %> %</div>
-        <div>Actual: <%= money_to_currency @project.fees, params %></div>
-      </td>
-    </tr>
+      <% if  @project.fee_type == "% of Budget" %>
+      <tr class="collapse multi-collapse">
+        <td>
+          Fees as % of Budget
+        </td>
+        <td>
+          <%=  @project.percentage_of_estimated_budget %> %
+        </td>
+      </tr>
+      <% elsif  @project.fee_type == "Rate / SqFt" %>
+      <tr class="collapse multi-collapse">
+        <td>
+          Fees as Rate per SqFt
+        </td>
+        <td>
+          <%=  money_to_currency @project.per_sq_ft_rate, params %>
+        </td>
+      </tr>
+      <% end %>
+      
+      <tr class="collapse multi-collapse">
+        <td>
+          Discount
+        </td>
+        <td>
+          <%= @project.discount %> %
+        </td>
+      </tr>
 
-    
+      <tr class="collapse multi-collapse">
+        <td>
+          Fees
+        </td>
+        <td>
+          <div>Gross: <%= money_to_currency @project.gross_fees, params %></div>
+          <div>Discount: <%= @project.discount %> %</div>
+          <div>Actual: <%= money_to_currency @project.fees, params %></div>
+        </td>
+      </tr>
+
+      
 
 
-    <tr>
-      <td>
-        Payment Amount
-      </td>
-      <td>
-        <%= money_to_currency @project.payment_amount, params %>
-      </td>
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Payment Amount
+        </td>
+        <td>
+          <%= money_to_currency @project.payment_amount, params %>
+        </td>
+      </tr>
 
-    <tr>
-      <td colspan="2" class="bg-primary"></td>
-    </tr>
-    
-    
-    <tr>
-      <td>
-        Status
-      </td>
-      <td>
-        <%= @project.status %>
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Percentage Completed
-      </td>
-      <td>
-        <%= number_with_precision @project.percentage_completed_days, precision: 2 %> %
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <%=@project.percentage_completed_days%>%" aria-valuenow="<%=@project.percentage_completed_days%>" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </td>
-    </tr>
-    
-    <tr>
-      <td>
-        Days
-      </td>
-      <td>
-        Total: <%= @project.total_days %>, 
-        Completed: <%= @project.completed_days %>
-      </td>    
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td colspan="2" class="bg-primary"></td>
+      </tr>
+      
+      
+      <tr class="collapse multi-collapse">
+        <td>
+          Status
+        </td>
+        <td>
+          <%= @project.status %>
+        </td>
+      </tr>
+      
+      <tr class="collapse multi-collapse">
+        <td>
+          Progress
+        </td>
+        <td>
+          <%= number_with_precision @project.percentage_completed_days, precision: 2 %> %
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <%=@project.percentage_completed_days%>%" aria-valuenow="<%=@project.percentage_completed_days%>" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </td>
+      </tr>
+      
+      <tr class="collapse multi-collapse">
+        <td>
+          Days
+        </td>
+        <td>
+          Total: <%= @project.total_days %>, 
+          Completed: <%= @project.completed_days %>
+        </td>    
+      </tr>
 
-    <tr>
-      <td>
-        Details
-      </td>
-      <td>
-        <%= @project.details %>
-      </td>    
-    </tr>
+      <tr class="collapse multi-collapse">
+        <td>
+          Details
+        </td>
+        <td>
+          <%= @project.details %>
+        </td>    
+      </tr>
 
-    <tr>
-      <td>
-        Company
-      </td>
-      <td>
-        <%= @project.company.name %>
-      </td>
-    </tr>
-
+      <tr class="collapse multi-collapse">
+        <td>
+          Company
+        </td>
+        <td>
+          <%= @project.company.name %>
+        </td>
+      </tr>
 
   </table>
 
-  <% if policy(@project).update? %>
   <div>
-    <%= link_to "Edit" , edit_project_path(@project), {class: "btn btn-primary" } %> |
-    <% if @project.cloned_from.present? && @project.phases.count == 0 %>
-      <%= button_to "Clone Phases" , clone_phases_project_path(@project), {class: "btn btn-success", method: :patch } %> |
-    <% else %>
-      <%= button_to "Clone Project" , clone_project_path(@project), {class: "btn btn-success", method: :post } %> |
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"    aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Details</button> |
+    <% if policy(@project).update? %>
+    
+      <%= link_to "Edit" , edit_project_path(@project), {class: "btn btn-primary" } %> |
+      <% if @project.cloned_from.present? && @project.phases.count == 0 %>
+        <%= button_to "Clone Phases" , clone_phases_project_path(@project), {class: "btn btn-success", method: :patch } %> |
+      <% else %>
+        <%= button_to "Clone Project" , clone_project_path(@project), {class: "btn btn-success", method: :post } %> |
+      <% end %>
+      <%= button_to "Delete" , @project, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
+    
     <% end %>
-    <%= button_to "Delete" , @project, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>
   </div>
-  <% end %>
+  
 
-  <div data-controller="datatable">
+
+  <div data-controller="datatable" data-sort="2" data-state="false">    
     <%= render "/projects/project_details", project: @project %>
   </div>

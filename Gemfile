@@ -52,6 +52,7 @@ gem 'groupdate'
 gem 'hightop'
 
 # gem 'eu_central_bank'
+gem 'humanize'
 gem 'money-rails', '~>1.12'
 # gem 'prometheus_exporter'
 

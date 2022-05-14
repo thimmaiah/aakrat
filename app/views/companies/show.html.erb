@@ -27,12 +27,21 @@
          </tr>
          <tr>
             <td>
-               Details
+               Address
             </td>
             <td>
-               <%= @company.details %>
+               <%= @company.address %>
             </td>
          </tr>
+         <tr>
+            <td>
+               GST
+            </td>
+            <td>
+               <%= @company.gst_number %>
+            </td>
+         </tr>
+
          <% if @company.company_type == "Startup" %>
          <tr>
             <td>

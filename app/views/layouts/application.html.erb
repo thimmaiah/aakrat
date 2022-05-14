@@ -61,7 +61,7 @@
         
 </head>
 
-<body id="page-top">
+<body id="page-top"  data-controller="confirm">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -109,6 +109,7 @@
     </a>
 
     <%= render "/layouts/logout_modal" %>    
+    <%= render "/layouts/confirm" %>    
     <%= render "/layouts/terms" if (current_user && !current_user.accept_terms) %>
 
 </body>

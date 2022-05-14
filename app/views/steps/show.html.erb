@@ -108,7 +108,7 @@
   <div>
     <% if policy(@step).update? %>
       <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
-      <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %> |
+      <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton",  data: {action: "click->confirm#delete"} %> |
     <% end %>
 
     <% if current_user.company_id == @step.company_id %>

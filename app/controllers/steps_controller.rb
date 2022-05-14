@@ -83,12 +83,12 @@ class StepsController < ApplicationController
     @step.destroy
 
     respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.remove(@step)
-        ]
-      end
-      format.html { redirect_to steps_url, notice: "Step was successfully destroyed." }
+      # format.turbo_stream do
+      #   render turbo_stream: [
+      #     turbo_stream.remove(@step)
+      #   ]
+      # end
+      format.html { redirect_to phase_path(@step.phase), notice: "Step was successfully destroyed." }
       format.json { head :no_content }
     end
   end

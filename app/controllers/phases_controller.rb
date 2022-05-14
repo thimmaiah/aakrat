@@ -80,7 +80,7 @@ class PhasesController < ApplicationController
           turbo_stream.remove(@phase)
         ]
       end
-      format.html { redirect_to phases_url, notice: "Phase was successfully destroyed." }
+      format.html { redirect_to project_path(@phase.project), notice: "Phase was successfully destroyed." }
       format.json { head :no_content }
     end
   end

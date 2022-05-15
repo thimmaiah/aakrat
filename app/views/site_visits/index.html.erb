@@ -1,3 +1,5 @@
 <%= render "/layouts/alerts" %>
-<%= render "/site_visits/index", site_visits: @site_visits %>
+<div data-controller="datatable">
+    <%= render "/site_visits/index", site_visits: @site_visits %>
+</div>
 

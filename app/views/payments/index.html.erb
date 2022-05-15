@@ -1,2 +1,4 @@
 <%= render "/layouts/alerts" %>
-<%= render "/payments/index", payments: @payments %>
+<div data-controller="datatable">
+    <%= render "/payments/index", payments: @payments %>
+</div>

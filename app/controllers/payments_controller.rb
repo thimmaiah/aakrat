@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
 
   # GET /payments/1/edit
   def edit
-    @payment.status = params[:status] if params[:status].present? 
+    @payment.status = params[:status] if params[:status].present?
   end
 
   # POST /payments or /payments.json

@@ -370,6 +370,15 @@ table {
   }
 }
 
+#step_completed_form {
+  display: inline;
+  width: fit-content;
+  div, .form-control { 
+    display: inline;
+    width: fit-content;
+   }
+}
+
 #project_status_form {
   display: inline-block !important;
 }

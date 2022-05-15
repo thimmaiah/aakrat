@@ -15,7 +15,7 @@
     <div class="tab-content">
         <div id="steps-tab" class="tab-pane fade show active">
             <div id="steps" class="associated_entity">
-                <%= render "/steps/index" , steps: policy_scope(phase.steps).order(start_date: :asc).includes(:assigned_to) %>
+                <%= render "/steps/index" , steps: policy_scope(phase.steps).includes(:client_attachments).order(start_date: :asc).includes(:assigned_to) %>
             </div>
         </div>
         <% if phase.payment_required && policy(:payment).index? %>

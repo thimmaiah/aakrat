@@ -26,7 +26,9 @@ class PaymentsController < ApplicationController
   end
 
   # GET /payments/1/edit
-  def edit; end
+  def edit
+    @payment.status = params[:status] if params[:status].present? 
+  end
 
   # POST /payments or /payments.json
   def create

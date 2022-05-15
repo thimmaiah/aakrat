@@ -4,24 +4,9 @@ export default class extends Controller {
 
 
   connect() {
-      console.log(`sort = ${this.element.dataset.sort}`);
-      let sort = this.element.dataset.sort;
-      console.log(`sort = ${sort}`);
-      
-      let state = this.element.dataset.state;
-      if (state === undefined) {
-        state = true;
-      }
-      else {
-        state = state == 'true';
-      }
 
-      console.log(`state = ${state}`);
-    
       let options = {
-        stateSave: state,
         retrieve: true,
-        order: [[sort, 'asc']],
         language: {
           search: '',
           searchPlaceholder: "Search...",
@@ -30,7 +15,24 @@ export default class extends Controller {
           }
         }
       };
+      
+      let sort = this.element.dataset.sort;
+      console.log(`sort = ${sort}`);
+      
+      let state = this.element.dataset.state;
+      console.log(`state = ${state}`);
+    
+      if (state === undefined) {
+        state = true;
+      }
+      else {
+        state = state == 'true';
+        if(!state && sort) {
+          options["order"] = [[sort, 'asc']];
+        }
+      }
 
+      options["stateSave"] = state;
       console.log(options);
   
       // Ensure  each DataTables is created

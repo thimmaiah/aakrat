@@ -174,7 +174,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_031747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.bigint "phase_id", null: false
+    t.bigint "phase_id", null: true
     t.bigint "project_id", null: false
     t.decimal "amount_cents", precision: 20, scale: 2, default: "0.0"
     t.string "status", limit: 50

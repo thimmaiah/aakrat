@@ -25,7 +25,7 @@ class Payment < ApplicationRecord
 
   belongs_to :company
   belongs_to :user
-  belongs_to :phase
+  belongs_to :phase, optional: true
 
   belongs_to :project
 

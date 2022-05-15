@@ -16,6 +16,7 @@ class PaymentsController < ApplicationController
   def new
     @payment = Payment.new(payment_params)
     @payment.company_id = current_user.company_id
+    @payment.due_date = Time.zone.today
     @payment.user_id = current_user.id
     if @payment.phase
       @payment.due_date = @payment.phase.end_date + 1.week

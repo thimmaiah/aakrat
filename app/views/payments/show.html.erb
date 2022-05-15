@@ -63,7 +63,7 @@
         Phase
       </td>
       <td>
-        <%= link_to  @payment.phase.name, @payment.project %>
+        <%= link_to  @payment.phase.name, @payment.project if @payment.phase %>
       </td>
     </tr>
     

@@ -164,11 +164,17 @@
                 <div class="card-header"> 4. Misc </div>
                 <div class="card-body">
             
-                    <div class="form-group">
+                      <div class="form-group">
                         <%= form.label :status %>
                         <%= form.select :status, Project::STATUS, {}, class: "form-control", required: true %>
                       </div>
                     
+                      <% if project.company.entity_names.present ? %>
+                        <div class="form-group">
+                          <%= form.label :entity_name %>
+                          <%= form.select :entity_name, project.company.entity_names.split(","), {}, class: "form-control" %>
+                        </div>
+                      <% end %>                  
                     
                       <div class="form-group">
                         <%= form.label :details %>

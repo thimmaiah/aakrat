@@ -29,7 +29,7 @@
     </span>
   </td>
   <td>
-    <%= project.company.name %>
+    <%= project.entity_name.present? ?  project.entity_name : project.company.name %>
   </td>
   <td>
     <%= link_to "Show" , project , {class: "btn btn-primary" }%>

@@ -245,6 +245,17 @@
         </td>
       </tr>
 
+      <% if @project.entity_name.present? %>
+      <tr class="collapse multi-collapse">
+        <td>
+          Entity
+        </td>
+        <td>
+          <%= @project.entity_name %>
+        </td>
+      </tr>
+      <% end %>
+
   </table>
 
   <div>

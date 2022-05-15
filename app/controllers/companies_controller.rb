@@ -84,7 +84,7 @@ class CompaniesController < ApplicationController
   def company_params
     params.require(:company).permit(:name, :url, :category, :founded, :company_type,
                                     :funding_amount, :funding_unit, :details, :logo_url,
-                                    :investor_categories, :instrument_types,
+                                    :investor_categories, :instrument_types, :entity_names,
                                     :currency, :units, :address, :gst_number)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_14_031747) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_15_081536) do
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "body", size: :long
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_031747) do
     t.boolean "trial", default: false
     t.text "address"
     t.string "gst_number", limit: 25
+    t.text "entity_names"
     t.index ["deleted_at"], name: "index_companies_on_deleted_at"
     t.index ["name"], name: "index_companies_on_name", unique: true
     t.index ["parent_company_id"], name: "index_companies_on_parent_company_id"
@@ -174,7 +175,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_031747) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
-    t.bigint "phase_id", null: true
+    t.bigint "phase_id"
     t.bigint "project_id", null: false
     t.decimal "amount_cents", precision: 20, scale: 2, default: "0.0"
     t.string "status", limit: 50
@@ -257,6 +258,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_14_031747) do
     t.text "services"
     t.text "address"
     t.decimal "discount", precision: 5, scale: 2, default: "0.0"
+    t.string "entity_name", limit: 100
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["team_lead_id"], name: "index_projects_on_team_lead_id"

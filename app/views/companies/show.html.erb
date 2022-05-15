@@ -42,27 +42,17 @@
             </td>
          </tr>
 
-         <% if @company.company_type == "Startup" %>
+       
          <tr>
             <td>
-               Currency
+               Entity Names
             </td>
             <td>
-               <%= @company.currency %>
+               <%= @company.entity_names %>
             </td>
          </tr>
 
-         <!-- <tr>
-            <td>
-               Currency Units
-            </td>
-            <td>
-               <%= @company.units %>
-            </td>
-         </tr> -->
-
-         <% end %>
-
+       
       </table>
       <% if current_user.company_id == @company.id %>
       <div>

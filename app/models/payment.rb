@@ -19,7 +19,7 @@ class Payment < ApplicationRecord
   # Make all models searchable
   ThinkingSphinx::Callbacks.append(self, behaviours: [:real_time])
 
-  STATUS = %w[Pending Received Confirmed Overdue Defaulted].freeze
+  STATUS = %w[Pending Received Overdue Defaulted].freeze
 
   RECVD_STATUS = %w[Received Confirmed].freeze
 

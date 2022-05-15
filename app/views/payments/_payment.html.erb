@@ -20,7 +20,7 @@
     <%= link_to payment.project.name, project_path(payment.project, tab: "payments-tab")  %>
   </td>
   <td>
-    <%= link_to payment.phase.name, payment.phase %>
+    <%= link_to payment.phase.name, payment.phase if payment.phase %>
   </td>
   <td>
     <%= payment.discount %>

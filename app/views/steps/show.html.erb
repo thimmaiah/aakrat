@@ -1,10 +1,16 @@
 <%= render "/layouts/alerts" %>
 
-  <table class="table table-bordered dataTable">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1>
+      <%= link_to @step.project.name, @step.project %> :
+      <%= link_to @step.phase.name, @step.phase %>
+    </h1>
+  </div>
 
+  <table class="table table-bordered dataTable">    
     <tr>
       <td>
-        Name
+        Step
       </td>
       <td>
         <%= @step.name %>
@@ -36,29 +42,13 @@
     </tr>
     <tr>
       <td>
-        Project
-      </td>
-      <td>
-        <%= link_to @step.project.name, @step.project %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Phase
-      </td>
-      <td>
-        <%= link_to @step.phase.name, @step.phase %>
-      </td>
-    </tr>
-    <tr>
-      <td>
         Assigned To
       </td>
       <td>
         <%= @step.assigned_to.full_name %>
       </td>
     </tr>
-    <tr>
+    <tr class="collapse multi-collapse">
       <td>
         Client Visible
       </td>
@@ -68,7 +58,7 @@
         </span>
       </td>
     </tr>
-    <tr>
+    <tr class="collapse multi-collapse">
       <td>
         Completed
       </td>
@@ -79,7 +69,7 @@
       </td>
     </tr>
 
-    <tr>
+    <tr class="collapse multi-collapse">
       <td>
         Details
       </td>
@@ -88,7 +78,7 @@
       </td>    
     </tr>
 
-    <tr>
+    <tr class="collapse multi-collapse">
       <td>
         Attachments
       </td>
@@ -106,6 +96,9 @@
 
 
   <div>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse"          aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Details</button> |
+    
+
     <% if policy(@step).update? %>
       <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
       <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton",  data: {action: "click->confirm#delete", turbo: false} %> |

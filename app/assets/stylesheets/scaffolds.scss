@@ -38,7 +38,7 @@ div.actions {
 .field_with_errors {
   padding: 1px;
   color: rgb(233, 105, 105);
-  input {
+  input, textarea, select {
     border: 1px solid rgb(233, 105, 105);
   }
   // display: table; 
@@ -387,4 +387,9 @@ table {
   img {
     max-width: 60px;
   }
+}
+
+.attachment_list {
+  list-style: none;
+  margin-left: 0;
 }

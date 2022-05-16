@@ -7,6 +7,12 @@
     <span class="badge <%= phase_completion_badge(phase) %>">
       <%= number_with_precision phase.percentage_completed_days, precision: 2 %>%
     </span>
+    <span class="badge <%= phase.delayed? ? 'bg-danger' : 'bg-success' %>">
+      <%= phase.on_time_status %>
+    </span>
+    <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+      <%= phase.visible_status %>
+    </span>
   </td>
   <td>
     <%= l phase.start_date %>
@@ -18,20 +24,11 @@
     <%= phase.days %>
   </td>
   <td>
-    <div><%= phase.status %></div>
-    <span class="badge <%= phase.delayed? ? 'bg-danger' : 'bg-success' %>">
-      <%= phase.on_time_status %>
-    </span>
-
+    <div><%= phase.status %></div>    
   </td>
   
   <td>
     <%= phase.assigned_to.full_name %>
-  </td>
-  <td>
-    <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-      <%= phase.visible_status %>
-    </span>
   </td>
   <td>
     <% if phase.payment_amount > 0 %>

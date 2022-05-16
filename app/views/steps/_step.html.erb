@@ -56,7 +56,7 @@
   <td>
     <% if policy(step).update? %>
       <%= link_to "Edit" , edit_step_path(step), {class: "btn btn-primary" } if @phase %>
-      <%#= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
+      <%= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, data: {action: "click->confirm#delete"} %>
 
       <% if step.approval_status == "Approved" %>
         <% label = step.completed ? "Rework" : "Completed" %>

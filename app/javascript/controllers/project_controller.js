@@ -9,15 +9,15 @@ export default class extends Controller {
             $("#project_client_name").autocomplete({
                 source: "/clients/search.json",
                 minLength: 3,
-                response: function( event, ui ) {
+                response: function (event, ui) {
                     console.log(ui.content);
-                    if(ui.content.length == 0) {
+                    if (ui.content.length == 0) {
                         alert("No results found for this client name");
                         $("#project_client_name").val("");
-                    } 
+                    }
                 },
                 select: function (event, ui) {
-                    ui.item.label = ui.item.full_name;                
+                    ui.item.label = ui.item.full_name;
                     $("#project_client_id").val(ui.item.user_id);
                 }
             });
@@ -54,6 +54,36 @@ export default class extends Controller {
         submit.click();
 
     }
+
+    setDisplayType(event) {
+        console.log("setDisplayType called");
+        event.preventDefault();
+        
+        let form = $("#display_type_form");
+        
+        let query = decodeURIComponent(window.location.search.substring(1));
+        console.log(`query = ${query}`)
+        let vars = query.split('&');
+        console.log(`vars = ${vars}`);
+
+        // We need to make sure all params in the URL are sent back
+        // So add them to the form
+        vars.forEach(keyVal => {
+            let keyValArr = keyVal.split('=');
+            if (keyValArr[0] != "display") {
+                let value = keyValArr[1].replace("+", " ");
+                form.append(`<input type='text' hidden="hidden" name='${keyValArr[0]}' value='${value}' />`);
+            }
+        });
+        
+        form.append(`<input type='text' hidden="hidden" name='display' value='${event.target.dataset.display}' />`);
+
+        // Make the call
+        let submit = form.find("input[type='submit']");
+        submit.click();
+
+    }
+
 }
 
 

@@ -1,0 +1,89 @@
+<div class="project_card col-lg-3">
+
+    <div class="card">
+        <!-- <img src="..." class="card-img-top" alt="..."> -->
+        <div class="card-body">
+            <h5 class="card-title">
+                <%= project.name %>
+            </h5>
+            <div class="card-text">
+
+                <table class="table table-bordered dataTable">
+
+                    <tr>
+                        <td>
+                            Client
+                        </td>
+                        <td>
+                            <%= project.client.full_name %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Project Name
+                        </td>
+                        <td>
+                            <%= project.name %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Status
+                        </td>
+                        <td>
+                            <span class="badge <%= status_badge(project) %>">
+                                <%= project.status %>
+                            </span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Address
+                        </td>
+                        <td>
+                            <%= project.address %>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Start Date
+                        </td>
+                        <td>
+                            <%= l project.start_date %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            End Date
+                        </td>
+                        <td>
+                            <%= l project.end_date %>
+                        </td>
+                    </tr>
+                    <tr class="">
+                        <td>
+                            Progress
+                        </td>
+                        <td>
+                            <%= number_with_precision project.percentage_completed_days, precision: 2 %> %
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated"
+                                        role="progressbar" style="width: <%=project.percentage_completed_days%>%"
+                                        aria-valuenow="<%=project.percentage_completed_days%>" aria-valuemin="0"
+                                        aria-valuemax="100">
+                                    </div>
+                                </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <%= link_to "Show" , project , {class: "btn btn-primary" }%>
+        </div>
+    </div>
+
+</div>

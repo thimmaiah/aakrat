@@ -1,22 +1,35 @@
-<%= render "/layouts/alerts" %>
+<div id="projects_main">
+  <%= render "/layouts/alerts" %>
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Projects</h1>
-    <span>
-      <%= render "/projects/status_filter" %>
+    <span data-controller="project">
 
+      <%= render "/projects/status_filter" %>
+      
       <% project = Project.new(company_id: current_user.company_id) %>
       <%= link_to "New Project" , new_project_path("project[company_id]": project.company_id), 
           {class: "btn btn-primary"}  if policy(project).new? %>
 
       <%= link_to "New Client" , new_client_path("client[company_id]": current_user.company_id, 
           "client[user_type]": "Client"), {class: "btn btn-primary" } %>      
+
+      <%= render "/projects/display_type" %>
+      
     </span>
   </div>
 
   <%= render "/layouts/steps", steps: ["Setup Client", "Create Project", "Add Phases",
                       "Add Steps", "Add Site Visits"].freeze %>
 
+  <% if params[:display] == "grid" %>
+    <div class="row">
+      <% @projects.each do |project| %>        
+        <%= render "project_card", project: project %>
+      <% end %>
+    </div>
+
+  <% else %>
 
   <div class="table-responsive" data-controller="datatable" data-sort="6" data-state="false">
 
@@ -65,3 +78,7 @@
     </table>
 
   </div>
+
+  <% end %>
+
+</div>

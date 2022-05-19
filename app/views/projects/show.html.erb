@@ -26,7 +26,8 @@
         Address
       </td>
       <td>
-        <%= @project.address %>
+        <%= link_to @project.address, "https://www.google.com/maps/search/?api=1&query=#{@project.address}", target: "_blank" %>
+        <i class="fas fa-map-marker-alt"></i>
       </td>
     </tr>
 

@@ -22,7 +22,8 @@
   <%= render "/layouts/steps", steps: ["Setup Client", "Create Project", "Add Phases",
                       "Add Steps", "Add Site Visits"].freeze %>
 
-  <% if params[:display] == "grid" %>
+  <% if params[:display] == "grid" || (params[:display].blank? && cookies[:display] == "grid") %>
+    <% cookies[:display] = "grid" %> 
     <div class="row">
       <% @projects.each do |project| %>        
         <%= render "project_card", project: project %>
@@ -30,54 +31,54 @@
     </div>
 
   <% else %>
+    <% cookies[:display] = "list" %>    
+    <div class="table-responsive" data-controller="datatable" data-sort="6" data-state="false">
 
-  <div class="table-responsive" data-controller="datatable" data-sort="6" data-state="false">
+      <table id="projects" class="table table-bordered dataTable jqDataTable">
 
-    <table id="projects" class="table table-bordered dataTable jqDataTable">
+        <thead>
+          <tr>
+            <th>
+              Client
+            </th>
+            <th>
+              Project Name
+            </th>
+            <th>
+              Start Date
+            </th>
+            <th>
+              End Date
+            </th>
+            <th>
+              Budget Estimate
+            </th>
+            <th>
+              Payments
+            </th>
+            <th>
+              Progress
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Company
+            </th>
+            <th>
+              Action
+            </th>
+          </tr>
+        </thead>
 
-      <thead>
-        <tr>
-          <th>
-            Client
-          </th>
-          <th>
-            Project Name
-          </th>
-          <th>
-            Start Date
-          </th>
-          <th>
-            End Date
-          </th>
-          <th>
-            Budget Estimate
-          </th>
-          <th>
-            Payments
-          </th>
-          <th>
-            Progress
-          </th>
-          <th>
-            Status
-          </th>
-          <th>
-            Company
-          </th>
-          <th>
-            Action
-          </th>
-        </tr>
-      </thead>
+        <tbody>
+          <% @projects.each do |project| %>
+            <%= render project %>
+          <% end %>
+        </tbody>
+      </table>
 
-      <tbody>
-        <% @projects.each do |project| %>
-          <%= render project %>
-        <% end %>
-      </tbody>
-    </table>
-
-  </div>
+    </div>
 
   <% end %>
 

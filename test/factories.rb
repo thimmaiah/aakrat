@@ -105,6 +105,7 @@ FactoryBot.define do
     team_lead { User.team_leads.sample }
     currency { company.currency }
     details { Faker::Quotes::Rajnikanth.joke }
+    address { Faker::Address.full_address }
   end
 
   factory :payment do

@@ -1,8 +1,11 @@
 <%= form_with(model: nil, method: :get, action: "", id: "project_status_form", class: "inline_form") do |form| %>
 
   <div class="form-group">
-    <% selected = params[:status].present? ? params[:status] : cookies[:project_status] %>
-    <%= form.select :status, Project::STATUS, {selected: selected, include_blank: "Any Status"}, 
+    <% 
+      selected = params[:status].present? ? params[:status] : cookies[:project_status] 
+      cookies[:project_status] = selected
+    %>
+    <%= form.select :status, ["Any Status"] + Project::STATUS, {selected: selected}, 
         { id: "project_status", class: "form-control", 
         data: { action: "change->project#setStatus", toggle: "tooltip", title: "Choose Project Status" } } %>
   </div>

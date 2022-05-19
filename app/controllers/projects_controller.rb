@@ -5,7 +5,16 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @projects = policy_scope(Project)
-    @projects = @projects.where(status: params[:status]) if params[:status].present?
+
+    if params[:status].blank? && cookies[:project_status].blank?
+      cookies[:project_status] = "In Progress"
+    end
+
+    if params[:status].present?
+      @projects = @projects.where(status: params[:status]) if params[:status] != "Any Status"
+    elsif cookies[:project_status].present?
+      @projects = @projects.where(status: cookies[:project_status]) if cookies[:project_status] != "Any Status"
+    end
   end
 
   # GET /projects/1 or /projects/1.json

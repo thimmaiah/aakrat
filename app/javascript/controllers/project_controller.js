@@ -70,7 +70,7 @@ export default class extends Controller {
         // So add them to the form
         vars.forEach(keyVal => {
             let keyValArr = keyVal.split('=');
-            if (keyValArr[0] != "display") {
+            if (keyValArr[1] && keyValArr[0] != "display") {
                 let value = keyValArr[1].replace("+", " ");
                 form.append(`<input type='text' hidden="hidden" name='${keyValArr[0]}' value='${value}' />`);
             }

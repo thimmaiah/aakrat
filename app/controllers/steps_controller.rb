@@ -68,8 +68,6 @@ class StepsController < ApplicationController
       @step.completed = !@step.completed
       @step.approval_status = "Rejected" unless @step.completed
     end
-    
-    
 
     @step.save
     respond_to do |format|

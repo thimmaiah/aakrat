@@ -55,22 +55,32 @@
   
   <td>
     <% if policy(step).update? %>
-      <%= link_to "Edit" , edit_step_path(step), {class: "btn btn-primary" } if @phase %>
-      <%= button_to "Delete" , step_path(step) , class: "btn btn-danger", method: :delete, data: {action: "click->confirm#delete"} %>
 
-      <% if step.approval_status == "Approved" %>
-        <% label = step.completed ? "Rework" : "Completed" %>
-        <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
-        <%= button_to label , toggle_completed_step_path(step, show_project_phase: show_project_phase) , {class: "btn #{complete_btn_color}", method: :patch }%>
-      <% end %>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"   
+                data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+          Action
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <%= link_to "Edit" , edit_step_path(step), {class: "dropdown-item btn-primary" } if @phase %>
+          <%= button_to "Delete" , step_path(step) , class: "dropdown-item btn-danger", method: :delete, data: {action: "click->confirm#delete"} %>
+
+          <% if step.approval_status == "Approved" %>
+            <% label = step.completed ? "Rework" : "Completed" %>
+            <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
+            <%= button_to label , toggle_completed_step_path(step, show_project_phase: show_project_phase) , {class: "dropdown-item #{complete_btn_color}", method: :patch }%>
+          <% end %>
       
-      <% if policy(step).approve?  %>
-        <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
-        <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
-        <%= button_to approved , toggle_completed_step_path(step, approval: true, show_project_phase: show_project_phase) , {class: "btn #{approve_btn_color}", method: :patch }%>
-      <% end %>
+          <% if policy(step).approve?  %>
+            <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
+            <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
+            <%= button_to approved , toggle_completed_step_path(step, approval: true, show_project_phase: show_project_phase) , {class: "dropdown-item #{approve_btn_color}", method: :patch }%>
+          <% end %>
 
-      <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "btn btn-success" }%>
+          <%= link_to "Add Note" , new_note_path("note[owner_id]": step.id, "note[owner_type]": step.class.name) , {class: "dropdown-item btn-success" }%>
+        </div>
+      </div>
+
     <% end %>
   </td>
 </tr>

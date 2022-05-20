@@ -6,7 +6,7 @@ class AttachmentPolicy < ApplicationPolicy
       elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
       else
-        scope.joins(project: :project_accesses).visible_to_client
+        scope.joins(:step, project: :project_accesses).visible_to_client
              .merge(ProjectAccess.for(user, %w[Client]))
       end
     end

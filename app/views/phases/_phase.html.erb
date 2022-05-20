@@ -10,9 +10,11 @@
     <span class="badge <%= phase.delayed? ? 'bg-danger' : 'bg-success' %>">
       <%= phase.on_time_status %>
     </span>
-    <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
-      <%= phase.visible_status %>
-    </span>
+    <% if @project && policy(@project).action? %>
+      <span class="badge <%= phase.visible_to_client ? 'bg-success' : 'bg-warning' %>">
+        <%= phase.visible_status %>
+      </span>
+    <% end %>
   </td>
   <td>
     <%= l phase.start_date %>
@@ -26,10 +28,13 @@
   <td>
     <div><%= phase.status %></div>    
   </td>
-  
-  <td>
-    <%= phase.assigned_to.full_name %>
-  </td>
+
+  <% if @project && policy(@project).action? %>
+    <td>
+      <%= phase.assigned_to.full_name %>
+    </td>
+  <% end %>
+
   <td>
     <% if phase.payment_amount > 0 %>
       <div><%= money_to_currency(phase.payment_amount, params) %></div>
@@ -47,16 +52,20 @@
     </span>    
   </td>
   
-  <td>
-    <div>
-      <% if policy(phase).update? %>
-        <%= link_to "Edit" , edit_phase_path(phase) , {class: "btn btn-primary"}%>
-        <% label = phase.completed ? "Not Complete" : "Completed" %>
-        <%#= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
-        <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger delete-btn", 
-          method: :delete, data: {action: "click->confirm#delete"} %>
-      <% end %>
-      <% #= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
-    </div>
-  </td>
+  <% if @project && policy(@project).action? %>
+
+    <td>
+      <div>
+        <% if policy(phase).update? %>
+          <%= link_to "Edit" , edit_phase_path(phase) , {class: "btn btn-primary"}%>
+          <% label = phase.completed ? "Not Complete" : "Completed" %>
+          <%#= button_to label , toggle_completed_phase_path(phase) , {class: "btn btn-success", method: :patch }%>
+          <%= button_to "Delete" , phase_path(phase) , class: "btn btn-danger delete-btn", 
+            method: :delete, data: {action: "click->confirm#delete"} %>
+        <% end %>
+        <% #= link_to "Add Note" , new_note_path("note[owner_id]": phase.id, "note[owner_type]": phase.class.name) , {class: "btn btn-success" }%>
+      </div>
+    </td>
+
+  <% end %>
 </tr>

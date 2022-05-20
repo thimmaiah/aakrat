@@ -112,22 +112,22 @@
     <% if policy(@step).update? %>
       <%= link_to "Edit" , edit_step_path(@step), {class: "btn btn-primary" } %> |
       <%= button_to "Delete" , @step, method: :delete, class: "btn btn-danger" , form_class: "deleteButton",  data: {action: "click->confirm#delete", turbo: false} %> |
-    <% end %>
-
-    <% step = @step; if step.approval_status == "Approved" %>
-        <% label = step.completed ? "Rework" : "Completed" %>
-        <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
-        <%= button_to label , toggle_completed_step_path(step) , {class: "btn #{complete_btn_color}", method: :patch, data: {turbo: false} }%> |
-    <% end %>
     
-    <% step = @step; if policy(step).approve?  %>
-      <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
-      <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
-      <%= button_to approved , toggle_completed_step_path(step, approval: true) , {class: "btn #{approve_btn_color}", method: :patch, data: {turbo: false} }%> |
+      <% step = @step; if step.approval_status == "Approved" %>
+          <% label = step.completed ? "Rework" : "Completed" %>
+          <% complete_btn_color = (step.completed) ?  "btn-warning" : "btn-success" %>
+          <%= button_to label , toggle_completed_step_path(step) , {class: "btn #{complete_btn_color}", method: :patch, data: {turbo: false} }%> |
+      <% end %>
+      
+      <% step = @step; if policy(step).approve?  %>
+        <% approved = (step.approval_status == "Approved") ?  "Reject" : "Approve" %>
+        <% approve_btn_color = (step.approval_status == "Approved") ?  "btn-warning" : "btn-success" %>
+        <%= button_to approved , toggle_completed_step_path(step, approval: true) , {class: "btn #{approve_btn_color}", method: :patch, data: {turbo: false} }%> |
+      <% end %>
+
     <% end %>
 
-
-    <% if current_user.company_id == @step.company_id %>
+    <% if policy(@step).add_note? %>
       <%= link_to "Add Note" , new_note_path("note[owner_id]": @step.id, "note[owner_type]": @step.class.name) ,
             {class: "btn btn-success" }%> 
     <% end %>

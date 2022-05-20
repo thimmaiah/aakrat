@@ -12,7 +12,7 @@
           {class: "btn btn-primary"}  if policy(project).new? %>
 
       <%= link_to "New Client" , new_client_path("client[company_id]": current_user.company_id, 
-          "client[user_type]": "Client"), {class: "btn btn-primary" } %>      
+          "client[user_type]": "Client"), {class: "btn btn-primary" } if policy(project).new?  %>      
 
       <%= render "/projects/display_type" %>
 

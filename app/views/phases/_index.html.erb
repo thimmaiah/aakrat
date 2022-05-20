@@ -1,4 +1,6 @@
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+<% @project ||= nil %>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Phases</h1>
     <% if @project && policy(@project).update? %>
       <%#= link_to "New Phase" , new_phase_path("phase[project_id]": @project.id), 
@@ -52,9 +54,11 @@
           <th>
             Status
           </th>
-          <th>
-            Assigned
-          </th>
+          <% if @project && policy(@project).action? %>
+            <th>
+              Assigned
+            </th>
+          <% end %>
           <th>
             Payment
           </th>
@@ -64,9 +68,11 @@
           <th>
             Due
           </th>
-          <th>
-            Action
-          </th>
+          <% if @project && policy(@project).action? %>
+            <th>
+              Action
+            </th>
+          <% end %>
         </tr>
       </thead>
 

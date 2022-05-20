@@ -6,9 +6,7 @@ class ProjectsController < ApplicationController
   def index
     @projects = policy_scope(Project)
 
-    if params[:status].blank? && cookies[:project_status].blank?
-      cookies[:project_status] = "In Progress"
-    end
+    cookies[:project_status] = "In Progress" if params[:status].blank? && cookies[:project_status].blank?
 
     if params[:status].present?
       @projects = @projects.where(status: params[:status]) if params[:status] != "Any Status"

@@ -106,7 +106,7 @@
 
   </table>
 
-  <% if current_user.has_cached_role?(:team_lead) %>
+  <% if policy(@payment).update? %>
     <div>
       <%= link_to "Edit" , edit_payment_path(@payment), {class: "btn btn-primary" } %> |
       <%= button_to "Delete" , @payment, method: :delete, class: "btn btn-danger" , form_class: "deleteButton" %>

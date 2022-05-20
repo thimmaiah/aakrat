@@ -33,6 +33,6 @@
   </td>
   <td>
     <%= link_to "Show" , payment , {class: "btn btn-primary" }%>
-    <%= link_to "Received" , edit_payment_path(payment, status: "Received") , {class: "btn btn-success" }%>
+    <%= link_to "Received" , edit_payment_path(payment, status: "Received") , {class: "btn btn-success"} if policy(payment).update? %>
   </td>
 </tr>

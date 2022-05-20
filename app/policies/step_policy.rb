@@ -5,13 +5,12 @@ class StepPolicy < ApplicationPolicy
         scope.all
       elsif user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
         scope.where(company_id: user.company_id)
-      else
+      elsif user.has_cached_role?(:client)
         scope.joins(project: :project_accesses).visible_to_client
              .merge(ProjectAccess.for(user, %w[Client]))
-             .or(
-               scope.joins(project: :project_accesses)
-                  .merge(ProjectAccess.for(user, %w[Contractor Accountant]))
-             )
+      else
+        scope.joins(project: :project_accesses)
+             .merge(ProjectAccess.for(user, %w[Contractor Accountant]))
       end
     end
   end
@@ -64,5 +63,13 @@ class StepPolicy < ApplicationPolicy
 
   def toggle_completed?
     update?
+  end
+
+  def attachment?
+    user.company_id == record.company_id
+  end
+
+  def add_note?
+    user.company_id == record.company_id
   end
 end

@@ -59,4 +59,8 @@ class ProjectPolicy < ApplicationPolicy
   def destroy?
     false
   end
+
+  def action?
+    user.company_id == record.company_id
+  end
 end

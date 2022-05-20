@@ -4,8 +4,9 @@
     <span>
         <%= render "/steps/status_filter" %>
     
-        <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id), 
-                    {class: "btn btn-primary" } if @phase %> 
+        <% if @phase && policy(@phase.project).update? %>
+            <%= link_to "New Step" , new_step_path("step[phase_id]": @phase.id, "step[project_id]": @phase.project_id),{class: "btn btn-primary" } if @phase %> 
+        <% end %>
     </span>
 </div>
 
@@ -38,10 +39,7 @@
                     Step
                 </th>
                 <th>
-                    Completed
-                </th>
-                <th>
-                    Approved
+                    Progress
                 </th>
                 <th>
                     Start Date
@@ -55,18 +53,20 @@
                 <th>
                     Status
                 </th>
-                <th>
-                    Assigned
-                </th>
-                <th>
-                    Client Visible
-                </th>
+                <% if @phase && policy(@phase.project).action? %>
+                    <th>
+                        Assigned
+                    </th>
+                <% end %>
+
                 <th>
                     Docs
                 </th>
-                <th>
-                    Action
-                </th>
+                <% if @phase && policy(@phase.project).action? %>
+                    <th>
+                        Action
+                    </th>
+                <% end %>
             </tr>
         </thead>
         <tbody id="steps_tbody">

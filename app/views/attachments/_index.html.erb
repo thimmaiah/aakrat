@@ -1,7 +1,7 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Attachments</h1>
     <%= link_to "New Attachment", new_attachment_path("attachment[step_id]": @step.id), 
-            {class: "btn btn-primary"} if @step  %>
+            {class: "btn btn-primary"} if @step && policy(@step).attachment? %>
 </div>
   
 <div class="table-responsive">

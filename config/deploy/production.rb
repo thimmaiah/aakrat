@@ -6,6 +6,10 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
+server "43.204.225.217", user: "ubuntu", roles: %w[app db web]
+set :rails_env, "production"
+set :stage, :production
+set "RAILS_MASTER_KEY", "60f14778533c12fdffd55f09b8f39af5"
 
 # role-based syntax
 # ==================

@@ -59,8 +59,8 @@ namespace :deploy do
       rails_env = fetch(:rails_env)
       upload!("/data/work/aakrat/.env", release_path.to_s, recursive: false)
       upload!("/data/work/aakrat/.env.local", release_path.to_s, recursive: false)
-      upload!("/data/work/aakrat/.env.staging", release_path.to_s, recursive: false) # if rails_env == :staging
-      upload!("/data/work/aakrat/.env.production", release_path.to_s, recursive: false) if rails_env == :production
+      upload!("/data/work/aakrat/.env.staging", release_path.to_s, recursive: false)  if fetch(:stage) == :staging
+      upload!("/data/work/aakrat/.env.production", release_path.to_s, recursive: false) if fetch(:stage) == :production
     end
   end
 

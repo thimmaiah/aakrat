@@ -56,16 +56,14 @@ namespace :deploy do
   desc "Uploads .env remote servers."
   task :upload_env do
     on roles(:app) do
-      rails_env = fetch(:rails_env)
       upload!("/data/work/aakrat/.env", release_path.to_s, recursive: false)
       upload!("/data/work/aakrat/.env.local", release_path.to_s, recursive: false)
-      upload!("/data/work/aakrat/.env.staging", release_path.to_s, recursive: false)  if fetch(:stage) == :staging
+      upload!("/data/work/aakrat/.env.staging", release_path.to_s, recursive: false) if fetch(:stage) == :staging
       upload!("/data/work/aakrat/.env.production", release_path.to_s, recursive: false) if fetch(:stage) == :production
     end
   end
 
   before "deploy:assets:precompile", :upload_env
-
 end
 
 namespace :puma do

@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class UserDashboard < Administrate::BaseDashboard
+class NoteDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,19 +8,15 @@ class UserDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    roles: Field::HasMany,
+    user: Field::BelongsTo,
     company: Field::BelongsTo,
+    owner: Field::Polymorphic,
+    details: Field::HasOne,
+    attachments_attachments: Field::HasMany,
+    attachments_blobs: Field::HasMany,
     id: Field::Number,
-    first_name: Field::String,
-    last_name: Field::String,
-    email: Field::String,
-    remember_created_at: Field::DateTime,
-    phone: Field::String,
-    active: Field::Boolean,
-    confirmed_at: Field::DateTime,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
-    accept_terms: Field::Boolean
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -29,40 +25,34 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    first_name
-    last_name
-    email
+    user
     company
+    owner
+    details
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    roles
+    user
     company
+    owner
+    details
+    attachments_attachments
+    attachments_blobs
     id
-    first_name
-    last_name
     created_at
     updated_at
-    email
-    phone
-    active
-    accept_terms
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    roles
-    first_name
-    last_name
-    email
-    phone
-    active
-    accept_terms
+    user
+    company
+    owner
+    details
   ].freeze
 
   # COLLECTION_FILTERS
@@ -77,10 +67,10 @@ class UserDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how notes are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(user)
-    user.full_name
-  end
+  # def display_resource(note)
+  #   "Note ##{note.id}"
+  # end
 end

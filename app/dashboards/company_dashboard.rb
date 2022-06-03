@@ -8,22 +8,31 @@ class CompanyDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    employees: Field::HasMany,
-    investments: Field::HasMany,
+    versions: Field::HasMany,
+    rich_text_details: Field::HasOne,
+    users: Field::HasMany,
+    projects: Field::HasMany,
+    clients: Field::HasMany,
+    attachments: Field::HasMany,
     id: Field::Number,
     name: Field::String,
     url: Field::String,
     category: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    active: Field::BooleanEmoji,
-    company_type: Field::Select.with_options(collection: Company::TYPES),
+    logo_url: Field::Text,
+    active: Field::Boolean,
+    company_type: Field::String,
     created_by: Field::Number,
-    investor_categories: Field::String,
-    instrument_types: Field::String,
-    trial: Field::BooleanEmoji,
-    trial_end_date: Field::Date
-
+    deleted_at: Field::DateTime,
+    parent_company_id: Field::Number,
+    currency: Field::String,
+    units: Field::String,
+    trial_end_date: Field::Date,
+    trial: Field::Boolean,
+    address: Field::Text,
+    gst_number: Field::String,
+    entity_names: Field::Text
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -32,12 +41,9 @@ class CompanyDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
     url
-    company_type
     category
-    trial
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -49,13 +55,23 @@ class CompanyDashboard < Administrate::BaseDashboard
     category
     created_at
     updated_at
+    logo_url
     active
     company_type
     created_by
-    investor_categories
-    instrument_types
-    trial
+    deleted_at
+    parent_company_id
+    currency
+    units
     trial_end_date
+    trial
+    address
+    gst_number
+    rich_text_details
+    users
+    projects
+    clients
+    attachments
 
   ].freeze
 
@@ -63,23 +79,35 @@ class CompanyDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    versions
+    rich_text_details
+    users
+    projects
+    clients
+    attachments
     name
     url
     category
+    logo_url
     active
     company_type
-    investor_categories
-    instrument_types
-    trial
+    created_by
+    deleted_at
+    parent_company_id
+    currency
+    units
     trial_end_date
-
+    trial
+    address
+    gst_number
+    entity_names
   ].freeze
 
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
   # field of the dashboard.
   #
-  # For example to add an options to search for open resources by typing "open:"
+  # For example to add an option to search for open resources by typing "open:"
   # in the search field:
   #
   #   COLLECTION_FILTERS = {

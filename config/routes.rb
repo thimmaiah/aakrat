@@ -31,6 +31,15 @@ Rails.application.routes.draw do
     resources :users
     resources :companies
     resources :roles
+    resources :projects
+    resources :project_accesses
+    resources :phases
+    resources :steps
+    resources :clients
+    resources :payments
+    resources :quotes
+    resources :notes
+    resources :site_visits
 
     root to: "users#index"
   end

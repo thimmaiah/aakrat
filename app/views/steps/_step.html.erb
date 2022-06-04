@@ -50,7 +50,7 @@
   <% end %>
   
   <td>
-    <% step.client_attachments.visible_to_client.each do |attachment| %>
+    <% step.client_attachments.joins(:step).visible_to_client.each do |attachment| %>
       <%= render "/layouts/attachments", attachments: attachment.attachments, allow_delete: "No" %>
     <% end %>
   </td>

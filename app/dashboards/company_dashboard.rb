@@ -57,16 +57,11 @@ class CompanyDashboard < Administrate::BaseDashboard
     logo_url
     active
     company_type
-    created_by
-    deleted_at
-    parent_company_id
     currency
-    units
     trial_end_date
     trial
     address
-    gst_number
-    
+    gst_number    
     users
     projects
     clients
@@ -78,23 +73,13 @@ class CompanyDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    versions
-    
-    users
-    projects
-    clients
-    attachments
     name
     url
     category
     logo_url
     active
     company_type
-    created_by
-    deleted_at
-    parent_company_id
     currency
-    units
     trial_end_date
     trial
     address

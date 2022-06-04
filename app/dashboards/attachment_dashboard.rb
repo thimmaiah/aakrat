@@ -14,7 +14,6 @@ class AttachmentDashboard < Administrate::BaseDashboard
     project: Field::BelongsTo,
     phase: Field::BelongsTo,
     step: Field::BelongsTo,
-    rich_text_details: Field::HasOne,
     attachments_attachments: Field::HasMany,
     attachments_blobs: Field::HasMany,
     id: Field::Number,
@@ -46,7 +45,7 @@ class AttachmentDashboard < Administrate::BaseDashboard
     project
     phase
     step
-    rich_text_details
+    
     attachments_attachments
     attachments_blobs
     id
@@ -67,7 +66,7 @@ class AttachmentDashboard < Administrate::BaseDashboard
     project
     phase
     step
-    rich_text_details
+    
     attachments_attachments
     attachments_blobs
     name

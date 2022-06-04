@@ -9,7 +9,6 @@ class CompanyDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     versions: Field::HasMany,
-    rich_text_details: Field::HasOne,
     users: Field::HasMany,
     projects: Field::HasMany,
     clients: Field::HasMany,
@@ -67,7 +66,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     trial
     address
     gst_number
-    rich_text_details
+    
     users
     projects
     clients
@@ -80,7 +79,7 @@ class CompanyDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     versions
-    rich_text_details
+    
     users
     projects
     clients

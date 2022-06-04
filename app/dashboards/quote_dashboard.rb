@@ -11,7 +11,6 @@ class QuoteDashboard < Administrate::BaseDashboard
     company: Field::BelongsTo,
     user: Field::BelongsTo,
     client: Field::BelongsTo,
-    rich_text_details: Field::HasOne,
     attachments_attachments: Field::HasMany,
     attachments_blobs: Field::HasMany,
     id: Field::Number,
@@ -33,7 +32,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    rich_text_details
+    
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -42,7 +41,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    rich_text_details
+    
     attachments_attachments
     attachments_blobs
     id
@@ -62,7 +61,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    rich_text_details
+    
     attachments_attachments
     attachments_blobs
     project_type

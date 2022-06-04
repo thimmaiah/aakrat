@@ -11,7 +11,6 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company: Field::BelongsTo,
     user: Field::BelongsTo,
     project: Field::BelongsTo,
-    rich_text_details: Field::HasOne,
     id: Field::Number,
     role_name: Field::String,
     created_at: Field::DateTime,
@@ -27,7 +26,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    rich_text_details
+    
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,7 +35,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    rich_text_details
+    
     id
     role_name
     created_at
@@ -50,7 +49,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    rich_text_details
+    
     role_name
   ].freeze
 

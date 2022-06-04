@@ -16,7 +16,6 @@ class PhaseDashboard < Administrate::BaseDashboard
     steps: Field::HasMany,
     payments: Field::HasMany,
     attachments: Field::HasMany,
-    rich_text_details: Field::HasOne,
     id: Field::Number,
     name: Field::String,
     start_date: Field::Date,

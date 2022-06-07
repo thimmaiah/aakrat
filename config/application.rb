@@ -36,7 +36,7 @@ module Aakrat
 
     config.action_mailer.smtp_settings = {
       address: "email-smtp.ap-south-1.amazonaws.com",
-      domain: "skillsassessments.com",
+      domain: "aakrat.com",
       port: 587,
       user_name: ENV["SES_SMTP_USERNAME"],
       password: ENV["SES_SMTP_PASSWORD"],

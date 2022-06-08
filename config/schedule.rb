@@ -3,12 +3,12 @@ job_type :bundle, 'cd :path && :environment_variable=:environment bundle exec :t
 
 every 1.day, at: '00:01 am' do
   command "logrotate /home/ubuntu/Aakrat/shared/log/logrotate.conf --state /home/ubuntu/Aakrat/shared/log/logrotate.state --verbose"
-  rake "ts:rebuild"
+  rake "ts:start"
 end
 
 every :reboot do
   bundle "sidekiq"
-  rake "ts:rebuild"
+  rake "ts:start"
   bundle "puma -C /home/ubuntu/Aakrat/shared/puma.rb"
 end
 

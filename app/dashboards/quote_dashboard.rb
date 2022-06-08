@@ -32,7 +32,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    
+
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,7 +41,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    
+
     attachments_attachments
     attachments_blobs
     id
@@ -61,7 +61,7 @@ class QuoteDashboard < Administrate::BaseDashboard
     company
     user
     client
-    
+
     attachments_attachments
     attachments_blobs
     project_type

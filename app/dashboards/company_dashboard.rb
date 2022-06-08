@@ -61,7 +61,7 @@ class CompanyDashboard < Administrate::BaseDashboard
     trial_end_date
     trial
     address
-    gst_number    
+    gst_number
     users
     projects
     clients

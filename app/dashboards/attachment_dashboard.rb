@@ -45,7 +45,7 @@ class AttachmentDashboard < Administrate::BaseDashboard
     project
     phase
     step
-    
+
     attachments_attachments
     attachments_blobs
     id
@@ -66,7 +66,7 @@ class AttachmentDashboard < Administrate::BaseDashboard
     project
     phase
     step
-    
+
     attachments_attachments
     attachments_blobs
     name

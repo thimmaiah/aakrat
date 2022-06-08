@@ -26,7 +26,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    
+
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    
+
     id
     role_name
     created_at
@@ -49,7 +49,7 @@ class ProjectAccessDashboard < Administrate::BaseDashboard
     company
     user
     project
-    
+
     role_name
   ].freeze
 

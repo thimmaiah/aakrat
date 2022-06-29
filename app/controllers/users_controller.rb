@@ -69,9 +69,6 @@ class UsersController < ApplicationController
   def accept_terms
     current_user.accept_terms = true
     current_user.save
-
-    # puts current_user.to_json
-
     redirect_to root_path
   end
 

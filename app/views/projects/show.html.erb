@@ -97,24 +97,6 @@
       
       <tr class="collapse multi-collapse">
         <td>
-          Client Budget Estimate
-        </td>
-        <td>
-          <%= money_to_currency @project.client_estimated_budget, params %>
-        </td>
-      </tr>
-
-      <tr class="collapse multi-collapse">
-        <td>
-          Actual Cost
-        </td>
-        <td>
-          <%= money_to_currency @project.actual_cost, params %>
-        </td>
-      </tr>
-
-      <tr class="collapse multi-collapse">
-        <td>
           Estimated BuiltUp Area
         </td>
         <td>
@@ -131,66 +113,90 @@
         </td>
       </tr>
 
-      <tr class="collapse multi-collapse">
-        <td>
-          Fees Type
-        </td>
-        <td>
-          <%=  @project.fee_type %> 
-        </td>
-      </tr>
 
-      <% if  @project.fee_type == "% of Budget" %>
-      <tr class="collapse multi-collapse">
-        <td>
-          Fees as % of Budget
-        </td>
-        <td>
-          <%=  @project.percentage_of_estimated_budget %> %
-        </td>
-      </tr>
-      <% elsif  @project.fee_type == "Rate / SqFt" %>
-      <tr class="collapse multi-collapse">
-        <td>
-          Fees as Rate per SqFt
-        </td>
-        <td>
-          <%=  money_to_currency @project.per_sq_ft_rate, params %>
-        </td>
-      </tr>
+      <% if current_user.has_cached_role?(:team_lead) %>
+
+        <tr class="collapse multi-collapse">
+          <td>
+            Client Budget Estimate
+          </td>
+          <td>
+            <%= money_to_currency @project.client_estimated_budget, params %>
+          </td>
+        </tr>
+
+        <tr class="collapse multi-collapse">
+          <td>
+            Actual Cost
+          </td>
+          <td>
+            <%= money_to_currency @project.actual_cost, params %>
+          </td>
+        </tr>
+        
+      
+        <tr class="collapse multi-collapse">
+          <td>
+            Fees Type
+          </td>
+          <td>
+            <%=  @project.fee_type %> 
+          </td>
+        </tr>
+
+        <% if  @project.fee_type == "% of Budget" %>
+        <tr class="collapse multi-collapse">
+          <td>
+            Fees as % of Budget
+          </td>
+          <td>
+            <%=  @project.percentage_of_estimated_budget %> %
+          </td>
+        </tr>
+        <% elsif  @project.fee_type == "Rate / SqFt" %>
+        <tr class="collapse multi-collapse">
+          <td>
+            Fees as Rate per SqFt
+          </td>
+          <td>
+            <%=  money_to_currency @project.per_sq_ft_rate, params %>
+          </td>
+        </tr>
+        <% end %>
+        
+        <tr class="collapse multi-collapse">
+          <td>
+            Discount
+          </td>
+          <td>
+            <%= @project.discount %> %
+          </td>
+        </tr>
+
+        <tr class="collapse multi-collapse">
+          <td>
+            Fees
+          </td>
+          <td>
+            <div>Gross: <%= money_to_currency @project.gross_fees, params %></div>
+            <div>Discount: <%= @project.discount %> %</div>
+            <div>Actual: <%= money_to_currency @project.fees, params %></div>
+          </td>
+        </tr>
+
+        
+
+
+        <tr class="collapse multi-collapse">
+          <td>
+            Payment Amount
+          </td>
+          <td>
+            <%= money_to_currency @project.payment_amount, params %>
+          </td>
+        </tr>
+
       <% end %>
-      
-      <tr class="collapse multi-collapse">
-        <td>
-          Discount
-        </td>
-        <td>
-          <%= @project.discount %> %
-        </td>
-      </tr>
-
-      <tr class="collapse multi-collapse">
-        <td>
-          Fees
-        </td>
-        <td>
-          <div>Gross: <%= money_to_currency @project.gross_fees, params %></div>
-          <div>Discount: <%= @project.discount %> %</div>
-          <div>Actual: <%= money_to_currency @project.fees, params %></div>
-        </td>
-      </tr>
-
-      
-
-
-      <tr class="collapse multi-collapse">
-        <td>
-          Payment Amount
-        </td>
-        <td>
-          <%= money_to_currency @project.payment_amount, params %>
-        </td>
-      </tr>
 
       <tr class="collapse multi-collapse">
         <td colspan="2" class="bg-primary"></td>

@@ -101,7 +101,8 @@
       </td>
     </tr>
 
-    <% if @phase.payment_required %>
+    <% if @phase.payment_required && current_user.has_cached_role?(:team_lead) %>
+
 
       <tr class="collapse multi-collapse">
         <td>

@@ -34,24 +34,28 @@
       <%= phase.assigned_to.full_name %>
     </td>
   <% end %>
-
-  <td>
-    <% if phase.payment_amount > 0 %>
-      <div><%= money_to_currency(phase.payment_amount, params) %></div>
-    <% end %>
-    <span class="badge <%= phase_payment_status_badge(phase) %>">
-      <%= phase.payment_status %>
-    </span>
-  </td>
-  <td>
-    <%= phase.payment_due_percentage %> %  
-  </td>
-  <td>
-    <span class="<%= (phase.completed && phase.due_amount != 0) ? 'text-danger':'' %>" >
-      <%= money_to_currency phase.due_amount, params %>
-    </span>    
-  </td>
   
+  <% if current_user.has_cached_role?(:team_lead) %>
+
+    <td>
+      <% if phase.payment_amount > 0 %>
+        <div><%= money_to_currency(phase.payment_amount, params) %></div>
+      <% end %>
+      <span class="badge <%= phase_payment_status_badge(phase) %>">
+        <%= phase.payment_status %>
+      </span>
+    </td>
+    <td>
+      <%= phase.payment_due_percentage %> %  
+    </td>
+    <td>
+      <span class="<%= (phase.completed && phase.due_amount != 0) ? 'text-danger':'' %>" >
+        <%= money_to_currency phase.due_amount, params %>
+      </span>    
+    </td>
+    
+  <% end %>
+
   <% if @project && policy(@project).action? %>
 
     <td>

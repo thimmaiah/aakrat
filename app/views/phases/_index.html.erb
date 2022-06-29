@@ -59,15 +59,18 @@
               Assigned
             </th>
           <% end %>
-          <th>
-            Payment
-          </th>
-          <th>
-            Due %
-          </th>
-          <th>
-            Due
-          </th>
+
+          <% if current_user.has_cached_role?(:team_lead) %>
+            <th>
+              Payment
+            </th>
+            <th>
+              Due %
+            </th>
+            <th>
+              Due
+            </th>
+          <% end %>
           <% if @project && policy(@project).action? %>
             <th>
               Action

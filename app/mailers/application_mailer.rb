@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "support@skillsassessments.com"
+  default from: "support@aakrat.com"
   layout "mailer"
 end

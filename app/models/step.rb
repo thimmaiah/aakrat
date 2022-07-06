@@ -7,6 +7,8 @@ class Step < ApplicationRecord
   belongs_to :project
   belongs_to :company
   belongs_to :phase
+  acts_as_list scope: :phase
+
   belongs_to :assigned_to, class_name: "User"
 
   has_many :client_attachments, class_name: "Attachment", dependent: :destroy

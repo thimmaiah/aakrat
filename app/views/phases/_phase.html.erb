@@ -1,5 +1,8 @@
 <tr id="<%= dom_id phase %>">
   <td>
+    <%= phase.position %>
+  </td>
+  <td>
     <% current_user_is_client ||= phase.project.client?(current_user) %>
     <%= current_user_is_client && !phase.visible_to_client ? phase.name : link_to(phase.name, phase) %>
   </td>

@@ -97,7 +97,7 @@ class PhasesController < ApplicationController
   def phase_params
     params.require(:phase).permit(:name, :start_date, :end_date, :days, :status, :project_id,
                                   :assigned_to_id, :visible_to_client,
-                                  :payment_status, :payment_due_percentage,
+                                  :payment_status, :payment_due_percentage, :position,
                                   :percentage_complete, :completed, :details, :payment_required)
   end
 end

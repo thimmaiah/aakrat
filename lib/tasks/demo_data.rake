@@ -53,7 +53,8 @@ namespace :vk do
         p = FactoryBot.create(:project, company: c)        
         puts p.to_json
         (1..5).each do |i|
-          s = FactoryBot.create(:phase, name: "Phase #{i}", company: c, project: p)        
+          at = c.users.sample
+          s = FactoryBot.create(:phase, name: "Phase #{i}", company: c, project: p, assigned_to: at)        
 
           (1..3).each do |j|
             t = FactoryBot.create(:step, name: "Step #{j}", company: c, project: p, phase: s)        

@@ -1,6 +1,9 @@
 <% show_project_phase ||= params[:show_project_phase] %>
 
 <tr id="<%= dom_id step %>">
+  <td>
+    <%= step.position %>
+  </td>
   <% if show_project_phase == "Yes" %>
   <td>
     <%= link_to step.project.name, step.project %>

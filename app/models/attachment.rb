@@ -5,6 +5,7 @@ class Attachment < ApplicationRecord
   belongs_to :project
   belongs_to :phase
   belongs_to :step
+  acts_as_list scope: :step
 
   has_rich_text :details
   has_many_attached :attachments, service: :amazon, dependent: :destroy

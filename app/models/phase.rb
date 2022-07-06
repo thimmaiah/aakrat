@@ -4,6 +4,8 @@ class Phase < ApplicationRecord
 
   belongs_to :company
   belongs_to :project
+  acts_as_list scope: :project
+
   belongs_to :assigned_to, class_name: "User"
 
   has_many :notes, as: :owner, dependent: :destroy

@@ -18,6 +18,11 @@
   </div>
 
   <div class="form-group">
+    <%= form.label :position, "Sequence" %>
+    <%= form.number_field :position, class: "form-control"  %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :start_date %>
     <%= form.date_field :start_date, class: "form-control"  %>
   </div>

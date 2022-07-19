@@ -32,11 +32,12 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    user.has_cached_role?(:super) || user.id == record.id
+    user.has_cached_role?(:super) || user.id == record.id ||
+      (user.company_id == record.company_id && user.has_cached_role?(:team_lead))
   end
 
   def edit?
-    user.has_cached_role?(:super) || user.id == record.id
+    update?
   end
 
   def destroy?

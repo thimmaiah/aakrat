@@ -11,12 +11,14 @@
   <td>
     <%= l project.end_date %>
   </td>
-  <td>
-    <%= money_to_currency project.client_estimated_budget, params %>
-  </td>
-  <td>
-    <%= money_to_currency project.payment_amount, params %>
-  </td>
+  <% if current_user.has_cached_role?(:team_lead) %>
+    <td>
+      <%= money_to_currency project.client_estimated_budget, params %>
+    </td>
+    <td>
+      <%= money_to_currency project.payment_amount, params %>
+    </td>
+  <% end %>
   <td>
     <%= number_with_precision project.percentage_completed_days, precision: 2 %> %
     <div class="progress">

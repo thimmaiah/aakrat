@@ -8,7 +8,7 @@ end
 
 every :reboot do
   bundle "sidekiq"
-  rake "ts:start"
+  rake "ts:rebuild"
   bundle "puma -C /home/ubuntu/Aakrat/shared/puma.rb"
 end
 

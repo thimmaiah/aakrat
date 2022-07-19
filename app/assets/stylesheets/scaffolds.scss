@@ -397,3 +397,15 @@ table {
 .project_card  {
   margin-bottom: 30px;
 }
+
+.perms {
+  margin: 40px 0px;
+
+  input[type="radio"], input[type="checkbox"] {
+    width: 200px !important;
+  }
+  label {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,11 +1,15 @@
 <div class="associated_entity" data-controller="tabs">
     <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
         <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#steps-tab">Steps</a>
-        <% if phase.payment_required && policy(:payment).index? %>
+        <% if phase.payment_required && (policy(@phase).update? || policy(@phase).permissions&.read_payment?) %>
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#payments-tab">Payments</a>
         <% end %>
-        <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#site-visits-tab">Site Visits</a>
-        <% if policy(:note).index? %>
+
+        <% if policy(@phase).update? || policy(@phase).permissions&.read_site_visit? %>
+            <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#site-visits-tab">Site Visits</a>
+        <% end %>
+
+        <% if policy(@phase).update? || policy(@phase).permissions&.read_note? %>
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
         <% end %>
     </nav>
@@ -18,7 +22,7 @@
                 <%= render "/steps/index" , steps: policy_scope(phase.steps).includes(:client_attachments).order(start_date: :asc).includes(:assigned_to) %>
             </div>
         </div>
-        <% if phase.payment_required && policy(:payment).index? %>
+        <% if phase.payment_required && (policy(@phase).update? || policy(@phase).permissions&.read_payment?) %>
             <div id="payments-tab" class="tab-pane fade">
                 <div id="payments" class="associated_entity">
                     <%= render "/payments/index", payments: policy_scope(phase.payments).includes(:project, :phase, :user) %>
@@ -26,13 +30,15 @@
             </div>
         <% end %>
 
-        <div id="site-visits-tab" class="tab-pane fade">
-            <div id="site_visits" class="associated_entity">
-                <%= render "/site_visits/index", site_visits: policy_scope(phase.site_visits).includes(:project, :phase, :assigned_to) %>
+        <% if policy(@phase).update? || policy(@phase).permissions&.read_site_visit? %>
+            <div id="site-visits-tab" class="tab-pane fade">
+                <div id="site_visits" class="associated_entity">
+                    <%= render "/site_visits/index", site_visits: policy_scope(phase.site_visits).includes(:project, :phase, :assigned_to) %>
+                </div>
             </div>
-        </div>
+        <% end %>
 
-        <% if policy(:note).index? %>
+        <% if policy(@phase).update? || policy(@phase).permissions&.read_note? %>
             <div id="notes-tab" class="tab-pane fade">
                 <div id="notes" class="associated_entity">
                     <%= render "/notes/index", notes: phase.notes.with_all_rich_text, owner: phase %>

@@ -1,9 +1,13 @@
 <div class="associated_entity" data-controller="tabs">
     <nav class="nav nav-tabs nav-fill nav-justified" role="tablist">
 
-        <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#attachments-tab">Attachments</a>
+        <% if policy(@step).update? || policy(@step).permissions&.read_attachment? %>
+            <a class="nav-link active" data-bs-toggle="pill" data-toggle="tab" href="#attachments-tab">
+                Attachments
+            </a>
+        <% end %>
 
-        <% if policy(:note).index? %>
+        <% if policy(@step).update? || policy(@step).permissions&.read_note? %>
             <a class="nav-link" data-bs-toggle="pill" data-toggle="tab" href="#notes-tab">Notes</a>
         <% end %>
 
@@ -11,13 +15,15 @@
 
     <div class="tab-content">
 
-        <div id="attachments-tab" class="tab-pane fade  show active">
-            <div id="attachments" class="associated_entity">
-                <%= render "/attachments/index" , attachments: policy_scope(step.client_attachments).includes(:step) %>
+        <% if policy(@step).update? || policy(@step).permissions&.read_attachment? %>
+            <div id="attachments-tab" class="tab-pane fade  show active">
+                <div id="attachments" class="associated_entity">
+                    <%= render "/attachments/index" , attachments: policy_scope(step.client_attachments).includes(:step) %>
+                </div>
             </div>
-        </div>
+        <% end %>
 
-        <% if policy(:note).index? %>
+        <% if policy(@step).update? || policy(@step).permissions&.read_note? %>
 
             <div id="notes-tab" class="tab-pane fade">
                 <div id="notes" class="associated_entity">

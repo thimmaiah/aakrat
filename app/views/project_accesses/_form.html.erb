@@ -29,14 +29,15 @@
     <%= form.select :role_name, ProjectAccess::ROLES, {}, class: "form-control"  %>
   </div>
 
-  <% ProjectAccess.permissions.pairs.each do |key, val| %>
-    <div class="form-group">
-      <%= form.label :permissions, key %>
-      <%= form.check_box :permissions, {name: "project_access[permissions][]",
-          val: val, id: "permissions_#{val}", class: "form-control form-checkbox"}, val, nil   %>
-    </div>
-  <% end %>
-
+  <div class="perms form-horizontal form-row align-items-center">
+    <% ProjectAccess.permissions.pairs.each do |key, val| %>
+      <span class="form-group">
+        <%= form.label :permissions, key.titleize %>
+        <%= form.check_box :permissions, {name: "project_access[permissions][]",
+            val: val, id: "permissions_#{val}", class: "form-control form-checkbox"}, val, nil   %>
+      </span>
+    <% end %>
+  </div>
   <div class="form-group">
     <%= form.submit "Save", {class: "btn btn-primary"}%>
   </div>

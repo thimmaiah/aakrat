@@ -27,18 +27,16 @@ class SiteVisitPolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.company_id
+    if user.company_id == record.company_id
       true
     else
-      SiteVisit.joins(project: :project_accesses)
-               .where("project_accesses.user_id=?", user.id)
-               .where(id: record.id).present?
+      permissions&.read_site_visit?
     end
   end
 
   def create?
     (user.has_cached_role?(:team_lead) && user.company_id == record.company_id) ||
-      record.project.client?(user)
+      permissions&.write_site_visit?
   end
 
   def new?
@@ -46,7 +44,7 @@ class SiteVisitPolicy < ApplicationPolicy
   end
 
   def update?
-    (user.has_cached_role?(:team_lead) && user.company_id == record.company_id)
+    create?
   end
 
   def edit?

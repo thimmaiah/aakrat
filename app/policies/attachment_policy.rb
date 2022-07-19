@@ -27,15 +27,16 @@ class AttachmentPolicy < ApplicationPolicy
   def show?
     if user.has_cached_role?(:super) || user.company_id == record.company_id
       true
+    elsif user.has_cached_role?(:client)
+      permissions&.read_attachment? && record.visible_to_client
     else
-      Step.joins(project: :project_accesses).visible_to_client
-          .where("project_accesses.user_id=?", user.id)
-          .where(id: record.id).present?
+      permissions&.read_attachment?
     end
   end
 
   def create?
-    user.has_cached_role?(:team_member) && user.company_id == record.company_id
+    (user.has_cached_role?(:team_member) && user.company_id == record.company_id) ||
+      permissions&.write_attachment?
   end
 
   def new?
@@ -47,7 +48,7 @@ class AttachmentPolicy < ApplicationPolicy
   end
 
   def update?
-    create? && (record.attached_by_id == user.id || user.has_cached_role?(:team_lead))
+    create?
   end
 
   def edit?

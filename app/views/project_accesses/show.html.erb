@@ -34,6 +34,16 @@
           <%= @project_access.role_name.titlecase.camelcase %>
         </td>    
       </tr>
+
+    </tr>
+    <tr>
+      <td>
+        Permissions
+      </td>
+      <td>
+          <%= @project_access.permissions.to_a.map{|p| p.to_s.humanize.titleize} %>        
+      </td>    
+    </tr>
     
   
 </table>

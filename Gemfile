@@ -69,6 +69,7 @@ gem 'public_activity', github: 'chaps-io/public_activity', branch: 'master'
 gem 'sanitize_email'
 gem 'whenever', require: false
 # gem 'ajax-datatables-rails'
+gem 'active_flag'
 
 gem "acts_as_list"
 gem 'acts-as-taggable-on', '~> 9.0'

@@ -50,7 +50,6 @@ class Project < ApplicationRecord
   end
 
   def client?(user)
-    project_accesses.where("project_accesses.user_id=? and project_accesses.role_name=?",
-                           user.id, "Client").present?
+    project_accesses.select { |pa| pa.user_id == user.id && pa.role_name == "Client" }.present?
   end
 end

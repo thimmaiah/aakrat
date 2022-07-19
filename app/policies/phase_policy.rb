@@ -29,18 +29,12 @@ class PhasePolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.company_id
+    if user.company_id == record.company_id
       true
+    elsif user.has_cached_role?(:client)
+      permissions&.read_phase? && record.visible_to_client
     else
-      # If the user is a Client then the phase must be visible
-      Phase.joins(project: :project_accesses).visible_to_client
-           .merge(ProjectAccess.for(user, %w[Client]))
-           .or(
-             # If user is a Contractor or Accountant then he can view
-             Phase.joins(project: :project_accesses)
-                  .merge(ProjectAccess.for(user, %w[Contractor Accountant]))
-           )
-           .where(id: record.id).present?
+      permissions&.read_phase?
     end
   end
 
@@ -53,7 +47,7 @@ class PhasePolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    create? || permissions&.write_phase?
   end
 
   def edit?

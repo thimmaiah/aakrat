@@ -28,12 +28,12 @@ class StepPolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.company_id
+    if user.company_id == record.company_id
       true
+    elsif user.has_cached_role?(:client)
+      permissions&.read_step? && record.visible_to_client
     else
-      Step.joins(project: :project_accesses).visible_to_client
-          .where("project_accesses.user_id=?", user.id)
-          .where(id: record.id).present?
+      permissions&.read_step?
     end
   end
 
@@ -50,7 +50,8 @@ class StepPolicy < ApplicationPolicy
   end
 
   def update?
-    create? && (record.assigned_to_id == user.id || user.has_cached_role?(:team_lead))
+    (create? && (record.assigned_to_id == user.id || user.has_cached_role?(:team_lead))) ||
+      permissions&.write_step?
   end
 
   def edit?

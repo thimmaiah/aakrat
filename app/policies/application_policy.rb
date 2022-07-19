@@ -52,4 +52,8 @@ class ApplicationPolicy
 
     attr_reader :user, :scope
   end
+
+  def permissions
+    ProjectAccess.where(user_id: user.id, project_id: record.project_id).first&.permissions
+  end
 end

@@ -12,7 +12,7 @@
     <%= project_access.role_name.titlecase %>
   </td>
   <td>
-    <%#= link_to "Show" , project_access , {class: "btn btn-primary" }%>
+    <%= link_to "Show" , project_access , {class: "btn btn-primary" }%>
     <% if policy(project_access).destroy? %>
       <%= button_to "Delete" , project_access_path(project_access) , class: "btn btn-danger", method: :delete, confirm: "Are you sure?" %>
     <% end %>

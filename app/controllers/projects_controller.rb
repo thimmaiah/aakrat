@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = policy_scope(Project)
+    @projects = policy_scope(Project).includes(:project_accesses)
 
     cookies[:project_status] = "In Progress" if params[:status].blank? && cookies[:project_status].blank?
 

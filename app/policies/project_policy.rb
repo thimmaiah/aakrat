@@ -24,12 +24,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def show?
-    if user.has_cached_role?(:super) || user.company_id == record.company_id
-      true
-    else
-      Project.joins(:project_accesses).where("project_accesses.user_id=?", user.id)
-             .where(id: record.id).first.present?
-    end
+    user.company_id == record.company_id || permissions&.read_project?
   end
 
   def create?
@@ -41,7 +36,7 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    create?
+    create? || permissions&.write_project?
   end
 
   def edit?
@@ -62,5 +57,9 @@ class ProjectPolicy < ApplicationPolicy
 
   def action?
     user.company_id == record.company_id
+  end
+
+  def permissions
+    ProjectAccess.where(user_id: user.id, project_id: record.id).first&.permissions
   end
 end

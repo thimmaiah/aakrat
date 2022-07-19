@@ -12,7 +12,7 @@ class NotePolicy < ApplicationPolicy
   end
 
   def index?
-    user.has_cached_role?(:super) || user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
+    user.has_cached_role?(:team_lead) || user.has_cached_role?(:team_member)
   end
 
   def dashboard?
@@ -24,11 +24,13 @@ class NotePolicy < ApplicationPolicy
   end
 
   def show?
-    user.has_cached_role?(:super) || user.company_id == record.company_id
+    user.company_id == record.company_id ||
+      permissions&.read_note?
   end
 
   def create?
-    user.has_cached_role?(:team_lead) && user.company_id == record.company_id
+    (user.has_cached_role?(:team_lead) && user.company_id == record.company_id) ||
+      permissions&.write_note?
   end
 
   def new?

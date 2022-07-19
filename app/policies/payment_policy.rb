@@ -7,7 +7,7 @@ class PaymentPolicy < ApplicationPolicy
         scope.where(company_id: user.company_id)
       else
         scope.joins(project: :project_accesses)
-             .merge(ProjectAccess.for(user, %w[Client Accountant]))
+             .merge(ProjectAccess.where_permissions(:read_payment))
       end
     end
   end
